@@ -1,5 +1,5 @@
 # Interactive Brokers API
-An API for Interactive Brokers Trader Workstation written in pure Haskell with minimal dependencies. It was written based on 9.71 of the IB API.
+An API for Interactive Brokers Trader Workstation written in pure Haskell with minimal dependencies. It was based on 9.71 of the IB API.
 
 ## Status
 This library is completely experimental and untested. I have not even attempted to use it to connect to TWS yet. Please use at your own risk, and if you find bugs, feel free to commit fixes.
