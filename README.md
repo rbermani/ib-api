@@ -26,7 +26,7 @@ The following messages are supported.
 *  AutoOpenOrdersReq 
 *  AllOpenOrdersReq
 *  ManagedAcctsReq
-*  FAReq FaDataType
+*  FAReq
 *  FAReplaceReq 
 *  HistoricalDataReq 
 *  ExerciseOptionsReq  
