@@ -1,5 +1,5 @@
 # Interactive Brokers API
-An API for Interactive Brokers Trader Workstation written in pure Haskell with minimal dependencies. It was written based on 9.71 of tge IB API.
+An API for Interactive Brokers Trader Workstation written in pure Haskell with minimal dependencies. It was written based on 9.71 of the IB API.
 
 
 ## API Coverage
@@ -17,11 +17,11 @@ The following messages are supported.
 *  IdsReq Int 
 *  ContractDetailsReq
 *  MktDepthReq  
-*  CancelMktDepth TickerId
-*  NewsBulletinsReq Bool
+*  CancelMktDepth 
+*  NewsBulletinsReq 
 *  CancelNewsBulletins
-*  SetServerLogLevel Int
-*  AutoOpenOrdersReq Bool
+*  SetServerLogLevel 
+*  AutoOpenOrdersReq 
 *  AllOpenOrdersReq
 *  ManagedAcctsReq
 *  FAReq FaDataType
@@ -29,30 +29,30 @@ The following messages are supported.
 *  HistoricalDataReq 
 *  ExerciseOptionsReq  
 *  ScannerSubscriptionReq
-*  CancelScannerSubscription TickerId
+*  CancelScannerSubscription 
 *  ScannerParametersReq  
-*  CancelHistoricalData TickerId
+*  CancelHistoricalData 
 *  CurrentTimeReq
 *  RealTimeBarsReq   
-*  CancelRealTimeBars TickerId
+*  CancelRealTimeBars 
 *  FundamentalDataReq
-*  CancelFundamentalData TickerId
+*  CancelFundamentalData 
 *  ImpliedVolatilityReq
 *  CalcOptionPriceReq  
-*  CancelCalcImpliedVolatility TickerId
-*  CancelCalcOptionPrice TickerId
+*  CancelCalcImpliedVolatility 
+*  CancelCalcOptionPrice 
 *  GlobalCancelReq
-*  MarketDataTypeReq TickerId
+*  MarketDataTypeReq 
 *  PositionsReq
 *  AccountSummaryReq
-*  CancelAccountSummary ReqId
+*  CancelAccountSummary 
 *  CancelPositions
 *  VerifyReq
-*  VerifyMessage String
-*  QueryDisplayGroups ReqId
-*  SubscribeToGroupEvents ReqId GroupId
+*  VerifyMessage 
+*  QueryDisplayGroups 
+*  SubscribeToGroupEvents  
 *  UpdateDisplayGroup
-*  UnsubscribeFromGroupEvents ReqId
+*  UnsubscribeFromGroupEvents 
 *  StartApi
 
 ### Responses
@@ -63,41 +63,39 @@ The following messages are supported.
 *  OpenOrder 
 *  AcctValue  
 *  PortfolioValue
-*  AcctUpdateTime String 
-*  NextValidId Int  
-*  ContractData ContractDetails  
+*  AcctUpdateTime  
+*  NextValidId   
+*  ContractData   
 *  ExecutionData  
 *  MarketDepth 
 *  MarketDepthL2 
 *  NewsBulletins  
-*  ManagedAccts String  
+*  ManagedAccts   
 *  ReceiveFA  
 *  HistoricalData 
-*  BondContractData ContractDetails  
-*  ScannerParameters String  
+*  BondContractData   
+*  ScannerParameters   
 *  ScannerData  
 *  TickOptionComputation 
 *  TickGeneric  
 *  TickString
 *  TickEFP  
-*  CurrentTime Int   
+*  CurrentTime nt   
 *  RealTimeBars  
 *  FundamentalData 
-*  ContractDataEnd ReqId  
+*  ContractDataEnd   
 *  OpenOrderEnd  
 *  AcctDownloadEnd String  
-*  ExecutionDataEnd ReqId  
+*  ExecutionDataEnd   
 *  DeltaNeutralValidation  
-*  TickSnapshotEnd ReqId  
+*  TickSnapshotEnd   
 *  MarketDataType 
 *  CommissionReport  
 *  PositionData  
 *  PositionEnd  
 *  AccountSummary  
-*  AccountSummaryEnd ReqId 
-*  VerifyMessageAPI String   
+*  AccountSummaryEnd
+*  VerifyMessageAPI 
 *  VerifyCompleted  
 *  DisplayGroupList  
 *  DisplayGroupUpdated  
-
-
