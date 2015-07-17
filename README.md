@@ -6,7 +6,7 @@ This library is completely experimental and untested. I have not even attempted 
 
 ## API Coverage
 
-The following messages are supported.
+The following messages are supported (in theory).
 
 ### Requests
 * MktDataReq 
