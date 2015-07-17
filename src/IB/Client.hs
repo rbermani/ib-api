@@ -3,7 +3,6 @@
 -- License : GPL3
 -- Author : Robert Bermani <bobbermani@gmail.com>
 -- Stability : experimental
--- |
 
 -- IB Client
 
