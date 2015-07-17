@@ -1,2 +1,2 @@
 # ib-api
-An API for the Interactive Brokers Trading Workstation written in pure Haskell
+An API for the Interactive Brokers Trader Workstation written in pure Haskell
