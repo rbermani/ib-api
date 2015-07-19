@@ -15,7 +15,7 @@ module IB.Client.Request
 
 import Control.Concurrent.MVar
 import Control.Exception
-import Control.Monad (when)
+import Control.Monad (when, unless)
 import Text.Printf
 import qualified System.IO as S
 import qualified Data.ByteString.Char8 as B
@@ -42,7 +42,7 @@ a <++> b =  a `B.append` nullch `B.append` b `B.append` nullch
 
 debugWrite :: IBServer -> String -> IO ()
 debugWrite s msg =
-    (when (s_debug s) $ putStrLn msg)
+    when (s_debug s) $ putStrLn msg
 
 write :: IBServer -> B.ByteString -> IO ()
 write s msg = do
@@ -74,37 +74,37 @@ encodeDblMax val
     | otherwise = encodeDbl val
 
 encodeExecutionFilter :: ExecutionFilter -> B.ByteString 
-encodeExecutionFilter exf = (show' $ exf_clientId exf )
-                                    <++> (B.pack $ exf_acctCode exf)
-                                    <++> (B.pack $ exf_time exf)
-                                    <++> (B.pack $ exf_symbol exf)
-                                    <++> (B.pack $ exf_secType exf)
-                                    <++> (B.pack $ exf_exchange exf)
-                                    <++> (B.pack $ exf_side exf )
+encodeExecutionFilter exf = show' ( exf_clientId exf)
+                                    <++> B.pack (exf_acctCode exf)
+                                    <++> B.pack ( exf_time exf)
+                                    <++> B.pack ( exf_symbol exf)
+                                    <++> B.pack ( exf_secType exf)
+                                    <++> B.pack ( exf_exchange exf)
+                                    <++> B.pack ( exf_side exf )
 
 
 encodeSubscription :: ScannerSubscription -> B.ByteString 
-encodeSubscription subs = (encodeIntMax $ ssb_numberOfRows subs)
-                             <++> (B.pack $ ssb_instrument subs)
-                             <++> (B.pack $ ssb_locationCode subs)
-                             <++> (B.pack $ ssb_scanCode subs)
-                             <++> (encodeDblMax $ ssb_abovePrice subs)
-                             <++> (encodeDblMax $ ssb_belowPrice subs)
-                             <++> (encodeIntMax $ ssb_aboveVolume subs)
-                             <++> (encodeDblMax $ ssb_marketCapAbove subs)
-                             <++> (encodeDblMax $ ssb_marketCapBelow subs)
-                             <++> (B.pack $ ssb_moodyRatingAbove subs)
-                             <++> (B.pack $ ssb_moodyRatingBelow subs)
-                             <++> (B.pack $ ssb_spRatingAbove subs)
-                             <++> (B.pack $ ssb_spRatingBelow subs)
-                             <++> (B.pack $ ssb_maturityDateAbove subs)
-                             <++> (B.pack $ ssb_maturityDateBelow subs)
-                             <++> (encodeDblMax $ ssb_couponRateAbove subs)
-                             <++> (encodeDblMax $ ssb_couponRateBelow subs)
-                             <++> (encodeIntMax $ ssb_excludeConvertible subs)
-                             <++> (encodeIntMax $ ssb_averageOptionVolumeAbove subs)
-                             <++> (B.pack $ ssb_scannerSettingPairs subs)
-                             <++> (B.pack $ ssb_stockTypeFilter subs)
+encodeSubscription subs = encodeIntMax ( ssb_numberOfRows subs)
+                             <++> B.pack ( ssb_instrument subs)
+                             <++> B.pack ( ssb_locationCode subs)
+                             <++> B.pack ( ssb_scanCode subs)
+                             <++> encodeDblMax ( ssb_abovePrice subs)
+                             <++> encodeDblMax ( ssb_belowPrice subs)
+                             <++> encodeIntMax ( ssb_aboveVolume subs)
+                             <++> encodeDblMax ( ssb_marketCapAbove subs)
+                             <++> encodeDblMax ( ssb_marketCapBelow subs)
+                             <++> B.pack ( ssb_moodyRatingAbove subs)
+                             <++> B.pack ( ssb_moodyRatingBelow subs)
+                             <++> B.pack ( ssb_spRatingAbove subs)
+                             <++> B.pack ( ssb_spRatingBelow subs)
+                             <++> B.pack ( ssb_maturityDateAbove subs)
+                             <++> B.pack ( ssb_maturityDateBelow subs)
+                             <++> encodeDblMax ( ssb_couponRateAbove subs)
+                             <++> encodeDblMax ( ssb_couponRateBelow subs)
+                             <++> encodeIntMax ( ssb_excludeConvertible subs)
+                             <++> encodeIntMax ( ssb_averageOptionVolumeAbove subs)
+                             <++> B.pack ( ssb_scannerSettingPairs subs)
+                             <++> B.pack ( ssb_stockTypeFilter subs)
 
                               
 encodeTagValue :: TagValue -> B.ByteString 
@@ -114,37 +114,37 @@ encodeTagValueList :: [TagValue] -> B.ByteString
 encodeTagValueList tvl = B.concat $ map encodeTagValue tvl
 
 encodeUnderComp :: UnderComp -> B.ByteString 
-encodeUnderComp uc = show' 1 <++> (show' $ uc_conId uc )
-                        <++> (show' $ uc_price uc)
+encodeUnderComp uc = show' 1 <++> show' ( uc_conId uc )
+                        <++> show' ( uc_price uc)
 
 encodeComboLeg :: ComboLeg -> B.ByteString 
-encodeComboLeg cl =  (show' $ cl_conId cl)
-                        <++> (show' $ cl_ratio cl )
-                        <++> (B.pack $ cl_action cl )
-                        <++> (B.pack $ cl_exchange cl)
+encodeComboLeg cl =  show' ( cl_conId cl)
+                        <++> show' ( cl_ratio cl )
+                        <++> B.pack ( cl_action cl )
+                        <++> B.pack ( cl_exchange cl)
 
 encodeComboLegList :: [ComboLeg] -> B.ByteString 
-encodeComboLegList cll = (show' $ length cll) <++> (B.concat $ map encodeComboLeg cll )
+encodeComboLegList cll = show' ( length cll) <++> B.concat ( map encodeComboLeg cll )
 
 encodeContract :: IBServer -> Contract -> Bool -> IO B.ByteString 
 encodeContract s con pexch = 
     do let serv_ver = s_version s 
            bs | serv_ver >= min_server_ver_trading_class = show' $ ct_conId con
               | otherwise = B.empty 
-           out = bs <++> (B.pack $ ct_symbol con)
-                    <++> (B.pack $ ct_secType con)
-                    <++> (B.pack $ ct_expiry con)
-                    <++> (show' $ ct_strike con)
-                    <++> (B.pack $ ct_right con)
-                    <++> (B.pack $ ct_multiplier con)
-                    <++> (B.pack $ ct_exchange con)
-           out' | pexch = out <++> ( B.pack $ ct_primaryExchange con )
+           out = bs <++> B.pack ( ct_symbol con)
+                    <++> B.pack ( ct_secType con)
+                    <++> B.pack ( ct_expiry con)
+                    <++> show' ( ct_strike con)
+                    <++> B.pack ( ct_right con)
+                    <++> B.pack ( ct_multiplier con)
+                    <++> B.pack ( ct_exchange con)
+           out' | pexch = out <++>  B.pack ( ct_primaryExchange con )
                 | otherwise = out
-           out'' = out' <++> (B.pack $ ct_currency con)
-                        <++> (B.pack $ ct_localSymbol con)
+           out'' = out' <++> B.pack ( ct_currency con)
+                        <++> B.pack ( ct_localSymbol con)
 
-       if (serv_ver >= min_server_ver_trading_class)
-            then return $ out'' <++> (B.pack $ ct_tradingClass con)
+       if serv_ver >= min_server_ver_trading_class
+            then return $ out'' <++> B.pack ( ct_tradingClass con)
             else return out'' 
  
 getHeaderCon :: IBServer -> ReqHeader -> Contract -> IO B.ByteString 
@@ -157,11 +157,11 @@ getHeaderCon s rqh con =
        case () of
         _ | not connected -> throwIO $ IBExc (rqh_errId rqh) NotConnected ""  
           | rqh_minVer rqh /= undefined -> 
-                if ((serv_ver < (rqh_minVer rqh)) && ((not $ null ( ct_tradingClass con)) || (ct_conId con) > 0))
-                    then throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
-                    else return ()
+                when ((serv_ver < rqh_minVer rqh) && not ( null ( ct_tradingClass con)) || ct_conId con > 0)
+                    $ throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
+                    
 
-       return $ (show' $ rqh_msgId rqh) <++> (show' $ rqh_proVer rqh)
+       return $ show' ( rqh_msgId rqh) <++> show' ( rqh_proVer rqh)
 
 getHeader :: IBServer -> ReqHeader -> IO B.ByteString 
 getHeader s rqh = 
@@ -172,12 +172,11 @@ getHeader s rqh =
  
        case () of
         _ | not connected -> throwIO $ IBExc (rqh_errId rqh) NotConnected ""  
-          | rqh_minVer rqh /= undefined -> if (serv_ver < rqh_minVer rqh) then throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
-                                                               else return ()
-          | rqh_exAuth rqh /= undefined -> if (not mExtraAuth) then throwIO $ IBExc (no_valid_id) UpdateTWS "  Intent to authenticate needs to be expressed during initial connect request."
-                                                               else return ()
+          | rqh_minVer rqh /= undefined -> when (serv_ver < rqh_minVer rqh) $ throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
 
-       return $ (show' $ rqh_msgId rqh) <++> (show' $ rqh_proVer rqh)
+          | rqh_exAuth rqh /= undefined -> unless mExtraAuth $ throwIO $ IBExc no_valid_id UpdateTWS "  Intent to authenticate needs to be expressed during initial connect request."
+
+       return $ show' ( rqh_msgId rqh) <++> show' ( rqh_proVer rqh)
 
 request :: IBServer -> Request -> IO ()
 
@@ -192,28 +191,28 @@ request s inp @ (MktDataReq { }) =
 
        case () of
         _ | not connected -> throwIO $ IBExc tickerId NotConnected ""  
-          | (serv_ver < min_server_ver_under_comp) && (ct_underComp ct /= undefined) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support fundamental data requests." 
-          | (serv_ver < min_server_ver_req_mkt_data_conid) && (ct_conId ct > 0) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support conId parameter."  
-          | (serv_ver < min_server_ver_trading_class) && (not $ null (ct_tradingClass ct)) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support tradingClass parameter in reqMktData."   
+          | serv_ver < min_server_ver_under_comp && (ct_underComp ct /= undefined) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support fundamental data requests." 
+          | serv_ver < min_server_ver_req_mkt_data_conid && (ct_conId ct > 0) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support conId parameter."  
+          | serv_ver < min_server_ver_trading_class && not ( null (ct_tradingClass ct)) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support tradingClass parameter in reqMktData."   
           | otherwise -> return ()
 
-       let bs = (show' (reqToId MktDataReq {}))
-                 <++> (show' version)
-                 <++> (show' tickerId)
+       let bs = show' (reqToId MktDataReq {})
+                 <++> show' version
+                 <++> show' tickerId
            conbs | serv_ver >= min_server_ver_req_mkt_data_conid = show' $ ct_conId ct 
                  | otherwise = B.empty
 
            bs' = bs <++> conbs
-            <++> (B.pack $ ct_symbol ct )
-            <++> (B.pack $ ct_secType ct)
-            <++> (B.pack $ ct_expiry ct)
-            <++> (show' $ ct_strike ct)
-            <++> (B.pack $ ct_right ct)
-            <++> (B.pack $ ct_multiplier ct )
-            <++> (B.pack $ ct_exchange ct)
-            <++> (B.pack $ ct_primaryExchange ct)
-            <++> (B.pack $ ct_currency ct)
-            <++> (B.pack $ ct_localSymbol ct)
+            <++> B.pack ( ct_symbol ct )
+            <++> B.pack ( ct_secType ct)
+            <++> B.pack ( ct_expiry ct)
+            <++> show' ( ct_strike ct)
+            <++> B.pack ( ct_right ct)
+            <++> B.pack ( ct_multiplier ct )
+            <++> B.pack ( ct_exchange ct)
+            <++> B.pack ( ct_primaryExchange ct)
+            <++> B.pack ( ct_currency ct)
+            <++> B.pack ( ct_localSymbol ct)
 
            tclass | serv_ver >= min_server_ver_trading_class = (show' $ ct_tradingClass ct )
                   | otherwise = B.empty
@@ -226,11 +225,11 @@ request s inp @ (MktDataReq { }) =
                     <++> tclass 
                     <++> clist 
                     <++> ucomp 
-                    <++> (B.pack $ mdr_genericTicks inp )
-                    <++> (show' $ fromBool ( mdr_snapshot inp))
+                    <++> B.pack ( mdr_genericTicks inp )
+                    <++> show' ( fromBool ( mdr_snapshot inp))
 
-       if (serv_ver >= min_server_ver_linking)
-           then write s $ bs'' <++> ( encodeTagValueList $ mdr_mktDataOptions inp)
+       if serv_ver >= min_server_ver_linking
+           then write s $ bs'' <++>  encodeTagValueList ( mdr_mktDataOptions inp)
            else write s bs'' 
 
        wFlush s

@@ -65,9 +65,8 @@ greetServer server =
                                twsTime = pre_twsTime val
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
-                              | serv_ver >= 3 -> if (serv_ver < min_server_ver_linking)
-                                                    then do write server $ show' $ s_clientId server
-                                                    else return ()
+                              | serv_ver >= 3 -> when (serv_ver < min_server_ver_linking) $
+                                                    write server $ show' $ s_clientId server
                               | not extraAuth -> request server StartApi
                               | otherwise -> return ()
                            wFlush server
@@ -86,14 +85,14 @@ checkMsg mvs loop =
            ver = s_version s
        eof <- timeout (s_timeoutInterval s) $ hIsEOF h
 
-       if (eof /= Just False)
+       if eof /= Just False
             then do
                 modifyMVar_ mvs (\serv -> return $ serv {s_sock = Nothing})
                 hClose h
             else do
                 msg <- B.hGet h 4096
                 server <- takeMVar mvs
-                debugWrite server $ ">> " ++ (B.unpack msg)
+                debugWrite server $ ">> " ++ B.unpack msg
                 putMVar mvs server
                 pResult <- parseWith (B.hGet h 1024) (pRecvMsg ver) msg 
 
@@ -101,9 +100,7 @@ checkMsg mvs loop =
                     Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
                     Right res -> handleMsg mvs $ rc_msgBody res 
                 
-                if (loop) 
-                    then checkMsg mvs loop
-                    else return ()
+                when loop $ checkMsg mvs loop
 
 -- |Connects to a server
 connect :: ClientConfig     -- ^ Configuration
@@ -112,8 +109,8 @@ connect :: ClientConfig     -- ^ Configuration
            -> IO (Either IOError MIB) -- ^ IB instance
  
 connect cconf threaded debug = try $ do
-    (when debug $
-        putStrLn $ "Connecting to " ++ cc_addr cconf)
+    when debug $
+        putStrLn $ "Connecting to " ++ cc_addr cconf
 
 --    if (isConnected $ cc_socket cconf)
 --             then throwIO IBExc no_valid_id AlreadyConnected ""
@@ -124,7 +121,7 @@ connect cconf threaded debug = try $ do
         portStr = show $ cc_port cconf
         hostname | null hostStr = Nothing
                  | otherwise = Just hostStr 
-    addrinfos <-  ( S.getAddrInfo Nothing hostname (Just portStr))
+    addrinfos <- S.getAddrInfo Nothing hostname (Just portStr)
 
     let serveraddr = head addrinfos
     s <- S.socket (S.addrFamily serveraddr) S.Stream defaultProtocol

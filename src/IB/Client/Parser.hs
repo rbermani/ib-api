@@ -26,10 +26,9 @@ pServerVersion =
     do pre_serverVersion <- pStrInt
        let pre_twsTime = 0
  
-       if (pre_serverVersion >= 20)
-        then do pre_twsTime <- pStrInt
-                return ()
-        else return ()
+       when (pre_serverVersion >= 20) $
+        do pre_twsTime <- pStrInt
+           return ()
     
        --if (serv_ver >= 20)
        -- then do twsTime <- pStrInt
@@ -59,16 +58,13 @@ tickOptionDefault = TickOptionComputation { tickerId = 0
 
 
 pStr :: Parser String
-pStr = do bs <- takeWhile1 (\w -> w /= '\0')
+pStr = do bs <- takeWhile1 (/= '\NUL')
           return (C.unpack bs)
 
 pStrMaybe :: Parser (Maybe String)
-pStrMaybe = do bs <- takeWhile1 (\w -> w /= '\0')
+pStrMaybe = do bs <- takeWhile1 (/= '\NUL')
                let str = C.unpack bs
-
-               return $ case null str of
-                            True -> Nothing
-                            False -> Just str
+               return (if null str then Nothing else Just str)
 
 pStrIntMax :: Parser Int
 pStrIntMax = do res <- pStrMaybe
@@ -141,42 +137,9 @@ pAcctValue _ _ = AcctValue <$>
     <?> "Acct Value"
 
 pPortfolioValue :: Int -> Int -> Parser IBMessage
-pPortfolioValue _ ver = 
-     do ct_conId <- pStrInt
-        ct_symbol <- pStr
-        ct_secType <- pStr
-        ct_expiry <- pStr
-        ct_strike <- pStrDouble
-        ct_right <- pStr
-        let ct_multiplier = ""
-            ct_tradingClass = ""
+pPortfolioValue sver ver = 
+     do contract <- pContractHead sver ver (7,8)
 
-        if (ver >= 7)
-            then do ct_multiplier <- pStr
-                    return ()
-            else return () 
-
-        ct_exchange <- pStr
-        ct_currency <- pStr
-        ct_localSymbol <- pStr
-        
-        if (ver >= 8)
-            then do ct_tradingClass <- pStr
-                    return ()
-            else return () 
-
-        let contract = Contract { ct_conId
-                                , ct_symbol
-                                , ct_secType
-                                , ct_expiry
-                                , ct_strike
-                                , ct_right
-                                , ct_multiplier
-                                , ct_exchange
-                                , ct_currency
-                                , ct_localSymbol
-                                , ct_tradingClass 
-                                }
         position <- pStrInt
         marketPrice <- pStrDouble
         marketValue <- pStrDouble
@@ -262,51 +225,22 @@ pFundamentalData _ _ = FundamentalData <$>
     <?> "Fundamental Data"
 
 pPositionData :: Int -> Int -> Parser IBMessage
-pPositionData _ ver = do account <- pStr
-                         contract <- pContract' 
-                         position <- pStrInt
-                         let avgCost = dblMaximum
+pPositionData sver ver = 
+    do account <- pStr
+       contract <- pContractHead sver ver (0,2) 
+       position <- pStrInt
+       let avgCost = dblMaximum
 
-                         if (ver >= 3)
-                            then do avgCost <- pStrDouble
-                                    return ()
-                            else return () 
+       when (ver >= 3) $
+          do avgCost <- pStrDouble
+             return ()
 
-                         return PositionData { account
-                                             , contract
-                                             , position
-                                             , avgCost
-                                             }
-                      where pContract' =  
-                             do ct_conId <- pStrInt
-                                ct_symbol <- pStr
-                                ct_secType <- pStr
-                                ct_expiry <- pStr
-                                ct_strike <- pStrDouble
-                                ct_right <- pStr
-                                ct_multiplier <- pStr
-                                ct_exchange <- pStr
-                                ct_currency <- pStr
-                                ct_localSymbol <- pStr
-                                let ct_tradingClass = ""
-
-                                if (ver >= 2)
-                                    then do ct_tradingClass <- pStr
-                                            return ()
-                                    else return () 
-
-                                return Contract { ct_conId
-                                                , ct_symbol
-                                                , ct_secType
-                                                , ct_expiry
-                                                , ct_strike
-                                                , ct_right
-                                                , ct_multiplier
-                                                , ct_exchange
-                                                , ct_currency
-                                                , ct_localSymbol
-                                                , ct_tradingClass 
-                                                }
+       return PositionData { account
+                           , contract
+                           , position
+                           , avgCost
+                           }
+                           
 pPositionEnd :: Int -> Int -> Parser IBMessage
 pPositionEnd _ _ = return PositionEnd  
 
@@ -459,54 +393,54 @@ pExecution _ ver =
               , ex_evMultiplier 
               }
 
+pContractHead :: Int -> Int -> (Int, Int) -> Parser Contract
+pContractHead _ ver vercheck@(lwr, uppr) = 
+    do ct_conId <- pStrInt
+       ct_symbol <- pStr
+       ct_secType <- pStr
+       ct_expiry <- pStr
+       ct_strike <- pStrDouble
+       ct_right <- pStr
+       
+       let ct_multiplier = ""
+           ct_tradingClass = ""
+    
+       when (ver >= lwr) $
+           do ct_multiplier <- pStr
+              return ()
+
+       ct_exchange <- pStr
+       ct_currency <- pStr
+       ct_localSymbol <- pStr
+       
+       when (ver >= uppr) $
+           do ct_tradingClass <- pStr
+              return ()
+
+       return Contract { ct_conId
+                       , ct_symbol
+                       , ct_secType
+                       , ct_expiry
+                       , ct_strike
+                       , ct_right
+                       , ct_multiplier
+                       , ct_exchange
+                       , ct_currency
+                       , ct_localSymbol
+                       , ct_tradingClass 
+                       }
+
 pExecutionData :: Int -> Int -> Parser IBMessage
-pExecutionData _ ver = do reqId <- pStrInt 
-                          orderId <- pStrInt 
-                          contract <- pContract'
-                          exec <- pExecution 0 ver
-                          return ExecutionData { reqId
-                                               , orderId
-                                               , contract
-                                               , exec 
-                                               } 
-                            where pContract' :: Parser Contract
-                                  pContract' = 
-                                    do ct_conId <- pStrInt
-                                       ct_symbol <- pStr
-                                       ct_secType <- pStr
-                                       ct_expiry <- pStr
-                                       ct_strike <- pStrDouble
-                                       ct_right <- pStr
-                                       
-                                       let ct_multiplier = ""
-                                           ct_tradingClass = ""
-
-                                       if (ver >= 9)
-                                           then do ct_multiplier <- pStr
-                                                   return ()
-                                           else return () 
-
-                                       ct_exchange <- pStr
-                                       ct_currency <- pStr
-                                       ct_localSymbol <- pStr
-                                       
-                                       if (ver >= 10)
-                                           then do ct_tradingClass <- pStr
-                                                   return ()
-                                           else return ()
-
-                                       return Contract { ct_conId
-                                                       , ct_symbol
-                                                       , ct_secType
-                                                       , ct_expiry
-                                                       , ct_strike
-                                                       , ct_right
-                                                       , ct_multiplier
-                                                       , ct_exchange
-                                                       , ct_currency
-                                                       , ct_localSymbol
-                                                       , ct_tradingClass 
-                                                       }
+pExecutionData sver ver = 
+    do reqId <- pStrInt 
+       orderId <- pStrInt 
+       contract <- pContractHead sver ver (9,10)
+       exec <- pExecution 0 ver
+       return ExecutionData { reqId
+                            , orderId
+                            , contract
+                            , exec 
+                            } 
 
 pMarketDepth :: Int -> Int -> Parser IBMessage
 pMarketDepth _ _ = MarketDepth <$>
@@ -532,9 +466,10 @@ pMarketDepthL2 _ _ = MarketDepthL2 <$>
 pBondContractData :: Int -> Int -> Parser IBMessage
 pBondContractData _ ver = 
     do  let reqId = -1 
-        if (ver >= 3) then do reqId <- pStrInt
-                              return ()
-                      else return ()
+        when (ver >= 3) $ 
+            do reqId <- pStrInt
+               return ()
+
         ct_symbol <- pStr
         ct_secType <- pStr
         ctd_cusip <- pStr
@@ -623,9 +558,10 @@ pNewsBulletins _ _ = NewsBulletins <$>
 pContractData :: Int -> Int -> Parser IBMessage
 pContractData _ ver = do
     let reqId = -1
-    if (ver >= 3) then do reqId <- pStrInt
-                          return ()
-                  else return ()
+    when (ver >= 3) $ 
+        do reqId <- pStrInt
+           return ()
+           
     ct_symbol <- pStr
     ct_secType <- pStr
     ct_expiry <- pStr
@@ -655,32 +591,30 @@ pContractData _ ver = do
         ctd_tradingHours = ""
         ctd_liquidHours = ""
 
-    if (ver >= 4) then do ctd_underConId <- pStrInt
-                          return ()
-                  else return () 
-    if (ver >= 5) then do ctd_longName <- pStr
-                          ct_primaryExchange <- pStr 
-                          return ()
-                  else return () 
-                      
-    if (ver >= 6) then do ctd_contractMonth <- pStr
-                          ctd_industry <- pStr
-                          ctd_category <- pStr
-                          ctd_subcategory <- pStr
-                          ctd_timeZoneId <- pStr
-                          ctd_tradingHours <- pStr
-                          ctd_liquidHours <- pStr
-                          return ()
-                   else return ()
-                   
-    if (ver >= 8) then do ctd_evRule <- pStr
-                          ctd_evMultiplier <- pStrDouble
-                          return ()
-                  else return ()
+    when (ver >= 4) $ do ctd_underConId <- pStrInt
+                         return ()
 
-    if (ver >= 7) then do ctd_secIdList <- pTagValueCons
-                          return ()
-                  else return ()
+    when (ver >= 5) $ do ctd_longName <- pStr
+                         ct_primaryExchange <- pStr 
+                         return ()
+                      
+    when (ver >= 6) $ do ctd_contractMonth <- pStr
+                         ctd_industry <- pStr
+                         ctd_category <- pStr
+                         ctd_subcategory <- pStr
+                         ctd_timeZoneId <- pStr
+                         ctd_tradingHours <- pStr
+                         ctd_liquidHours <- pStr
+                         return ()
+                   
+    when (ver >= 8) $ do ctd_evRule <- pStr
+                         ctd_evMultiplier <- pStrDouble
+                         return ()
+        
+
+    when (ver >= 7) $ do ctd_secIdList <- pTagValueCons
+                         return ()
+
                                        
     let ctd_summary = Contract { ct_symbol
                                , ct_secType
@@ -714,42 +648,9 @@ pContractData _ ver = do
                               , ctd_secIdList
                               }
     return $ ContractData ctd
+
 pContract :: Int -> Int -> Parser Contract
-pContract _ ver =
-     do let ct_multiplier = ""
-            ct_trading_class = ""
-        ct_conId <- pStrInt
-        ct_symbol <- pStr
-        ct_secType <- pStr
-        ct_expiry <- pStr
-        ct_strike <- pStrDouble
-        ct_right <- pStr
-
-        if (ver >= 32)
-            then do ct_multiplier <- pStr
-                    return ()
-            else return ()
-
-        ct_exchange <- pStr
-        ct_currency <- pStr
-        ct_localSymbol <- pStr
-        
-        if (ver >= 32)
-            then do ct_tradingClass <- pStr
-                    return ()
-            else return ()
-
-        return Contract { ct_conId
-                        , ct_symbol
-                        , ct_secType
-                        , ct_expiry
-                        , ct_strike
-                        , ct_right
-                        , ct_multiplier
-                        , ct_exchange
-                        , ct_currency
-                        , ct_localSymbol
-                        }
+pContract sver ver = pContractHead sver ver (32,32)
 
 pOrder :: Int -> Int -> Parser Order
 pOrder serv_ver ver = 
@@ -767,13 +668,13 @@ pOrder serv_ver ver =
             ord_deltaNeutralDesignatedLocation = ""
             ord_trailingPercent = dblMaximum
 
-        if (ver < 29)
+        if ver < 29
            then do ord_lmtPrice <- pStrDouble
                    return ()
            else do ord_lmtPrice <- pStrDoubleMax
                    return ()
 
-        if (ver < 30)
+        if ver < 30
            then do ord_auxPrice <- pStrDouble
                    return ()
            else do ord_auxPrice <- pStrDoubleMax
@@ -803,13 +704,14 @@ pOrder serv_ver ver =
         ord_shortSaleSlot <- pStrInt
         ord_designatedLocation <- pStr
 
-        if (serv_ver == min_server_ver_sshortx_old)
-           then do pStrInt
-                   return () 
-           else if (ver >= 23) 
-            then do ord_exemptCode <- pStrInt
-                    return ()
-           else return ()
+        when (serv_ver == min_server_ver_sshortx_old) $
+           do pStrInt
+              return () 
+
+
+        when (serv_ver /= min_server_ver_sshortx_old && ver >= 23) $
+            do ord_exemptCode <- pStrInt
+               return ()
 
         ord_auctionStrategy <- pStrInt
         ord_startingPrice <- pStrDoubleMax
@@ -833,28 +735,28 @@ pOrder serv_ver ver =
         ord_deltaNeutralOrderType <- pStr
         ord_deltaNeutralAuxPrice <- pStrDoubleMax
 
-        if (ver >= 27 && not (null ord_deltaNeutralOrderType))
+        if ver >= 27 && not (null ord_deltaNeutralOrderType)
             then do ord_deltaNeutralConId <- pStrInt 
                     ord_deltaNeutralSettlingFirm <- pStr
                     ord_deltaNeutralClearingAccount <- pStr
                     ord_deltaNeutralClearingIntent <- pStr
                     return () 
-            else if (ver >= 31 && not  (null ord_deltaNeutralOrderType))
-                then do ord_deltaNeutralOpenClose <- pStr
-                        ord_deltaNetralShortSale <- pStrBool
-                        ord_deltaNeutralShortSaleSlot <- pStrInt
-                        ord_deltaNeutralDesignatedLocation <- pStr
-                        return ()
-            else return ()
+            else when (ver >= 31 && not  (null ord_deltaNeutralOrderType)) $
+                 do ord_deltaNeutralOpenClose <- pStr
+                    ord_deltaNetralShortSale <- pStrBool
+                    ord_deltaNeutralShortSaleSlot <- pStrInt
+                    ord_deltaNeutralDesignatedLocation <- pStr
+                    return ()
+
 
         ord_continuousUpdate <- pStrBool
         ord_referencePriceType <- pStrInt
         ord_trailStopPrice <- pStrDoubleMax
         
-        if (ver >= 30)
-            then do ord_trailingPercent <- pStrDoubleMax
-                    return ()
-            else return () 
+        when (ver >= 30) $
+            do ord_trailingPercent <- pStrDoubleMax
+               return ()
+
         
         ord_basisPoints <- pStrDoubleMax
         ord_basisPointsType <- pStrIntMax
@@ -956,26 +858,22 @@ pComboLeg = ComboLeg <$>
 pTagValueCons :: Parser [TagValue]
 pTagValueCons = 
     do listCount <- pStrInt
-       if (listCount > 0)
-        then do tvl <- replicateM listCount pTagValue
-                return tvl
-        else do return []
+       if listCount > 0
+        then replicateM listCount pTagValue
+        else return []
 
 pComboLegCons :: Int -> Int -> Parser [ComboLeg]
 pComboLegCons _ ver = 
-    if (ver >= 29) then do 
+    if ver >= 29 then do 
                         comboLegsCount <- pStrInt 
-                        if (comboLegsCount > 0)
-                            then do tvl <- replicateM comboLegsCount pComboLeg 
-                                    return tvl
+                        if comboLegsCount > 0
+                            then replicateM comboLegsCount pComboLeg 
+                                    
                             else return []
     else return []
 
 pOrderComboLeg :: Parser OrderComboLeg
-pOrderComboLeg = 
-    do ordComboLeg <- pStrDoubleMax
-       return ordComboLeg
-
+pOrderComboLeg = pStrDoubleMax
 
 pBarData :: Parser BarData
 pBarData = BarData <$>
@@ -1028,40 +926,37 @@ pScanData = ScanData <$>
 
 pScanDataList :: Parser [ScanData]
 pScanDataList = do numberOfElements <- pStrInt
-                   scl <- replicateM numberOfElements pScanData
-                   return scl
+                   replicateM numberOfElements pScanData
+                   
 
 pOrderComboLegCons :: Int -> Int -> Parser [OrderComboLeg]
 pOrderComboLegCons _ ver 
     | ver >= 29 = do orderComboLegsCount <- pStrInt
                      case () of
-                      _ | orderComboLegsCount > 0 -> do ocl <- replicateM orderComboLegsCount pOrderComboLeg
-                                                        return ocl
+                      _ | orderComboLegsCount > 0 -> replicateM orderComboLegsCount pOrderComboLeg
                         | otherwise -> return []
     | otherwise = return []
 
 pBarDataCons :: Parser [BarData]
 pBarDataCons  = do itemCount <- pStrInt
-                   bdl <- replicateM itemCount pBarData
-                   return bdl
+                   replicateM itemCount pBarData
 
 pUnderComp' :: Parser UnderComp
 pUnderComp' = UnderComp <$> pStrInt <*> pStrDouble <*> pStrDouble <?> "UnderComp"
 
 pUnderComp :: Int -> Int -> Parser UnderComp
 pUnderComp _ ver = 
-    do if (ver >= 20) 
+    if ver >= 20
         then do underCompPresent <- pStrBool
                 let uc_conId = int32max
                     uc_delta = dblMaximum
                     uc_price = dblMaximum 
 
-                if (underCompPresent) 
-                    then do uc_conId <- pStrInt
-                            uc_delta <- pStrDouble
-                            uc_price <- pStrDouble
-                            return ()
-                    else return ()
+                when underCompPresent $
+                    do uc_conId <- pStrInt
+                       uc_delta <- pStrDouble
+                       uc_price <- pStrDouble
+                       return ()
 
                 return UnderComp {uc_conId, uc_delta, uc_price}
         else return UnderComp {}
@@ -1069,11 +964,11 @@ pUnderComp _ ver =
 -- TODO: Convert to pattern guard case structure
 pAlgoStrategy :: Int -> Int -> Parser (String,[TagValue])
 pAlgoStrategy _ ver = 
-    do if (ver >= 21) 
+    if ver >= 21
         then do algoStrategy <- pStr
-                if (not (null algoStrategy)) 
+                if not (null algoStrategy)
                  then do algoParamsCount <- pStrInt
-                         if (algoParamsCount > 0)
+                         if algoParamsCount > 0
                            then do agl <- replicateM algoParamsCount pTagValue
                                    return (algoStrategy, agl)
                            else return (empty,[])
@@ -1106,11 +1001,10 @@ pOpenOrder serv_ver ver =
         comboLeg <- pComboLegCons serv_ver ver
         orderComboLegs <- pOrderComboLegCons serv_ver ver
 
-        if (ver >= 26) then do ord_smartComboRoutingParams <- pTagValueCons
-                               return ()
-                       else return ()
+        when (ver >= 26) $ do ord_smartComboRoutingParams <- pTagValueCons
+                              return ()
 
-        if (ver >= 20)
+        if ver >= 20
             then do ord_scaleInitLevelSize <- pStrIntMax
                     ord_scaleSubsLevelSize <- pStrIntMax
                     return ()
@@ -1120,36 +1014,34 @@ pOpenOrder serv_ver ver =
 
         ord_scalePriceIncrement <- pStrDoubleMax
         
-        if (ver >= 28 && ord_scalePriceIncrement > 0.0 && ord_scalePriceIncrement /= dblMaximum)
-            then do ord_scalePriceAdjustValue <- pStrDoubleMax
-                    ord_scalePriceAdjustInterval <- pStrIntMax
-                    ord_scaleProfitOffset <- pStrDoubleMax
-                    ord_scaleAutoReset <- pStrBool
-                    ord_scaleInitPosition <- pStrIntMax
-                    ord_scaleInitFillQty <- pStrIntMax
-                    ord_scaleRandomPercent <- pStrBool
+        when (ver >= 28 && ord_scalePriceIncrement > 0.0 && ord_scalePriceIncrement /= dblMaximum) $ 
+            do ord_scalePriceAdjustValue <- pStrDoubleMax
+               ord_scalePriceAdjustInterval <- pStrIntMax
+               ord_scaleProfitOffset <- pStrDoubleMax
+               ord_scaleAutoReset <- pStrBool
+               ord_scaleInitPosition <- pStrIntMax
+               ord_scaleInitFillQty <- pStrIntMax
+               ord_scaleRandomPercent <- pStrBool
+               return ()
+
+        when (ver >= 24) $ 
+            do ord_hedgeType <- pStr
+               unless (null ord_hedgeType) $
+                 do ord_hedgeParam <- pStr
                     return ()
-            else return ()
 
-        if (ver >= 24) 
-            then do ord_hedgeType <- pStr
-                    if (not (null ord_hedgeType)) 
-                        then do ord_hedgeParam <- pStr
-                                return ()
-                        else return ()
-                    return () 
-            else return ()
 
-        if (ver >= 25) then do ord_optOutSmartRouting <- pStrBool
-                               return ()
-                       else return ()
+        when (ver >= 25) $ 
+           do ord_optOutSmartRouting <- pStrBool
+              return ()
+              
 
         ord_clearingAccount <- pStr
         ord_clearingIntent <- pStr
 
-        if (ver >= 22) then do notHeld <- pStrBool
-                               return ()
-                       else return ()
+        when (ver >= 22) $ 
+            do notHeld <- pStrBool
+               return ()
 
         ct_underComp <- pUnderComp serv_ver ver
         (ord_algoStrategy, ord_algoParams) <- pAlgoStrategy serv_ver ver
@@ -1202,19 +1094,18 @@ pTickOptionComputation _ ver = do
         impliedVol <- dblCheckNegative <$> pStrDouble
         delta <- pStrDouble
 
-        if (ver >= 6 || tickType == fromEnum MODEL_OPTION)
-          then do optPrice <- dblCheckNegative <$> pStrDouble
-                  pvDividend <- dblCheckNegative <$> pStrDouble  
-                  return ()
-          else return ()
+        when (ver >= 6 || tickType == fromEnum MODEL_OPTION) $
+          do optPrice <- dblCheckNegative <$> pStrDouble
+             pvDividend <- dblCheckNegative <$> pStrDouble  
+             return ()
 
-        if (ver >= 6)
-          then do gamma <- dblDefaultCheck <$> pStrDouble
-                  vega <- dblDefaultCheck <$> pStrDouble
-                  theta <- dblDefaultCheck <$> pStrDouble
-                  undPrice <- dblDefaultCheck <$> pStrDouble
-                  return ()
-          else return ()
+
+        when (ver >= 6) $
+          do gamma <- dblDefaultCheck <$> pStrDouble
+             vega <- dblDefaultCheck <$> pStrDouble
+             theta <- dblDefaultCheck <$> pStrDouble
+             undPrice <- dblDefaultCheck <$> pStrDouble
+             return ()
 
         return $ TickOptionComputation tickerId tickType impliedVol delta optPrice pvDividend gamma vega theta undPrice
 
