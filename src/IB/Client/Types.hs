@@ -1,5 +1,5 @@
 {-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE BangPatterns #-}
+--{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 
 module IB.Client.Types where
@@ -462,7 +462,7 @@ dblCheckNegative inp
     | otherwise = inp
 
 dblDefaultCheck :: Double -> Double
-dblDefaultCheck inp = dblBoundsCheck 1.0 (-1.0) inp
+dblDefaultCheck = dblBoundsCheck 1.0 (-1.0)
 
 dblBoundsCheck :: Double -> Double -> Double -> Double
 dblBoundsCheck upperBounds lowerBounds inp
@@ -470,7 +470,7 @@ dblBoundsCheck upperBounds lowerBounds inp
     | otherwise = inp
 
 fromEnum' :: Enum a =>  a -> Int
-fromEnum' a = (fromEnum a) +1
+fromEnum' a = fromEnum a +1
 
 fromBool :: Num a => Bool -> a
 fromBool False  = 0

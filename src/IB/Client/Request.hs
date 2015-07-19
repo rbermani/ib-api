@@ -258,15 +258,15 @@ request s rq @ (CancelOrder oid) =
        write s $ hdr <++> show' oid
        wFlush s
 
-request s rq @ (OpenOrdersReq) = do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
-                                    write s hdr 
-                                    wFlush s
+request s rq @ OpenOrdersReq = do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
+                                  write s hdr 
+                                  wFlush s
 
 request s rq @ (AccountUpdatesReq {aur_subscribe = subscribe, aur_acctCode = acctCode}) = 
      do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                         , rqh_proVer = 2
                                         }
-        write s $ (show' ( fromBool subscribe)) <++> B.pack acctCode
+        write s $ show' ( fromBool subscribe) <++> B.pack acctCode
         wFlush s
 
 request s rq @ (ExecutionsReq req_id exc_filt) =
@@ -301,11 +301,10 @@ request s rq @ (MktDepthReq { rqp_tickerId = tid
                                         } con
        con' <- encodeContract s con False
 
-       write s $ hdr <++> (show' tid) <++> con' <++> (show' numRows)
+       write s $ hdr <++> show' tid <++> con' <++> show' numRows
 
-       if (serv_ver >= min_server_ver_linking)
-           then write s $ encodeTagValueList mkDepthOpts
-           else return () 
+       when (serv_ver >= min_server_ver_linking) $
+           write s $ encodeTagValueList mkDepthOpts
 
        wFlush s
  
@@ -320,7 +319,7 @@ request s rq @ (NewsBulletinsReq allMsgs) =
        write s $ hdr <++> show' ( fromBool allMsgs)
        wFlush s
 
-request s rq @ (CancelNewsBulletins) = 
+request s rq @ CancelNewsBulletins = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
        write s hdr
 
@@ -334,12 +333,12 @@ request s rq @ (AutoOpenOrdersReq autoBind) =
        write s $ hdr <++> show' (fromBool autoBind)
        wFlush s
 
-request s rq @ (AllOpenOrdersReq) =
+request s rq @ AllOpenOrdersReq =
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
        write s hdr
        wFlush s
 
-request s rq @ (ManagedAcctsReq) = 
+request s rq @ ManagedAcctsReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq }   
        write s hdr
        wFlush s
@@ -374,21 +373,19 @@ request s rq @ (HistoricalDataReq {rqp_tickerId = tid
 
         write s $ (hdr <++> show' tid)
             <++> con'
-            <++> (show' $ fromBool $ ct_includeExpired con  )
-            <++> (B.pack edt)
-            <++> (B.pack barSizeSetting)
-            <++> (B.pack durStr)
-            <++> (show' useRTH)
-            <++> (B.pack whatToShow)
-            <++> (show' formatDate)
+            <++> show' ( fromBool $ ct_includeExpired con  )
+            <++> B.pack edt
+            <++> B.pack barSizeSetting
+            <++> B.pack durStr
+            <++> show' useRTH
+            <++> B.pack whatToShow
+            <++> show' formatDate
 
-        if (compare (ct_secType con) "BAG" == EQ)
-            then write s $ encodeComboLegList (ct_comboLegsList con) 
-            else return () 
+        when (compare (ct_secType con) "BAG" == EQ) $
+            write s $ encodeComboLegList (ct_comboLegsList con) 
       
-        if (serv_ver >= min_server_ver_linking)
-            then write s $ encodeTagValueList chartOptions
-            else return ()
+        when (serv_ver >= min_server_ver_linking) $
+            write s $ encodeTagValueList chartOptions
 
         wFlush s
  
@@ -410,10 +407,10 @@ request s rq @ (ExerciseOptionsReq { rqp_tickerId = tid
 
         write s $ hdr <++> show' tid
                 <++> con'
-                <++> (show' exerciseAction)
-                <++> (show' exerciseQty)
-                <++> (B.pack account)
-                <++> (show' override )
+                <++> show' exerciseAction
+                <++> show' exerciseQty
+                <++> B.pack account
+                <++> show' override 
         wFlush s
 
 request s rq @ (ScannerSubscriptionReq { rqp_tickerId = tid
@@ -427,9 +424,9 @@ request s rq @ (ScannerSubscriptionReq { rqp_tickerId = tid
                                       }
         write s $ show' tid <++> encodeSubscription subs
 
-        if (serv_ver >= min_server_ver_linking)
-            then write s $ encodeTagValueList subsOpts
-            else return ()
+        when (serv_ver >= min_server_ver_linking) $
+            write s $ encodeTagValueList subsOpts
+            
 
         wFlush s
 
@@ -441,9 +438,9 @@ request s rq @ (CancelScannerSubscription tid) =
        wFlush s
 
 -- TODO: verify correctness
-request s rq @ (ScannerParametersReq) = 
+request s rq @ ScannerParametersReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq }
-       write s $ hdr
+       write s hdr
        wFlush s
 
 request s rq @ (CancelHistoricalData tid) = 
@@ -455,7 +452,7 @@ request s rq @ (CancelHistoricalData tid) =
 
 
 
-request s rq @ (CurrentTimeReq) = 
+request s rq @ CurrentTimeReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
        write s hdr
        wFlush s
@@ -504,12 +501,12 @@ request s rq @ (CancelCalcOptionPrice tid) =
        write s $ hdr <++> show' tid
        wFlush s
 
-request s rq @ (GlobalCancelReq) = 
+request s rq @ GlobalCancelReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq 
                                      , rqh_errMsg = "  It does not support globalCancel requests."
                                      , rqh_minVer = min_server_ver_req_global_cancel
                                      }  
-       write s $ hdr
+       write s hdr
        wFlush s
 
 request s rq @ (MarketDataTypeReq tid) = 
@@ -518,9 +515,9 @@ request s rq @ (MarketDataTypeReq tid) =
        wFlush s
 
 
-request s rq @ (PositionsReq) = 
+request s rq @ PositionsReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq}
-       write s $ hdr 
+       write s hdr 
        wFlush s
 --TODO
 --request s rq @ (AccountSummaryReq {}) = 
@@ -530,15 +527,15 @@ request s rq @ (CancelAccountSummary req_id) =
                                      , rqh_minVer =  min_server_ver_account_summary
                                      , rqh_errMsg = "  It does not support account summary cancellation." 
                                      }
-       write s $ hdr
+       write s hdr
        wFlush s
                                
-request s rq @ (CancelPositions) = 
+request s rq @ CancelPositions = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                , rqh_errMsg = "  It does not support positions cancellation." 
                                , rqh_minVer = min_server_ver_positions
                                }
-       write s $ hdr
+       write s hdr
        wFlush s
 
 
@@ -593,7 +590,7 @@ request s rq @ (UnsubscribeFromGroupEvents reqId) =
        write s $ hdr <++> show' reqId
        wFlush s
 
-request s rq @ (StartApi) = 
+request s rq @ StartApi = 
     do  let clientId = s_clientId s
         hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
         write s $ hdr <++> show' clientId
