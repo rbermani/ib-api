@@ -18,6 +18,7 @@ import qualified Network.Socket as S hiding (send, recv, sendTo, recvFrom)
 import Network.Socket.ByteString 
 import Network.BSD
 import Data.List
+import Data.Char
 import System.Timeout
 import System.IO
 import qualified Data.ByteString.Char8 as B
@@ -57,21 +58,19 @@ greetServer server =
            extraAuth = s_extraAuth server
 
        msg <- B.hGet h 25 
-       putStrLn $ B.unpack msg
+    
        let prea = parse pServerVersion msg
-
 
        case eitherResult prea of
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
-                           putStrLn $ "ver: " ++ show (serv_ver) ++ "time: " ++ twsTime
-
+                           
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
                               | serv_ver >= 3 -> when (serv_ver < min_server_ver_linking) $
                                                     write server $ show' $ s_clientId server
-                              | not extraAuth -> request server StartApi
+                              | extraAuth -> request server StartApi
                               | otherwise -> return ()
                            wFlush server
                            return server { s_twsTime = twsTime

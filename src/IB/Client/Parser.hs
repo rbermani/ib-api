@@ -13,9 +13,11 @@ module IB.Client.Parser
   ) where
 
 --import Data.ByteString hiding (elem, map, empty)
+import Prelude hiding (takeWhile)
 import qualified Data.ByteString.Char8 as C 
 import Control.Monad 
 import Control.Applicative
+import Data.Char hiding (takeWhile)
 import Data.Attoparsec.ByteString.Char8
 
 import IB.Client.Types
@@ -24,19 +26,12 @@ import IB.Client.Nums
 pServerVersion :: Parser Preamble
 pServerVersion = 
     do pre_serverVersion <- pStrInt
-       let pre_twsTime = ""
-           
 
---       when (pre_serverVersion >= 20) $
---        do pre_twsTime <- pStr
---           return ()
-    
-       --if (serv_ver >= 20)
-       -- then do twsTime <- pStrInt
-       -- else let twsTime = 0 
-    
-       return Preamble {pre_serverVersion, pre_twsTime }
-
+       if pre_serverVersion >= 20
+        then do pre_twsTime <- pStr
+                return $ Preamble {pre_serverVersion, pre_twsTime}
+        else do return $ Preamble {pre_serverVersion, pre_twsTime = "" }
+       
 pRecvMsg :: Int -> Parser RecvMsg
 pRecvMsg sver = 
     do rc_msgId <- pStrInt
@@ -59,11 +54,10 @@ tickOptionDefault = TickOptionComputation { tickerId = 0
 
 
 pStr :: Parser String
-pStr = do bs <- takeWhile1 (/= '\NUL')
-          return (C.unpack bs)
+pStr = C.unpack <$> ( takeWhile (/= chr 0) )
 
 pStrMaybe :: Parser (Maybe String)
-pStrMaybe = do bs <- takeWhile1 (/= '\NUL')
+pStrMaybe = do bs <- takeWhile1 (/= chr 0)
                let str = C.unpack bs
                return (if null str then Nothing else Just str)
 
