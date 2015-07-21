@@ -13,7 +13,7 @@ module IB.Client.Parser
   ) where
 
 --import Data.ByteString hiding (elem, map, empty)
-import Prelude hiding (takeWhile)
+import Prelude hiding (takeWhile, take)
 import qualified Data.ByteString.Char8 as C 
 import Control.Monad 
 import Control.Applicative
@@ -53,12 +53,16 @@ tickOptionDefault = TickOptionComputation { tickerId = 0
                                           }
 
 
+pBStr :: Parser C.ByteString
+pBStr = takeWhile1 (/= chr 0) <* take 1
+
 pStr :: Parser String
-pStr = C.unpack <$> ( takeWhile (/= chr 0) )
+pStr = C.unpack <$> pBStr
 
 pStrMaybe :: Parser (Maybe String)
 pStrMaybe = do bs <- takeWhile1 (/= chr 0)
                let str = C.unpack bs
+               take 1
                return (if null str then Nothing else Just str)
 
 pStrIntMax :: Parser Int

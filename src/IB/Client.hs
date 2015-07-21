@@ -49,6 +49,9 @@ disconnect smv =
                      , s_connected = False
                      }
 
+ascCodes :: B.ByteString -> String
+ascCodes inp = unwords ( map (show . ord) (B.unpack inp) )
+       
 greetServer :: IBServer -> IO IBServer
 greetServer server = 
     do write server $ show' client_version
@@ -58,14 +61,13 @@ greetServer server =
            extraAuth = s_extraAuth server
 
        msg <- B.hGet h 25 
-    
        let prea = parse pServerVersion msg
 
        case eitherResult prea of
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
-                           
+
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
                               | serv_ver >= 3 -> when (serv_ver < min_server_ver_linking) $
