@@ -157,7 +157,7 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
 
 defaultConf :: ClientConfig 
 defaultConf = ClientConfig { cc_addr = ""
-                           , cc_port = 5555
+                           , cc_port = 7496
                            , cc_clientId = 1
                            , cc_extraAuth = False
                            , cc_handler = Just defHandler
