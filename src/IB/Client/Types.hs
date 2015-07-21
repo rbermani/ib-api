@@ -363,7 +363,7 @@ data IBServer =
     , s_extraAuth :: Bool
     , s_version :: Int
     , s_connected :: Bool
-    , s_twsTime :: Int
+    , s_twsTime :: String
     , s_debug :: Bool
     , s_sock :: Maybe Handle
     , s_msgThread :: Maybe ThreadId
@@ -494,7 +494,7 @@ idToMsg  = fromConstr . indexConstr (dataTypeOf IBUnknown)
 data Preamble = 
     Preamble
     { pre_serverVersion :: Int
-    , pre_twsTime :: Int
+    , pre_twsTime :: String
     }
 
 data Execution = 

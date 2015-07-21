@@ -56,13 +56,17 @@ greetServer server =
        let h = fromJust (s_sock server )
            extraAuth = s_extraAuth server
 
-       msg <- B.hGet h 128
+       msg <- B.hGet h 25 
+       putStrLn $ B.unpack msg
        let prea = parse pServerVersion msg
+
 
        case eitherResult prea of
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
+                           putStrLn $ "ver: " ++ show (serv_ver) ++ "time: " ++ twsTime
+
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
                               | serv_ver >= 3 -> when (serv_ver < min_server_ver_linking) $
@@ -110,7 +114,7 @@ connect :: ClientConfig     -- ^ Configuration
  
 connect cconf threaded debug = try $ do
     when debug $
-        putStrLn $ "Connecting to " ++ cc_addr cconf
+        putStrLn $ "Connecting to " ++ cc_addr cconf ++ " on port " ++ show (cc_port cconf)
 
 --    if (isConnected $ cc_socket cconf)
 --             then throwIO IBExc no_valid_id AlreadyConnected ""
@@ -156,7 +160,7 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
                                }
 
 defaultConf :: ClientConfig 
-defaultConf = ClientConfig { cc_addr = ""
+defaultConf = ClientConfig { cc_addr = "127.0.0.1"
                            , cc_port = 7496
                            , cc_clientId = 1
                            , cc_extraAuth = False

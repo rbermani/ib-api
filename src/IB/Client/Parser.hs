@@ -24,11 +24,12 @@ import IB.Client.Nums
 pServerVersion :: Parser Preamble
 pServerVersion = 
     do pre_serverVersion <- pStrInt
-       let pre_twsTime = 0
- 
-       when (pre_serverVersion >= 20) $
-        do pre_twsTime <- pStrInt
-           return ()
+       let pre_twsTime = ""
+           
+
+--       when (pre_serverVersion >= 20) $
+--        do pre_twsTime <- pStr
+--           return ()
     
        --if (serv_ver >= 20)
        -- then do twsTime <- pStrInt

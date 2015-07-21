@@ -47,7 +47,7 @@ debugWrite s msg =
 write :: IBServer -> B.ByteString -> IO ()
 write s msg = do
     debugWrite s $ "<< " ++ B.unpack msg 
-    B.hPutStr h (msg <++> B.pack "\0")
+    B.hPutStr h (msg `B.append` B.pack "\0")
     where h = fromJust $ s_sock s
 
 wFlush :: IBServer -> IO ()
