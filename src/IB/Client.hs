@@ -60,8 +60,8 @@ greetServer server =
        let h = fromJust (s_sock server )
            extraAuth = s_extraAuth server
 
-       msg <- B.hGet h 25 
-       let prea = parse pServerVersion msg
+       msg <- B.hGetNonBlocking h 25 
+       prea <- parseWith (B.hGetNonBlocking h 25) pServerVersion msg
 
        case eitherResult prea of
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg

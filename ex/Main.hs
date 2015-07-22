@@ -55,5 +55,5 @@ main =
     do result <- connect defaultConf False True
        case result of 
          Left err -> putStrLn "Error"
-         Right msv -> do putStrLn "Success"
-
+         Right msv -> do s <- readMVar msv
+                         when (s_connected s) (checkMsg msv True)
