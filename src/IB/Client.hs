@@ -95,11 +95,11 @@ checkMsg mvs loop =
                 modifyMVar_ mvs (\serv -> return $ serv {s_sock = Nothing})
                 hClose h
             else do
-                msg <- B.hGet h 4096
+                msg <- B.hGetNonBlocking h 4096
                 server <- takeMVar mvs
                 debugWrite server $ ">> " ++ B.unpack msg
                 putMVar mvs server
-                pResult <- parseWith (B.hGet h 1024) (pRecvMsg ver) msg 
+                pResult <- parseWith (B.hGetNonBlocking h 1024) (pRecvMsg ver) msg 
 
                 case eitherResult pResult of 
                     Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
