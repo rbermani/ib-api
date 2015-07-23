@@ -56,4 +56,13 @@ main =
        case result of 
          Left err -> putStrLn "Error"
          Right msv -> do s <- readMVar msv
-                         when (s_connected s) (checkMsg msv True)
+                         request s CurrentTimeReq 
+                         businessLogic msv
+
+
+businessLogic :: MIB -> IO ()
+businessLogic msv =
+    do s <- readMVar msv
+       when (s_connected s) $
+            do checkMsg msv True
+               businessLogic msv

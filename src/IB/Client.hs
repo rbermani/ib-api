@@ -60,19 +60,21 @@ greetServer server =
        let h = fromJust (s_sock server )
            extraAuth = s_extraAuth server
 
-       msg <- B.hGetNonBlocking h 25 
+       msg <- B.hGet h 25 
        prea <- parseWith (B.hGetNonBlocking h 25) pServerVersion msg
 
        case eitherResult prea of
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
-
+                           
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
-                              | serv_ver >= 3 -> when (serv_ver < min_server_ver_linking) $
-                                                    write server $ show' $ s_clientId server
-                              | extraAuth -> request server StartApi
+                              | serv_ver >= 3 -> if (serv_ver < min_server_ver_linking)
+                                                   then write server $ show' ( s_clientId server)
+                                                   else if (not extraAuth)
+                                                          then request server StartApi
+                                                          else return ()
                               | otherwise -> return ()
                            wFlush server
                            return server { s_twsTime = twsTime
@@ -88,24 +90,24 @@ checkMsg mvs loop =
        let h = fromJust $ s_sock s
            handleMsg = s_handler s
            ver = s_version s
-       eof <- timeout (s_timeoutInterval s) $ hIsEOF h
+       eof <- timeout (s_timeoutInterval s) (hIsEOF h)
 
-       if eof /= Just False
-            then do
-                modifyMVar_ mvs (\serv -> return $ serv {s_sock = Nothing})
-                hClose h
-            else do
-                msg <- B.hGetNonBlocking h 4096
-                server <- takeMVar mvs
-                debugWrite server $ ">> " ++ B.unpack msg
-                putMVar mvs server
-                pResult <- parseWith (B.hGetNonBlocking h 1024) (pRecvMsg ver) msg 
+       case eof of
+        Nothing -> putStrLn "EOF timeout encountered"
+        Just True -> do putStrLn "EOF encountered on handle"
+                        modifyMVar_ mvs (\serv -> return $ serv {s_sock = Nothing})
+                        hClose h
+        Just False -> do msg <- B.hGetNonBlocking h 1024
+                         server <- takeMVar mvs
+                         debugWrite server $ ">> " ++ B.unpack msg
+                         putMVar mvs server
+                         pResult <- parseWith (B.hGetNonBlocking h 1024) (pRecvMsg ver) msg 
 
-                case eitherResult pResult of 
-                    Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
-                    Right res -> handleMsg mvs $ rc_msgBody res 
-                
-                when loop $ checkMsg mvs loop
+                         case eitherResult pResult of 
+                             Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
+                             Right res -> handleMsg mvs $ rc_msgBody res 
+                         
+                         when loop $ checkMsg mvs loop
 
 -- |Connects to a server
 connect :: ClientConfig     -- ^ Configuration
@@ -158,12 +160,13 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
                                , s_handler = fromJust $ cc_handler cc
                                , s_debug = debug
                                , s_sock = Just h
+                               , s_timeoutInterval = 100000
                                }
 
 defaultConf :: ClientConfig 
 defaultConf = ClientConfig { cc_addr = "127.0.0.1"
                            , cc_port = 7496
-                           , cc_clientId = 1
+                           , cc_clientId = 23
                            , cc_extraAuth = False
                            , cc_handler = Just defHandler
                            } 
