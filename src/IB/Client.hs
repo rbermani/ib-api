@@ -67,20 +67,19 @@ greetServer server =
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
-                           
+                               sCo = server {s_connected= True} 
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
                               | serv_ver >= 3 -> if (serv_ver < min_server_ver_linking)
-                                                   then write server $ show' ( s_clientId server)
+                                                   then write sCo $ show' ( s_clientId sCo)
                                                    else if (not extraAuth)
-                                                          then request server StartApi
+                                                          then request sCo StartApi
                                                           else return ()
                               | otherwise -> return ()
-                           wFlush server
-                           return server { s_twsTime = twsTime
-                                         , s_version = serv_ver
-                                         , s_connected = True
-                                         } 
+                           wFlush sCo
+                           return sCo { s_twsTime = twsTime
+                                      , s_version = serv_ver
+                                      } 
 
 
 
@@ -161,6 +160,7 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
                                , s_debug = debug
                                , s_sock = Just h
                                , s_timeoutInterval = 100000
+                               , s_connected = False
                                }
 
 defaultConf :: ClientConfig 

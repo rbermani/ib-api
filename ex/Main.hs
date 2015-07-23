@@ -54,10 +54,10 @@ main :: IO ()
 main = 
     do result <- connect defaultConf False True
        case result of 
-         Left err -> putStrLn "Error"
+         Left err -> putStrLn "Unable to Connect"
          Right msv -> do s <- readMVar msv
                          request s CurrentTimeReq 
-                         businessLogic msv
+                         --businessLogic msv
 
 
 businessLogic :: MIB -> IO ()
