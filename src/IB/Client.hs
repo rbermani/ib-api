@@ -67,7 +67,10 @@ greetServer server =
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
-                               sCo = server {s_connected= True} 
+                               sCo = server { s_connected= True
+                                            , s_version = serv_ver
+                                            , s_twsTime = twsTime 
+                                            } 
                            case () of
                             _ | serv_ver < server_version -> throwIO $ IBExc no_valid_id UpdateTWS ""
                               | serv_ver >= 3 -> if (serv_ver < min_server_ver_linking)
@@ -77,10 +80,7 @@ greetServer server =
                                                           else return ()
                               | otherwise -> return ()
                            wFlush sCo
-                           return sCo { s_twsTime = twsTime
-                                      , s_version = serv_ver
-                                      } 
-
+                           return sCo 
 
 
 checkMsg :: MIB -> Bool -> IO ()
