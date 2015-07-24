@@ -67,7 +67,7 @@ greetServer server =
          Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
          Right val   -> do let serv_ver =  pre_serverVersion val
                                twsTime = pre_twsTime val
-                               sCo = server { s_connected= True
+                               sCo = server { s_connected = True
                                             , s_version = serv_ver
                                             , s_twsTime = twsTime 
                                             } 

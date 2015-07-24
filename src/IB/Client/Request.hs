@@ -21,9 +21,9 @@ import qualified System.IO as S
 import qualified Data.ByteString.Char8 as B
 import Data.Maybe
 
-import IB.Client.Exception
-import IB.Client.Nums
-import IB.Client.Types
+import IB.Exception
+import IB.Nums
+import IB.Types
 
 data ReqHeader = 
     ReqHeader 
@@ -31,11 +31,11 @@ data ReqHeader =
     , rqh_proVer :: Int
     , rqh_errId :: Int
     , rqh_errMsg :: String
-    , rqh_minVer :: Int
-    , rqh_exAuth :: Bool
+    , rqh_minVer :: Maybe Int
+    , rqh_exAuth :: Maybe Bool
     }
 
-defReqHeader = ReqHeader 1 1 no_valid_id "" undefined undefined
+defReqHeader = ReqHeader 1 1 no_valid_id "" Nothing Nothing
 
 (<++>) :: B.ByteString -> B.ByteString -> B.ByteString
 a <++> b =  a `B.append` nullch `B.append` b `B.append` nullch
@@ -156,10 +156,10 @@ getHeaderCon s rqh con =
  
        case () of
         _ | not connected -> throwIO $ IBExc (rqh_errId rqh) NotConnected ""  
-          | rqh_minVer rqh /= undefined -> 
-                when ((serv_ver < rqh_minVer rqh) && not ( null ( ct_tradingClass con)) || ct_conId con > 0)
+          | (rqh_minVer rqh) /= Nothing -> 
+                when ((serv_ver < fromJust (rqh_minVer rqh)) && not ( null ( ct_tradingClass con)) || ct_conId con > 0)
                     $ throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
-                    
+          | otherwise -> return ()          
 
        return $ show' ( rqh_msgId rqh) <++> show' ( rqh_proVer rqh)
 
@@ -172,9 +172,10 @@ getHeader s rqh =
  
        case () of
         _ | not connected -> throwIO $ IBExc (rqh_errId rqh) NotConnected ""  
-          | rqh_minVer rqh /= undefined -> when (serv_ver < rqh_minVer rqh) $ throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
+          | (rqh_minVer rqh) /= Nothing -> when (serv_ver < fromJust (rqh_minVer rqh)) $ throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
 
-          | rqh_exAuth rqh /= undefined -> unless mExtraAuth $ throwIO $ IBExc no_valid_id UpdateTWS "  Intent to authenticate needs to be expressed during initial connect request."
+          | (rqh_exAuth rqh) /= Nothing -> unless mExtraAuth $ throwIO $ IBExc no_valid_id UpdateTWS "  Intent to authenticate needs to be expressed during initial connect request."
+          | otherwise -> return ()
 
        return $ show' ( rqh_msgId rqh) <++> show' ( rqh_proVer rqh)
 
@@ -295,7 +296,7 @@ request s rq @ (MktDepthReq { rqp_tickerId = tid
 
        hdr <- getHeaderCon s defReqHeader { rqh_msgId = reqToId rq
                                         , rqh_proVer = 5
-                                        , rqh_minVer = min_server_ver_trading_class
+                                        , rqh_minVer = Just min_server_ver_trading_class
                                         , rqh_errId = tid
                                         , rqh_errMsg = "  It does not support conId and tradingClass parameters in reqMktDepth."
                                         } con
@@ -366,7 +367,7 @@ request s rq @ (HistoricalDataReq {rqp_tickerId = tid
         hdr <-  getHeaderCon s defReqHeader { rqh_msgId = reqToId rq
                                    , rqh_proVer = 6
                                    , rqh_errId = tid
-                                   , rqh_minVer = min_server_ver_trading_class
+                                   , rqh_minVer = Just min_server_ver_trading_class
                                    , rqh_errMsg = "  It does not support conId and tradingClass parameters in reqHistoricalData."
                                    } con
         con' <- encodeContract s con True
@@ -400,7 +401,7 @@ request s rq @ (ExerciseOptionsReq { rqp_tickerId = tid
         hdr <-  getHeaderCon s defReqHeader { rqh_msgId = reqToId rq
                                          , rqh_proVer = 2
                                          , rqh_errId = tid
-                                         , rqh_minVer = min_server_ver_trading_class
+                                         , rqh_minVer = Just min_server_ver_trading_class
                                          , rqh_errMsg = "  It does not support conId and tradingClass parameters in reqHistoricalData."
                                          } con
         con' <- encodeContract s con False
@@ -474,7 +475,7 @@ request s rq @ (CancelRealTimeBars tid) =
 request s rq @ (CancelFundamentalData tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                      , rqh_errId = tid
-                                     , rqh_minVer = min_server_ver_fundamental_data
+                                     , rqh_minVer = Just min_server_ver_fundamental_data
                                      , rqh_errMsg = "  It does not support fundamental data requests." 
                                      }
        write s $ hdr <++> show' tid
@@ -486,7 +487,7 @@ request s rq @ (CancelFundamentalData tid) =
 request s rq @ (CancelCalcImpliedVolatility tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                      , rqh_errId = tid
-                                     , rqh_minVer = min_server_ver_cancel_calc_implied_volat
+                                     , rqh_minVer = Just min_server_ver_cancel_calc_implied_volat
                                      , rqh_errMsg = "  It does not support calculate implied volatility cancellation." 
                                      }
        write s $ hdr <++> show' tid
@@ -495,7 +496,7 @@ request s rq @ (CancelCalcImpliedVolatility tid) =
 request s rq @ (CancelCalcOptionPrice tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                , rqh_errId = tid
-                               , rqh_minVer = min_server_ver_cancel_calc_option_price
+                               , rqh_minVer = Just min_server_ver_cancel_calc_option_price
                                , rqh_errMsg = "  It does not support calculate option price cancellation." 
                                }
        write s $ hdr <++> show' tid
@@ -504,7 +505,7 @@ request s rq @ (CancelCalcOptionPrice tid) =
 request s rq @ GlobalCancelReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq 
                                      , rqh_errMsg = "  It does not support globalCancel requests."
-                                     , rqh_minVer = min_server_ver_req_global_cancel
+                                     , rqh_minVer = Just min_server_ver_req_global_cancel
                                      }  
        write s hdr
        wFlush s
@@ -524,7 +525,7 @@ request s rq @ PositionsReq =
 
 request s rq @ (CancelAccountSummary req_id) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                                     , rqh_minVer =  min_server_ver_account_summary
+                                     , rqh_minVer =  Just min_server_ver_account_summary
                                      , rqh_errMsg = "  It does not support account summary cancellation." 
                                      }
        write s hdr
@@ -533,7 +534,7 @@ request s rq @ (CancelAccountSummary req_id) =
 request s rq @ CancelPositions = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                , rqh_errMsg = "  It does not support positions cancellation." 
-                               , rqh_minVer = min_server_ver_positions
+                               , rqh_minVer = Just min_server_ver_positions
                                }
        write s hdr
        wFlush s
@@ -541,16 +542,16 @@ request s rq @ CancelPositions =
 
 request s rq @ (VerifyReq apiName apiVersion) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                               , rqh_minVer = min_server_ver_linking
+                               , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support verification message sending." 
-                               , rqh_exAuth = True
+                               , rqh_exAuth = Just True
                                } 
        write s $ hdr <++> B.pack apiName <++> B.pack apiVersion
        wFlush s
 
 request s rq @ (VerifyMessage apiData) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                               , rqh_minVer = min_server_ver_linking
+                               , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support verification message sending." 
                                } 
        write s $ hdr <++> B.pack apiData
@@ -558,7 +559,7 @@ request s rq @ (VerifyMessage apiData) =
 
 request s rq @ (QueryDisplayGroups rid) =
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                               , rqh_minVer = min_server_ver_linking
+                               , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support queryDisplayGroups request." 
                                } 
        write s $ hdr <++> show' rid
@@ -566,7 +567,7 @@ request s rq @ (QueryDisplayGroups rid) =
   
 request s rq @ (SubscribeToGroupEvents reqId gid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                               , rqh_minVer = min_server_ver_linking
+                               , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support subscribeToGroupEvents request." 
                                } 
        write s $ hdr <++> show' reqId
@@ -575,7 +576,7 @@ request s rq @ (SubscribeToGroupEvents reqId gid) =
 
 request s rq @ (UpdateDisplayGroup reqId contractInfo) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                               , rqh_minVer = min_server_ver_linking
+                               , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support updateDisplayGroup request." 
                                } 
        write s $ show' reqId
@@ -584,7 +585,7 @@ request s rq @ (UpdateDisplayGroup reqId contractInfo) =
 
 request s rq @ (UnsubscribeFromGroupEvents reqId) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
-                               , rqh_minVer = min_server_ver_linking
+                               , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support unsubscribeFromGroupEvents request." 
                                } 
        write s $ hdr <++> show' reqId
