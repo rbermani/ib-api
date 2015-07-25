@@ -21,9 +21,9 @@ import qualified System.IO as S
 import qualified Data.ByteString.Char8 as B
 import Data.Maybe
 
-import IB.Exception
-import IB.Nums
-import IB.Types
+import IB.Client.Exception
+import IB.Client.Nums
+import IB.Client.Types
 
 data ReqHeader = 
     ReqHeader 
@@ -197,7 +197,7 @@ request s inp @ (MktDataReq { }) =
           | serv_ver < min_server_ver_trading_class && not ( null (ct_tradingClass ct)) -> throwIO $ IBExc tickerId UpdateTWS "  It does not support tradingClass parameter in reqMktData."   
           | otherwise -> return ()
 
-       let bs = show' (reqToId MktDataReq {})
+       let bs = show' (reqToId inp)
                  <++> show' version
                  <++> show' tickerId
            conbs | serv_ver >= min_server_ver_req_mkt_data_conid = show' $ ct_conId ct 

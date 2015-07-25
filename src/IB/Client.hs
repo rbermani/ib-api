@@ -158,6 +158,9 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
                                , s_extraAuth = cc_extraAuth cc
                                , s_handler = fromJust $ cc_handler cc
                                , s_debug = debug
+                               , s_twsTime = ""
+                               , s_msgThread = Nothing
+                               , s_version = 0
                                , s_sock = Just h
                                , s_timeoutInterval = 100000
                                , s_connected = False

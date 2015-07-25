@@ -194,7 +194,6 @@ data IBMessage
     | ContractData ContractDetails  
     | ExecutionData  
     { reqId :: Int
-    , orderId :: Int
     , contract :: Contract
     , exec    :: Execution
     }
@@ -637,6 +636,14 @@ data UnderComp =
     , uc_price   :: Double
     } deriving (Typeable, Data, Eq)
 
+defUnderComp :: UnderComp
+defUnderComp =
+    UnderComp
+    { uc_conId = 0
+    , uc_delta = 0.0
+    , uc_price = 0.0
+    }
+
 data Contract = 
     Contract
     { ct_conId	:: Int
@@ -667,6 +674,29 @@ data Contract =
      -- delta neutral
     , ct_underComp :: UnderComp
     } deriving (Typeable, Data)
+
+defContract :: Contract
+defContract = 
+    Contract
+    { ct_conId	= 0
+    , ct_symbol = ""
+    , ct_secType= ""
+    , ct_expiry	= ""
+    , ct_strike = 0.0	
+    , ct_right	= ""
+    , ct_multiplier	= ""
+    , ct_exchange	= ""
+    , ct_primaryExchange= ""
+    , ct_currency	= ""
+    , ct_localSymbol	= ""
+    , ct_tradingClass	= ""
+    , ct_includeExpired	= False
+    , ct_secIdType	= ""
+    , ct_secId= ""
+    , ct_comboLegsDescrip= ""
+    , ct_comboLegsList = []
+    , ct_underComp = defUnderComp
+    }
 
 data ContractDetails = 
     ContractDetails
@@ -705,6 +735,44 @@ data ContractDetails =
     , ctd_nextOptionPartial	:: Bool
     , ctd_notes	:: String
     } deriving (Data, Typeable)
+
+defContractDetails :: ContractDetails
+defContractDetails = 
+    ContractDetails 
+    { ctd_summary = defContract
+    , ctd_marketName = ""
+    , ctd_minTick = 0.0
+    , ctd_orderTypes = ""
+    , ctd_validExchanges = ""
+    , ctd_priceMagnifier = 0
+    , ctd_underConId = int32max 
+    , ctd_longName = ""
+    , ctd_contractMonth = ""
+    , ctd_industry = ""
+    , ctd_category = ""
+    , ctd_subcategory = ""
+    , ctd_timeZoneId = ""
+    , ctd_tradingHours = ""
+    , ctd_liquidHours = ""
+    , ctd_evRule = ""
+    , ctd_evMultiplier = dblMaximum
+    , ctd_secIdList = []
+    , ctd_cusip	 = ""
+    , ctd_ratings = ""
+    , ctd_descAppend = ""
+    , ctd_bondType = ""
+    , ctd_couponType	 = ""
+    , ctd_callable	 = False
+    , ctd_putable = False
+    , ctd_coupon = 0.0
+    , ctd_convertible = False
+    , ctd_maturity	 = ""
+    , ctd_issueDate = ""
+    , ctd_nextOptionDate = ""
+    , ctd_nextOptionType = ""
+    , ctd_nextOptionPartial = False
+    , ctd_notes	 = ""
+    }
 
 data Order = 
     Order 
@@ -804,7 +872,7 @@ data Order =
     , ord_settlingFirm	:: String
     , ord_clearingAccount	:: String -- True beneficiary of the order
     , ord_clearingIntent	:: String -- "" (Default), "IB", "Away", "PTA" (PostTrade)
-    , ord_-- ALGO ORDERS ONLY
+    -- ALGO ORDERS ONLY
     , ord_algoStrategy	:: String
     , ord_algoParams    :: [TagValue]
     , ord_smartComboRoutingParams   :: [TagValue]
@@ -821,4 +889,97 @@ data Order =
     --orderMiscOptions	TagValueListSPtr
     } deriving (Data, Typeable)
 
+defOrder :: Order
+defOrder =
+    Order
+    { ord_orderId  = 0
+    , ord_clientId = 0
+    , ord_permId   = 0
+    , ord_action = ""
+    , ord_totalQuantity = 0
+    , ord_orderType = ""
+    , ord_lmtPrice      = dblMaximum
+    , ord_auxPrice      = dblMaximum
+    , ord_tif = ""
+    , ord_activeStartTime = ""
+    , ord_activeStopTime = ""
+    , ord_ocaGroup = ""
+    , ord_ocaType        = 0
+    , ord_orderRef = ""
+    , ord_transmit       = True
+    , ord_parentId       = 0
+    , ord_blockOrder     = False
+    , ord_sweepToFill    = False
+    , ord_displaySize    = 0
+    , ord_triggerMethod  = 0
+    , ord_outsideRth     = False
+    , ord_hidden         = False
+    , ord_goodAfterTime = ""
+    , ord_goodTillDate = ""
+    , ord_rule80A = ""
+    , ord_allOrNone      = False
+    , ord_minQty         = int32max
+    , ord_percentOffset  = dblMaximum
+    , ord_overridePercentageConstraints = False
+    , ord_trailStopPrice = dblMaximum
+    , ord_trailingPercent = dblMaximum
+    , ord_faGroup = ""
+    , ord_faProfile = ""
+    , ord_faMethod = ""
+    , ord_faPercentage = ""
+    , ord_openClose     = "O"
+    , ord_origin        = CUSTOMER
+    , ord_shortSaleSlot = 0
+    , ord_designatedLocation = ""
+    , ord_exemptCode    = -1
+    , ord_discretionaryAmt = 0
+    , ord_eTradeOnly       = True
+    , ord_firmQuoteOnly    = True
+    , ord_nbboPriceCap     = dblMaximum
+    , ord_optOutSmartRouting = False
+    , ord_auctionStrategy = 0
+    , ord_startingPrice   = dblMaximum
+    , ord_stockRefPrice   = dblMaximum
+    , ord_delta           = dblMaximum
+    , ord_stockRangeLower = dblMaximum
+    , ord_stockRangeUpper = dblMaximum
+    , ord_volatility            = dblMaximum
+    , ord_volatilityType        = int32max 
+    , ord_deltaNeutralOrderType = ""
+    , ord_deltaNeutralAuxPrice  = dblMaximum
+    , ord_deltaNeutralConId     = 0
+    , ord_deltaNeutralSettlingFirm = ""
+    , ord_deltaNeutralClearingAccount = ""
+    , ord_deltaNeutralClearingIntent = ""
+    , ord_deltaNeutralOpenClose = ""
+    , ord_deltaNeutralShortSale = False
+    , ord_deltaNeutralShortSaleSlot = 0
+    , ord_deltaNeutralDesignatedLocation = ""
+    , ord_continuousUpdate      = False
+    , ord_referencePriceType    = int32max
+    , ord_basisPoints     = dblMaximum  
+    , ord_basisPointsType = int32max 
+    , ord_scaleInitLevelSize  = int32max
+    , ord_scaleSubsLevelSize  = int32max
+    , ord_scalePriceIncrement = dblMaximum
+    , ord_scalePriceAdjustValue = dblMaximum
+    , ord_scalePriceAdjustInterval = int32max
+    , ord_scaleProfitOffset = dblMaximum
+    , ord_scaleAutoReset = False
+    , ord_scaleInitPosition = int32max
+    , ord_scaleInitFillQty = int32max
+    , ord_scaleRandomPercent = False
+    , ord_scaleTable = ""
+    , ord_hedgeType = ""
+    , ord_hedgeParam = ""
+    , ord_account = ""
+    , ord_settlingFirm = "" 
+    , ord_clearingAccount = ""
+    , ord_clearingIntent = ""
+    , ord_algoStrategy = ""
+    , ord_algoParams = []
+    , ord_smartComboRoutingParams = [] 
+    , ord_whatIf = False
+    , ord_notHeld = False
+    }
 
