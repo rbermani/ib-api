@@ -9,6 +9,7 @@ module IB.Client.Request
   , request 
   , wFlush
   , write
+  , appNull
   , show'
   , debugWrite
   ) where
@@ -38,7 +39,7 @@ data ReqHeader =
 defReqHeader = ReqHeader 1 1 no_valid_id "" Nothing Nothing
 
 (<++>) :: B.ByteString -> B.ByteString -> B.ByteString
-a <++> b =  a `B.append` nullch `B.append` b `B.append` nullch
+a <++> b =  a `B.append` nullch `B.append` b 
 
 debugWrite :: IBServer -> String -> IO ()
 debugWrite s msg =
@@ -47,7 +48,7 @@ debugWrite s msg =
 write :: IBServer -> B.ByteString -> IO ()
 write s msg = do
     debugWrite s $ "<< " ++ B.unpack msg 
-    B.hPutStr h (msg `B.append` B.pack "\0")
+    B.hPutStr h msg 
     where h = fromJust $ s_sock s
 
 wFlush :: IBServer -> IO ()
@@ -59,6 +60,9 @@ show' = B.pack . show
 
 nullch :: B.ByteString
 nullch = B.pack "\0"
+
+appNull :: B.ByteString -> B.ByteString
+appNull bin = bin `B.append` nullch
 
 encodeDbl :: Double -> B.ByteString 
 encodeDbl val = B.pack (printf "%.2f" val)
@@ -74,17 +78,17 @@ encodeDblMax val
     | otherwise = encodeDbl val
 
 encodeExecutionFilter :: ExecutionFilter -> B.ByteString 
-encodeExecutionFilter exf = show' ( exf_clientId exf)
+encodeExecutionFilter exf = appNull (show' ( exf_clientId exf)
                                     <++> B.pack (exf_acctCode exf)
                                     <++> B.pack ( exf_time exf)
                                     <++> B.pack ( exf_symbol exf)
                                     <++> B.pack ( exf_secType exf)
                                     <++> B.pack ( exf_exchange exf)
-                                    <++> B.pack ( exf_side exf )
-
+                                    <++> B.pack ( exf_side exf ))
+                                    
 
 encodeSubscription :: ScannerSubscription -> B.ByteString 
-encodeSubscription subs = encodeIntMax ( ssb_numberOfRows subs)
+encodeSubscription subs = appNull $ encodeIntMax ( ssb_numberOfRows subs)
                              <++> B.pack ( ssb_instrument subs)
                              <++> B.pack ( ssb_locationCode subs)
                              <++> B.pack ( ssb_scanCode subs)
@@ -105,7 +109,7 @@ encodeSubscription subs = encodeIntMax ( ssb_numberOfRows subs)
                              <++> encodeIntMax ( ssb_averageOptionVolumeAbove subs)
                              <++> B.pack ( ssb_scannerSettingPairs subs)
                              <++> B.pack ( ssb_stockTypeFilter subs)
-
+                             
                               
 encodeTagValue :: TagValue -> B.ByteString 
 encodeTagValue tv = B.pack $ tv_tag tv ++ "=" ++ tv_value tv ++ ";" 
@@ -114,17 +118,17 @@ encodeTagValueList :: [TagValue] -> B.ByteString
 encodeTagValueList tvl = B.concat $ map encodeTagValue tvl
 
 encodeUnderComp :: UnderComp -> B.ByteString 
-encodeUnderComp uc = show' 1 <++> show' ( uc_conId uc )
+encodeUnderComp uc = appNull $ show' 1 <++> show' ( uc_conId uc )
                         <++> show' ( uc_price uc)
 
 encodeComboLeg :: ComboLeg -> B.ByteString 
-encodeComboLeg cl =  show' ( cl_conId cl)
+encodeComboLeg cl =  appNull $ show' ( cl_conId cl)
                         <++> show' ( cl_ratio cl )
                         <++> B.pack ( cl_action cl )
                         <++> B.pack ( cl_exchange cl)
 
 encodeComboLegList :: [ComboLeg] -> B.ByteString 
-encodeComboLegList cll = show' ( length cll) <++> B.concat ( map encodeComboLeg cll )
+encodeComboLegList cll = appNull $ show' ( length cll) <++> B.concat ( map encodeComboLeg cll )
 
 encodeContract :: IBServer -> Contract -> Bool -> IO B.ByteString 
 encodeContract s con pexch = 
@@ -144,8 +148,8 @@ encodeContract s con pexch =
                         <++> B.pack ( ct_localSymbol con)
 
        if serv_ver >= min_server_ver_trading_class
-            then return $ out'' <++> B.pack ( ct_tradingClass con)
-            else return out'' 
+            then return $ appNull $ out'' <++> B.pack ( ct_tradingClass con)
+            else return $ appNull out'' 
  
 getHeaderCon :: IBServer -> ReqHeader -> Contract -> IO B.ByteString 
 getHeaderCon s rqh con = 
@@ -161,7 +165,7 @@ getHeaderCon s rqh con =
                     $ throwIO $ IBExc (rqh_errId rqh) UpdateTWS (rqh_errMsg rqh)
           | otherwise -> return ()          
 
-       return $ show' ( rqh_msgId rqh) <++> show' ( rqh_proVer rqh)
+       return $ appNull $ show' ( rqh_msgId rqh) <++> show' ( rqh_proVer rqh)
 
 getHeader :: IBServer -> ReqHeader -> IO B.ByteString 
 getHeader s rqh = 
@@ -230,8 +234,8 @@ request s inp @ (MktDataReq { }) =
                     <++> show' ( fromBool ( mdr_snapshot inp))
 
        if serv_ver >= min_server_ver_linking
-           then write s $ bs'' <++>  encodeTagValueList ( mdr_mktDataOptions inp)
-           else write s bs'' 
+           then write s $ appNull $ bs'' <++>  encodeTagValueList ( mdr_mktDataOptions inp)
+           else write s $ appNull bs'' 
 
        wFlush s
 
@@ -240,7 +244,7 @@ request s rq @ (CancelMktData { rqp_tickerId = tid }) =
                                         , rqh_proVer = 2
                                         , rqh_errId = tid
                                         }
-        write s $ hdr <++> show' tid
+        write s $ appNull $ hdr <++> show' tid
         wFlush s
 
 request s rq @ (PlaceOrder { rqp_orderId = oid }) =
@@ -248,7 +252,7 @@ request s rq @ (PlaceOrder { rqp_orderId = oid }) =
                                        , rqh_proVer = 2
                                        , rqh_errId = oid
                                        }
-       write s $ hdr <++> show' oid
+       write s $ appNull $ hdr <++> show' oid
        wFlush s
 -- TODO PlaceOrder Complete
 
@@ -256,7 +260,7 @@ request s rq @ (CancelOrder oid) =
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                        , rqh_errId = oid
                                        }
-       write s $ hdr <++> show' oid
+       write s $ appNull $ hdr <++> show' oid
        wFlush s
 
 request s rq @ OpenOrdersReq = do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
@@ -267,7 +271,7 @@ request s rq @ (AccountUpdatesReq {aur_subscribe = subscribe, aur_acctCode = acc
      do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                         , rqh_proVer = 2
                                         }
-        write s $ show' ( fromBool subscribe) <++> B.pack acctCode
+        write s $ appNull $ show' ( fromBool subscribe) <++> B.pack acctCode
         wFlush s
 
 request s rq @ (ExecutionsReq req_id exc_filt) =
@@ -278,11 +282,11 @@ request s rq @ (ExecutionsReq req_id exc_filt) =
             reqbs | serv_ver >= min_server_ver_execution_data_chain = show' req_id
                   | otherwise = B.empty
 
-        write s $ hdr <++> reqbs <++> encodeExecutionFilter exc_filt
+        write s $ appNull $ hdr <++> reqbs <++> encodeExecutionFilter exc_filt
         wFlush s
 
 request s rq @ (IdsReq numIds) = do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq, rqh_errId = numIds }
-                                    write s $ hdr <++> show' numIds
+                                    write s $ appNull $ hdr <++> show' numIds
                                     wFlush s
 --TODO
 --request s rq @ (ContractDetailsReq req_id contract) = 
@@ -302,55 +306,55 @@ request s rq @ (MktDepthReq { rqp_tickerId = tid
                                         } con
        con' <- encodeContract s con False
 
-       write s $ hdr <++> show' tid <++> con' <++> show' numRows
+       write s $ appNull $ hdr <++> show' tid <++> con' <++> show' numRows
 
        when (serv_ver >= min_server_ver_linking) $
-           write s $ encodeTagValueList mkDepthOpts
+           write s $ appNull $ encodeTagValueList mkDepthOpts
 
        wFlush s
  
 request s rq @ (CancelMktDepth tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq,
                                  rqh_errId = tid}
-       write s $ hdr <++> show' tid 
+       write s $ appNull $ hdr <++> show' tid 
        wFlush s
 
 request s rq @ (NewsBulletinsReq allMsgs) =
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq}
-       write s $ hdr <++> show' ( fromBool allMsgs)
+       write s $ appNull $ hdr <++> show' ( fromBool allMsgs)
        wFlush s
 
 request s rq @ CancelNewsBulletins = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
-       write s hdr
+       write s $ appNull hdr
 
 request s rq @ (SetServerLogLevel llvl) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq }
-       write s $ hdr <++> show' llvl
+       write s $ appNull $ hdr <++> show' llvl
        wFlush s
 
 request s rq @ (AutoOpenOrdersReq autoBind) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq }
-       write s $ hdr <++> show' (fromBool autoBind)
+       write s $ appNull $ hdr <++> show' (fromBool autoBind)
        wFlush s
 
 request s rq @ AllOpenOrdersReq =
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 request s rq @ ManagedAcctsReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq }   
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 request s rq @ (FAReq fad) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq}  
-       write s $ hdr <++> show' ( fromEnum' fad)
+       write s $ appNull $ hdr <++> show' ( fromEnum' fad)
 
 request s rq @ (FAReplaceReq fad cxml) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq}  
-       write s $ hdr <++> show' (fromEnum' fad) <++> B.pack cxml
+       write s $ appNull $ hdr <++> show' (fromEnum' fad) <++> B.pack cxml
        wFlush s
 
 request s rq @ (HistoricalDataReq {rqp_tickerId = tid
@@ -372,7 +376,7 @@ request s rq @ (HistoricalDataReq {rqp_tickerId = tid
                                    } con
         con' <- encodeContract s con True
 
-        write s $ (hdr <++> show' tid)
+        write s $ appNull $ (hdr <++> show' tid)
             <++> con'
             <++> show' ( fromBool $ ct_includeExpired con  )
             <++> B.pack edt
@@ -383,10 +387,10 @@ request s rq @ (HistoricalDataReq {rqp_tickerId = tid
             <++> show' formatDate
 
         when (compare (ct_secType con) "BAG" == EQ) $
-            write s $ encodeComboLegList (ct_comboLegsList con) 
+            write s $ appNull $ encodeComboLegList (ct_comboLegsList con) 
       
         when (serv_ver >= min_server_ver_linking) $
-            write s $ encodeTagValueList chartOptions
+            write s $ appNull $ encodeTagValueList chartOptions
 
         wFlush s
  
@@ -406,7 +410,7 @@ request s rq @ (ExerciseOptionsReq { rqp_tickerId = tid
                                          } con
         con' <- encodeContract s con False
 
-        write s $ hdr <++> show' tid
+        write s $ appNull $ hdr <++> show' tid
                 <++> con'
                 <++> show' exerciseAction
                 <++> show' exerciseQty
@@ -423,10 +427,10 @@ request s rq @ (ScannerSubscriptionReq { rqp_tickerId = tid
                                       , rqh_proVer = 4
                                       , rqh_errId = tid
                                       }
-        write s $ show' tid <++> encodeSubscription subs
+        write s $ appNull $ show' tid <++> encodeSubscription subs
 
         when (serv_ver >= min_server_ver_linking) $
-            write s $ encodeTagValueList subsOpts
+            write s $ appNull $  encodeTagValueList subsOpts
             
 
         wFlush s
@@ -435,40 +439,40 @@ request s rq @ (CancelScannerSubscription tid) =
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                      , rqh_errId = tid 
                                      }
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 -- TODO: verify correctness
 request s rq @ ScannerParametersReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq }
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 request s rq @ (CancelHistoricalData tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                , rqh_errId = tid 
                                } 
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 
 
 request s rq @ CurrentTimeReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 -- TODO needs dev
 --
 request s rq @ (RealTimeBarsReq {}) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 request s rq @ (CancelRealTimeBars tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq
                                , rqh_errId = tid } 
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 
@@ -478,7 +482,7 @@ request s rq @ (CancelFundamentalData tid) =
                                      , rqh_minVer = Just min_server_ver_fundamental_data
                                      , rqh_errMsg = "  It does not support fundamental data requests." 
                                      }
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 --TODO
@@ -490,7 +494,7 @@ request s rq @ (CancelCalcImpliedVolatility tid) =
                                      , rqh_minVer = Just min_server_ver_cancel_calc_implied_volat
                                      , rqh_errMsg = "  It does not support calculate implied volatility cancellation." 
                                      }
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 request s rq @ (CancelCalcOptionPrice tid) = 
@@ -499,7 +503,7 @@ request s rq @ (CancelCalcOptionPrice tid) =
                                , rqh_minVer = Just min_server_ver_cancel_calc_option_price
                                , rqh_errMsg = "  It does not support calculate option price cancellation." 
                                }
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 request s rq @ GlobalCancelReq = 
@@ -507,18 +511,18 @@ request s rq @ GlobalCancelReq =
                                      , rqh_errMsg = "  It does not support globalCancel requests."
                                      , rqh_minVer = Just min_server_ver_req_global_cancel
                                      }  
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 request s rq @ (MarketDataTypeReq tid) = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq}
-       write s $ hdr <++> show' tid
+       write s $ appNull $ hdr <++> show' tid
        wFlush s
 
 
 request s rq @ PositionsReq = 
     do hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq}
-       write s hdr 
+       write s $ appNull hdr 
        wFlush s
 --TODO
 --request s rq @ (AccountSummaryReq {}) = 
@@ -528,7 +532,7 @@ request s rq @ (CancelAccountSummary req_id) =
                                      , rqh_minVer =  Just min_server_ver_account_summary
                                      , rqh_errMsg = "  It does not support account summary cancellation." 
                                      }
-       write s hdr
+       write s $ appNull hdr
        wFlush s
                                
 request s rq @ CancelPositions = 
@@ -536,7 +540,7 @@ request s rq @ CancelPositions =
                                , rqh_errMsg = "  It does not support positions cancellation." 
                                , rqh_minVer = Just min_server_ver_positions
                                }
-       write s hdr
+       write s $ appNull hdr
        wFlush s
 
 
@@ -546,7 +550,7 @@ request s rq @ (VerifyReq apiName apiVersion) =
                                , rqh_errMsg = "  It does not support verification message sending." 
                                , rqh_exAuth = Just True
                                } 
-       write s $ hdr <++> B.pack apiName <++> B.pack apiVersion
+       write s $ appNull $ hdr <++> B.pack apiName <++> B.pack apiVersion
        wFlush s
 
 request s rq @ (VerifyMessage apiData) = 
@@ -554,7 +558,7 @@ request s rq @ (VerifyMessage apiData) =
                                , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support verification message sending." 
                                } 
-       write s $ hdr <++> B.pack apiData
+       write s $ appNull $ hdr <++> B.pack apiData
        wFlush s
 
 request s rq @ (QueryDisplayGroups rid) =
@@ -562,7 +566,7 @@ request s rq @ (QueryDisplayGroups rid) =
                                , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support queryDisplayGroups request." 
                                } 
-       write s $ hdr <++> show' rid
+       write s $ appNull $ hdr <++> show' rid 
        wFlush s
   
 request s rq @ (SubscribeToGroupEvents reqId gid) = 
@@ -570,8 +574,9 @@ request s rq @ (SubscribeToGroupEvents reqId gid) =
                                , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support subscribeToGroupEvents request." 
                                } 
-       write s $ hdr <++> show' reqId
+       write s $ appNull $ hdr <++> show' reqId
                 <++> show' gid
+                
        wFlush s
 
 request s rq @ (UpdateDisplayGroup reqId contractInfo) = 
@@ -579,8 +584,9 @@ request s rq @ (UpdateDisplayGroup reqId contractInfo) =
                                , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support updateDisplayGroup request." 
                                } 
-       write s $ show' reqId
+       write s $ appNull $ hdr <++> show' reqId
             <++> B.pack contractInfo
+            
        wFlush s
 
 request s rq @ (UnsubscribeFromGroupEvents reqId) = 
@@ -588,11 +594,11 @@ request s rq @ (UnsubscribeFromGroupEvents reqId) =
                                , rqh_minVer = Just min_server_ver_linking
                                , rqh_errMsg = "  It does not support unsubscribeFromGroupEvents request." 
                                } 
-       write s $ hdr <++> show' reqId
+       write s $ appNull $ hdr <++> show' reqId 
        wFlush s
 
 request s rq @ StartApi = 
     do  let clientId = s_clientId s
         hdr <- getHeader s defReqHeader { rqh_msgId = reqToId rq } 
-        write s $ hdr <++> show' clientId
+        write s $ appNull $ hdr <++> show' clientId 
         wFlush s

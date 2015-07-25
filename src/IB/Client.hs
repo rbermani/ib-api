@@ -54,7 +54,7 @@ ascCodes inp = unwords ( map (show . ord) (B.unpack inp) )
        
 greetServer :: IBServer -> IO IBServer
 greetServer server = 
-    do write server $ show' client_version
+    do write server $ appNull $ show' client_version
        wFlush server
 
        let h = fromJust (s_sock server )
@@ -169,7 +169,7 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
 defaultConf :: ClientConfig 
 defaultConf = ClientConfig { cc_addr = "127.0.0.1"
                            , cc_port = 7496
-                           , cc_clientId = 23
+                           , cc_clientId = 0
                            , cc_extraAuth = False
                            , cc_handler = Just defHandler
                            } 
