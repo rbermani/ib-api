@@ -113,6 +113,7 @@ data Request =
     | CancelCalcOptionPrice TickerId
     | GlobalCancelReq
     | MarketDataTypeReq TickerId
+    | UnusedReq
     | PositionsReq
     | AccountSummaryReq
     { rqp_reqId :: ReqId
@@ -270,6 +271,7 @@ data IBMessage
     , dividendImpact	:: Double
     , dividendsToExpiry	:: Double
     } 
+    | UnusedMsg1
     | CurrentTime Int   
     | RealTimeBars  
     { reqId :: Int
@@ -307,6 +309,7 @@ data IBMessage
     , yield :: Double
     , yieldRedemptionDate :: Int 
     }
+    | UnusedMsg2
     | PositionData  
     { account :: String
     , contract :: Contract
@@ -482,13 +485,16 @@ conToId :: Data a => a -> Int
 conToId = constrIndex . toConstr 
 
 msgToId :: IBMessage -> Int
-msgToId = conToId
+msgToId msg | (conToId msg) > 21 = conToId msg + 23
+msgToId msg | otherwise = conToId msg
 
 reqToId :: Request -> Int
-reqToId = conToId
+reqToId rq | (conToId rq) > 25 = conToId rq + 23
+reqToId rq | otherwise = conToId rq
 
 idToMsg :: Int -> IBMessage
-idToMsg  = fromConstr . indexConstr (dataTypeOf IBUnknown) 
+idToMsg id | id > 25 = fromConstr $ indexConstr (dataTypeOf IBUnknown) (id - 23)
+idToMsg id | otherwise = fromConstr $ indexConstr (dataTypeOf IBUnknown) id 
 
 data Preamble = 
     Preamble
