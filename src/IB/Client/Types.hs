@@ -339,7 +339,7 @@ data IBMessage
     , contractInfo :: String
     }
     | IBUnknown 
-        deriving (Typeable, Data)
+        deriving (Typeable, Data, Show)
 
 data RecvMsg = 
     RecvMsg
@@ -520,7 +520,7 @@ data Execution =
     , ex_orderRef	:: String
     , ex_evRule	:: String
     , ex_evMultiplier	:: Double
-    } deriving (Data, Typeable)
+    } deriving (Data, Typeable, Show)
 
 data ExecutionFilter =
     ExecutionFilter
@@ -544,7 +544,7 @@ data BarData =
     , bar_average :: Double
     , bar_hasGaps :: String
     , bar_barCount :: Int
-    } deriving (Typeable, Data)
+    } deriving (Typeable, Data, Show)
 
 data ScanData  =
     ScanData
@@ -554,7 +554,7 @@ data ScanData  =
     , sd_benchmark :: String
     , sd_projection :: String
     , sd_legsStr :: String
-    } deriving (Typeable, Data)
+    } deriving (Typeable, Data, Show)
 
 data OrderState = 
     OrderState 
@@ -567,13 +567,13 @@ data OrderState =
     , os_maxCommission	:: Double
     , os_commissionCurrency	:: String
     , os_warningText	:: String
-    } deriving (Typeable, Data)
+    } deriving (Typeable, Data, Show)
 
 data TagValue = 
     TagValue 
     { tv_tag :: String
     , tv_value :: String
-    } deriving (Typeable, Data)
+    } deriving (Typeable, Data, Show)
 
 
 data ScannerSubscription = 
@@ -633,14 +633,14 @@ data ComboLeg =
     , cl_shortSaleSlot	:: Int -- 1 = clearing broker, 2 = third party
     , cl_designatedLocation	:: String
     , cl_exemptCode	:: Int
-    } deriving (Typeable, Data)
+    } deriving (Typeable, Data, Show)
 
 data UnderComp = 
     UnderComp 
     { uc_conId   :: Int
     , uc_delta   :: Double
     , uc_price   :: Double
-    } deriving (Typeable, Data, Eq)
+    } deriving (Typeable, Data, Eq, Show)
 
 defUnderComp :: UnderComp
 defUnderComp =
@@ -679,7 +679,7 @@ data Contract =
      
      -- delta neutral
     , ct_underComp :: UnderComp
-    } deriving (Typeable, Data)
+    } deriving (Typeable, Data, Show)
 
 defContract :: Contract
 defContract = 
@@ -740,7 +740,7 @@ data ContractDetails =
     , ctd_nextOptionType	:: String
     , ctd_nextOptionPartial	:: Bool
     , ctd_notes	:: String
-    } deriving (Data, Typeable)
+    } deriving (Data, Typeable, Show)
 
 defContractDetails :: ContractDetails
 defContractDetails = 
@@ -893,7 +893,7 @@ data Order =
     --
     --orderComboLegs	OrderComboLegListSPtr
     --orderMiscOptions	TagValueListSPtr
-    } deriving (Data, Typeable)
+    } deriving (Data, Typeable, Show)
 
 defOrder :: Order
 defOrder =

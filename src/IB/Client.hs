@@ -92,7 +92,7 @@ checkMsg mvs loop =
        eof <- timeout (s_timeoutInterval s) (hIsEOF h)
 
        case eof of
-        Nothing -> putStrLn "EOF timeout encountered"
+        Nothing -> return ()
         Just True -> do putStrLn "EOF encountered on handle"
                         modifyMVar_ mvs (\serv -> return $ serv {s_sock = Nothing})
                         hClose h
