@@ -51,6 +51,13 @@ write s msg = do
     B.hPutStr h msg 
     where h = fromJust $ s_sock s
 
+writeLst :: IBServer -> [B.ByteString] -> IO ()
+writeLst s bsl = 
+    do let outbs = (B.intercalate nullch bsl) `B.append` nullch
+       debugWrite s $ "<< " ++ B.unpack outbs
+       B.hPutStr h outbs
+       where h = fromJust $ s_sock s
+
 wFlush :: IBServer -> IO ()
 wFlush s = S.hFlush h
     where h = fromJust $ s_sock s
