@@ -54,7 +54,7 @@ ascCodes inp = unwords ( map (show . ord) (B.unpack inp) )
        
 greetServer :: IBServer -> IO IBServer
 greetServer server = 
-    do write server $ show' client_version
+    do write server $ appNull $ show' client_version
        wFlush server
 
        let h = fromJust (s_sock server )
@@ -92,7 +92,7 @@ checkMsg mvs loop =
        eof <- timeout (s_timeoutInterval s) (hIsEOF h)
 
        case eof of
-        Nothing -> putStrLn "EOF timeout encountered"
+        Nothing -> return ()
         Just True -> do putStrLn "EOF encountered on handle"
                         modifyMVar_ mvs (\serv -> return $ serv {s_sock = Nothing})
                         hClose h
@@ -158,6 +158,9 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
                                , s_extraAuth = cc_extraAuth cc
                                , s_handler = fromJust $ cc_handler cc
                                , s_debug = debug
+                               , s_twsTime = ""
+                               , s_msgThread = Nothing
+                               , s_version = 0
                                , s_sock = Just h
                                , s_timeoutInterval = 100000
                                , s_connected = False
@@ -166,7 +169,7 @@ toServer cc h debug = IBServer { s_addr = cc_addr cc
 defaultConf :: ClientConfig 
 defaultConf = ClientConfig { cc_addr = "127.0.0.1"
                            , cc_port = 7496
-                           , cc_clientId = 23
+                           , cc_clientId = 0
                            , cc_extraAuth = False
                            , cc_handler = Just defHandler
                            } 

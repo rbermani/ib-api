@@ -147,10 +147,15 @@ pPortfolioValue sver ver =
         realizedPNL <- pStrDouble
         accountName <- pStr
 
+        when (ver == 6 && sver == 39) $
+            do ct_primaryExchange <- pStr
+               return ()
+ 
         return PortfolioValue { contract
                               , position
                               , marketPrice
                               , averageCost
+                              , marketValue
                               , unrealizedPNL
                               , realizedPNL
                               , accountName 
@@ -340,8 +345,8 @@ pOrderState = OrderState <$>
 --  else let evRule = ""
 --           evMultiplier = dblMaximum
 
-pExecution :: Int -> Int -> Parser Execution
-pExecution _ ver = 
+pExecution :: Int -> Int -> Int -> Parser Execution
+pExecution _ ver oid = 
     do  ex_execId <- pStr
         ex_time <- pStr
         ex_acctNumber <- pStr
@@ -358,7 +363,7 @@ pExecution _ ver =
             ex_orderRef = ""
             ex_evRule = ""
             ex_evMultiplier = dblMaximum
-
+            ex_orderId = oid
         case () of
          _ | ver >= 9 -> do ex_cumQty <- pStrInt
                             ex_avgPrice <- pStrDouble
@@ -381,6 +386,7 @@ pExecution _ ver =
               , ex_exchange
               , ex_side
               , ex_shares
+              , ex_orderId
               , ex_price
               , ex_permId
               , ex_clientId
@@ -403,9 +409,15 @@ pContractHead _ ver vercheck@(lwr, uppr) =
        
        let ct_multiplier = ""
            ct_tradingClass = ""
-    
+           ct_primaryExchange = ""
+           ct_includeExpired = False
+           ct_secIdType = ""
+           ct_comboLegsDescrip = ""
+           ct_comboLegsList = []
+  
        when (ver >= lwr) $
            do ct_multiplier <- pStr
+              ct_primaryExchange <- pStr
               return ()
 
        ct_exchange <- pStr
@@ -416,27 +428,31 @@ pContractHead _ ver vercheck@(lwr, uppr) =
            do ct_tradingClass <- pStr
               return ()
 
-       return Contract { ct_conId
-                       , ct_symbol
-                       , ct_secType
-                       , ct_expiry
-                       , ct_strike
-                       , ct_right
-                       , ct_multiplier
-                       , ct_exchange
-                       , ct_currency
-                       , ct_localSymbol
-                       , ct_tradingClass 
-                       }
+       return defContract { ct_conId
+                          , ct_symbol
+                          , ct_secType
+                          , ct_expiry
+                          , ct_strike
+                          , ct_includeExpired
+                          , ct_secIdType
+                          , ct_comboLegsDescrip
+                          , ct_comboLegsList
+                          , ct_right
+                          , ct_multiplier
+                          , ct_exchange
+                          , ct_primaryExchange
+                          , ct_currency
+                          , ct_localSymbol
+                          , ct_tradingClass 
+                          }
 
 pExecutionData :: Int -> Int -> Parser IBMessage
 pExecutionData sver ver = 
     do reqId <- pStrInt 
        orderId <- pStrInt 
        contract <- pContractHead sver ver (9,10)
-       exec <- pExecution 0 ver
+       exec <- pExecution 0 ver orderId
        return ExecutionData { reqId
-                            , orderId
                             , contract
                             , exec 
                             } 
@@ -465,6 +481,26 @@ pMarketDepthL2 _ _ = MarketDepthL2 <$>
 pBondContractData :: Int -> Int -> Parser IBMessage
 pBondContractData _ ver = 
     do  let reqId = -1 
+            ct_expiry = ""
+            ct_strike = 0.0
+            ct_right = ""
+            ct_multiplier = ""
+            ct_primaryExchange = ""
+            ct_localSymbol = ""
+            ct_includeExpired = False
+            ct_secIdType = ""
+            ct_secId = ""
+            ct_comboLegsDescrip = ""
+            ct_comboLegsList = []
+            ctd_priceMagnifier = 0
+            ctd_underConId = 0
+            ctd_contractMonth = ""
+            ctd_industry = ""
+            ctd_subcategory = ""
+            ctd_timeZoneId = ""
+            ctd_tradingHours = ""
+            ctd_liquidHours = ""
+
         when (ver >= 3) $ 
             do reqId <- pStrInt
                return ()
@@ -495,8 +531,19 @@ pBondContractData _ ver =
         ctd_nextOptionPartial <- pStrBool
         ctd_notes <- pStr
         
-        let ctd_summary = Contract { ct_symbol
+        let ctd_summary = defContract { ct_symbol
                                , ct_secType
+                               , ct_expiry
+                               , ct_strike
+                               , ct_right
+                               , ct_multiplier
+                               , ct_primaryExchange
+                               , ct_localSymbol
+                               , ct_includeExpired
+                               , ct_secIdType
+                               , ct_secId
+                               , ct_comboLegsDescrip
+                               , ct_comboLegsList 
                                , ct_exchange
                                , ct_currency
                                , ct_tradingClass
@@ -519,7 +566,7 @@ pBondContractData _ ver =
            | ver >= 4 -> do ctd_longName <- pStr
                             return ()
 
-        let ctd = ContractDetails { ctd_summary
+        let ctd = defContractDetails { ctd_summary
                                   , ctd_marketName
                                   , ctd_minTick
                                   , ctd_orderTypes
@@ -543,6 +590,14 @@ pBondContractData _ ver =
                                   , ctd_maturity
                                   , ctd_coupon
                                   , ctd_cusip
+                                  , ctd_priceMagnifier
+                                  , ctd_underConId
+                                  , ctd_contractMonth
+                                  , ctd_industry
+                                  , ctd_subcategory
+                                  , ctd_timeZoneId
+                                  , ctd_tradingHours
+                                  , ctd_liquidHours
                                   }
         return $ BondContractData ctd
 
@@ -553,10 +608,32 @@ pNewsBulletins _ _ = NewsBulletins <$>
     <*> pStr
     <*> pStr
     <?> "News Bulletins"
+
  
 pContractData :: Int -> Int -> Parser IBMessage
 pContractData _ ver = do
     let reqId = -1
+        ct_conId = 0
+        ct_tradingClass = ""
+        ct_includeExpired = False
+        ct_secIdType = ""
+        ct_secId = ""
+        ct_comboLegsDescrip = ""
+        ct_comboLegsList = []
+        ctd_secIdList = []
+        ctd_evMultiplier = dblMaximum
+        ctd_evRule = ""
+        ctd_liquidHours = ""
+        ctd_tradingHours = ""
+        ctd_subcategory = ""
+        ctd_category = ""
+        ctd_industry = ""
+        ctd_contractMonth = ""
+        ctd_primaryExchange = ""
+        ctd_longName = ""
+        ctd_timeZoneId = ""
+        ctd_underConId = int32max
+      
     when (ver >= 3) $ 
         do reqId <- pStrInt
            return ()
@@ -576,19 +653,7 @@ pContractData _ ver = do
     ctd_validExchanges <- pStr
     ctd_priceMagnifier <- pStrInt
 
-    let ctd_underConId = int32max 
-        ctd_longName = ""
-        ct_primaryExchange = ""
-        ctd_evRule = ""
-        ctd_evMultiplier = dblMaximum
-        ctd_secIdList = []
-        ctd_contractMonth = ""
-        ctd_industry = ""
-        ctd_category = ""
-        ctd_subcategory = ""
-        ctd_timeZoneId = ""
-        ctd_tradingHours = ""
-        ctd_liquidHours = ""
+    let ct_primaryExchange = ""
 
     when (ver >= 4) $ do ctd_underConId <- pStrInt
                          return ()
@@ -615,10 +680,17 @@ pContractData _ ver = do
                          return ()
 
                                        
-    let ctd_summary = Contract { ct_symbol
+    let ctd_summary = defContract { ct_symbol
                                , ct_secType
                                , ct_expiry
                                , ct_primaryExchange
+                               , ct_conId
+                               , ct_tradingClass 
+                               , ct_includeExpired
+                               , ct_secIdType
+                               , ct_secId
+                               , ct_comboLegsDescrip
+                               , ct_comboLegsList 
                                , ct_strike
                                , ct_right
                                , ct_multiplier
@@ -627,25 +699,25 @@ pContractData _ ver = do
                                , ct_localSymbol 
                                }
 
-        ctd = ContractDetails { ctd_summary
-                              , ctd_marketName
-                              , ctd_minTick
-                              , ctd_orderTypes
-                              , ctd_validExchanges
-                              , ctd_priceMagnifier
-                              , ctd_underConId
-                              , ctd_longName
-                              , ctd_contractMonth
-                              , ctd_industry
-                              , ctd_category
-                              , ctd_subcategory
-                              , ctd_timeZoneId
-                              , ctd_tradingHours
-                              , ctd_liquidHours
-                              , ctd_evRule
-                              , ctd_evMultiplier
-                              , ctd_secIdList
-                              }
+        ctd = defContractDetails { ctd_summary
+                                 , ctd_marketName
+                                 , ctd_minTick
+                                 , ctd_orderTypes
+                                 , ctd_validExchanges
+                                 , ctd_priceMagnifier
+                                 , ctd_underConId
+                                 , ctd_longName
+                                 , ctd_contractMonth
+                                 , ctd_industry
+                                 , ctd_category
+                                 , ctd_subcategory
+                                 , ctd_timeZoneId
+                                 , ctd_tradingHours
+                                 , ctd_liquidHours
+                                 , ctd_evRule
+                                 , ctd_evMultiplier
+                                 , ctd_secIdList
+                                 }
     return $ ContractData ctd
 
 pContract :: Int -> Int -> Parser Contract
@@ -666,7 +738,6 @@ pOrder serv_ver ver =
             ord_deltaNeutralShortSaleSlot = int32max
             ord_deltaNeutralDesignatedLocation = ""
             ord_trailingPercent = dblMaximum
-
         if ver < 29
            then do ord_lmtPrice <- pStrDouble
                    return ()
@@ -751,78 +822,79 @@ pOrder serv_ver ver =
         ord_continuousUpdate <- pStrBool
         ord_referencePriceType <- pStrInt
         ord_trailStopPrice <- pStrDoubleMax
+
+        let ord_trailingPercent = dblMaximum
         
         when (ver >= 30) $
             do ord_trailingPercent <- pStrDoubleMax
                return ()
 
-        
         ord_basisPoints <- pStrDoubleMax
         ord_basisPointsType <- pStrIntMax
         let ord_origin = toEnum ord_origin'
 
-        return Order { ord_action
-                     , ord_totalQuantity
-                     , ord_orderType
-                     , ord_tif
-                     , ord_ocaGroup
-                     , ord_account
-                     , ord_openClose
-                     , ord_origin
-                     , ord_orderRef
-                     , ord_clientId
-                     , ord_permId
-                     , ord_outsideRth
-                     , ord_hidden
-                     , ord_discretionaryAmt
-                     , ord_goodAfterTime
-                     , ord_faGroup
-                     , ord_faMethod
-                     , ord_faPercentage
-                     , ord_faProfile
-                     , ord_goodTillDate
-                     , ord_rule80A
-                     , ord_percentOffset
-                     , ord_settlingFirm
-                     , ord_shortSaleSlot
-                     , ord_designatedLocation
-                     , ord_exemptCode
-                     , ord_auctionStrategy
-                     , ord_startingPrice
-                     , ord_stockRefPrice
-                     , ord_delta
-                     , ord_stockRangeLower
-                     , ord_stockRangeUpper
-                     , ord_displaySize
-                     , ord_blockOrder
-                     , ord_sweepToFill
-                     , ord_allOrNone
-                     , ord_minQty
-                     , ord_ocaType
-                     , ord_eTradeOnly
-                     , ord_firmQuoteOnly
-                     , ord_nbboPriceCap
-                     , ord_parentId
-                     , ord_triggerMethod
-                     , ord_volatility
-                     , ord_volatilityType
-                     , ord_deltaNeutralOrderType
-                     , ord_deltaNeutralAuxPrice
-                     , ord_deltaNeutralConId
-                     , ord_deltaNeutralSettlingFirm
-                     , ord_deltaNeutralClearingAccount
-                     , ord_deltaNeutralClearingIntent
-                     , ord_deltaNeutralOpenClose
-                     , ord_deltaNeutralShortSale
-                     , ord_deltaNeutralShortSaleSlot
-                     , ord_deltaNeutralDesignatedLocation
-                     , ord_continuousUpdate
-                     , ord_referencePriceType
-                     , ord_trailStopPrice
-                     , ord_trailingPercent
-                     , ord_basisPoints
-                     , ord_basisPointsType
-                     }
+        return defOrder { ord_action
+                        , ord_totalQuantity
+                        , ord_orderType
+                        , ord_tif
+                        , ord_ocaGroup
+                        , ord_account
+                        , ord_openClose
+                        , ord_origin
+                        , ord_orderRef
+                        , ord_clientId
+                        , ord_permId
+                        , ord_outsideRth
+                        , ord_hidden
+                        , ord_discretionaryAmt
+                        , ord_goodAfterTime
+                        , ord_faGroup
+                        , ord_faMethod
+                        , ord_faPercentage
+                        , ord_faProfile
+                        , ord_goodTillDate
+                        , ord_rule80A
+                        , ord_percentOffset
+                        , ord_settlingFirm
+                        , ord_shortSaleSlot
+                        , ord_designatedLocation
+                        , ord_exemptCode
+                        , ord_auctionStrategy
+                        , ord_startingPrice
+                        , ord_stockRefPrice
+                        , ord_delta
+                        , ord_stockRangeLower
+                        , ord_stockRangeUpper
+                        , ord_displaySize
+                        , ord_blockOrder
+                        , ord_sweepToFill
+                        , ord_allOrNone
+                        , ord_minQty
+                        , ord_ocaType
+                        , ord_eTradeOnly
+                        , ord_firmQuoteOnly
+                        , ord_nbboPriceCap
+                        , ord_parentId
+                        , ord_triggerMethod
+                        , ord_volatility
+                        , ord_volatilityType
+                        , ord_deltaNeutralOrderType
+                        , ord_deltaNeutralAuxPrice
+                        , ord_deltaNeutralConId
+                        , ord_deltaNeutralSettlingFirm
+                        , ord_deltaNeutralClearingAccount
+                        , ord_deltaNeutralClearingIntent
+                        , ord_deltaNeutralOpenClose
+                        , ord_deltaNeutralShortSale
+                        , ord_deltaNeutralShortSaleSlot
+                        , ord_deltaNeutralDesignatedLocation
+                        , ord_continuousUpdate
+                        , ord_referencePriceType
+                        , ord_trailStopPrice
+                        , ord_trailingPercent
+                        , ord_basisPoints
+                        , ord_basisPointsType
+                        }
 
  
 pOrderStatus :: Int -> Int -> Parser IBMessage
@@ -909,7 +981,7 @@ pScanData = ScanData <$>
                                    ctd_marketName <- pStr
                                    ct_tradingClass <- pStr
 
-                                   let ctd_summary = Contract { ct_conId
+                                   let ctd_summary = defContract { ct_conId
                                                           , ct_symbol
                                                           , ct_secType
                                                           , ct_expiry
@@ -920,7 +992,7 @@ pScanData = ScanData <$>
                                                           , ct_localSymbol
                                                           , ct_tradingClass
                                                           }
-                                   return ContractDetails { ctd_summary
+                                   return defContractDetails { ctd_summary
                                                           , ctd_marketName}
 
 pScanDataList :: Parser [ScanData]
@@ -958,7 +1030,7 @@ pUnderComp _ ver =
                        return ()
 
                 return UnderComp {uc_conId, uc_delta, uc_price}
-        else return UnderComp {}
+        else return defUnderComp 
 
 -- TODO: Convert to pattern guard case structure
 pAlgoStrategy :: Int -> Int -> Parser (String,[TagValue])
