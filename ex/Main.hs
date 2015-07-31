@@ -1,10 +1,3 @@
--- |
--- Module  : IB.Client
--- License : GPL3
--- Author : Robert Bermani <bobbermani@gmail.com>
--- Stability : experimental
--- |
-
 -- Main Loop example
 
 module Main where
