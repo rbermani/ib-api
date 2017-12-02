@@ -1,0 +1,552 @@
+
+==================== FINAL INTERFACE ====================
+2017-12-01 17:56:43.538132 UTC
+
+interface ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Exception 7102
+  interface hash: f9cb30edcdeae10b0317abe2523a0fef
+  ABI hash: ca4f6733651cf163ea580063199c2a5c
+  export-list hash: 7eff26c27b335ad06056128a7d034b9f
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 3fa072ff9b439f5c96d128f8b6aa37dd
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  IB.Client.Exception.code
+  IB.Client.Exception.excToPair
+  IB.Client.Exception.msg
+  IB.Client.Exception.CodeMsgPair
+  IB.Client.Exception.IBException{IB.Client.Exception.IBExc}
+  IB.Client.Exception.IBExceptionType{IB.Client.Exception.AlreadyConnected IB.Client.Exception.ConnectFail IB.Client.Exception.FailConnectTWS IB.Client.Exception.FailCreateSock IB.Client.Exception.FailSendCanHistData IB.Client.Exception.FailSendCanRTBars IB.Client.Exception.FailSendCanScanner IB.Client.Exception.FailSendFAReplace IB.Client.Exception.FailSendFARequest IB.Client.Exception.FailSendReqCurrTime IB.Client.Exception.FailSendReqHistData IB.Client.Exception.FailSendReqRtBars IB.Client.Exception.FailSendReqScanner IB.Client.Exception.FailSendReqScannerParameters IB.Client.Exception.MissingHandler IB.Client.Exception.NoBytesRead IB.Client.Exception.NotConnected IB.Client.Exception.NullStringRead IB.Client.Exception.ParseError IB.Client.Exception.SocketException IB.Client.Exception.SystemError IB.Client.Exception.UnknownID IB.Client.Exception.UpdateTWS IB.Client.Exception.ZeroByteRead}
+module dependencies:
+package dependencies: base-4.8.1.0* ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: base-4.8.1.0:GHC.Base base-4.8.1.0:GHC.Float
+family instance modules: base-4.8.1.0:Control.Applicative
+                         base-4.8.1.0:Data.Either base-4.8.1.0:Data.Monoid
+                         base-4.8.1.0:Data.Type.Equality base-4.8.1.0:GHC.Generics
+import  -/  base-4.8.1.0:Control.Exception ad90805da5ad455017893997acf84ba2
+import  -/  base-4.8.1.0:Data.Tuple 012ad951a59a9d85fe1de36a2f012986
+import  -/  base-4.8.1.0:Data.Typeable 39359a1dd0974d13f12ebfd9573fbeec
+import  -/  base-4.8.1.0:Data.Typeable.Internal 78d9dba5b6ac20dad582d2fb5137df59
+import  -/  base-4.8.1.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.1.0:GHC.Exception 49d670c608baf8e437c7e0f453690e18
+import  -/  base-4.8.1.0:GHC.Show b8c65ca3124f92a166c9f05120382442
+import  -/  base-4.8.1.0:Prelude 518f762991bc287d78f21a73c974da1f
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException ::
+    GHC.Exception.Exception IB.Client.Exception.IBException
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ IB.Client.Exception.IBException
+                  IB.Client.Exception.$fExceptionIBException2
+                  IB.Client.Exception.$fShowIBException
+                  IB.Client.Exception.$fExceptionIBException_$ctoException
+                  IB.Client.Exception.$fExceptionIBException_$cfromException
+                  IB.Client.Exception.$fExceptionIBException_$cdisplayException -}
+0e78c4c357fe436723a18a7dc80bcc2f
+  $fExceptionIBException1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "IBExc "#) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException2 ::
+    Data.Typeable.Internal.Typeable IB.Client.Exception.IBException
+  {- Arity: 1, Strictness: <L,A>m,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Exception.$fExceptionIBException3
+                  `cast`
+                (Sym (Data.Typeable.Internal.NTCo:Typeable[0]
+                          <*>_N <IB.Client.Exception.IBException>_N)) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException3 ::
+    GHC.Prim.Proxy# IB.Client.Exception.IBException
+    -> Data.Typeable.Internal.TypeRep
+  {- Arity: 1, Strictness: <L,A>m,
+     Unfolding: InlineRule (1, True, True)
+                (\ wild :: GHC.Prim.Proxy# IB.Client.Exception.IBException ->
+                 IB.Client.Exception.$fExceptionIBException4) -}
+d273aae987d9af56bbcf272687f9959f
+  $fExceptionIBException4 :: Data.Typeable.Internal.TypeRep
+  {- Strictness: m,
+     Unfolding: (Data.Typeable.Internal.TypeRep
+                   __word 16921001684421936260
+                   __word 5661301247354966655
+                   IB.Client.Exception.$fExceptionIBException_wild
+                   (GHC.Types.[] @ Data.Typeable.Internal.KindRep)
+                   (GHC.Types.[] @ Data.Typeable.Internal.TypeRep)) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException_$cdisplayException ::
+    IB.Client.Exception.IBException -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U(U),1*U,1*U)>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Exception.$fExceptionIBException_$cshow -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException_$cfromException ::
+    GHC.Exception.SomeException
+    -> GHC.Base.Maybe IB.Client.Exception.IBException
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: (\ eta :: GHC.Exception.SomeException ->
+                 case eta of wild { GHC.Exception.SomeException e10 $dException1 e2 ->
+                 case (GHC.Exception.$p1Exception @ e10 $dException1)
+                        `cast`
+                      (Data.Typeable.Internal.NTCo:Typeable[0] <*>_N <e10>_N)
+                        (GHC.Prim.proxy#
+                           @ *
+                           @ e10) of wild1 { Data.Typeable.Internal.TypeRep dt dt1 ds2 ds3 ds4 ->
+                 case dt of wild2 {
+                   DEFAULT -> GHC.Base.Nothing @ IB.Client.Exception.IBException
+                   __word 16921001684421936260
+                   -> case dt1 of wild3 {
+                        DEFAULT -> GHC.Base.Nothing @ IB.Client.Exception.IBException
+                        __word 5661301247354966655
+                        -> GHC.Base.Just
+                             @ IB.Client.Exception.IBException
+                             e2
+                               `cast`
+                             (UnivCo mkUnsafeCo representational e10 IB.Client.Exception.IBException) } } } }) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException_$cshow ::
+    IB.Client.Exception.IBException -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U(U),1*U,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: IB.Client.Exception.IBException ->
+                 IB.Client.Exception.$fExceptionIBException_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException_$cshowsPrec ::
+    GHC.Types.Int -> IB.Client.Exception.IBException -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S,1*U(U)><S,1*U(1*U(U),1*U,1*U)><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: GHC.Types.Int
+                   w1 :: IB.Client.Exception.IBException
+                   w2 :: GHC.Base.String ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { IB.Client.Exception.IBExc ww3 ww4 ww5 ->
+                 IB.Client.Exception.$w$cshowsPrec ww1 ww3 ww4 ww5 w2 } }) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fExceptionIBException_$ctoException ::
+    IB.Client.Exception.IBException -> GHC.Exception.SomeException
+  {- Arity: 1 -}
+5149d57d2d30c4974340ac731fd4e353
+  $fExceptionIBException_wild :: Data.Typeable.Internal.TyCon
+  {- Strictness: m,
+     Unfolding: (Data.Typeable.Internal.TyCon
+                   __word 16921001684421936260
+                   __word 5661301247354966655
+                   IB.Client.Exception.$fExceptionIBException_ww3
+                   IB.Client.Exception.$fExceptionIBException_ww1
+                   IB.Client.Exception.$fExceptionIBException_ww4) -}
+da9e623c56bbbf1f5555b2b73c96ae97
+  $fExceptionIBException_ww1 :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "IB.Client.Exception"#) -}
+d184498e2c55910545206bcd30cdd203
+  $fExceptionIBException_ww3 :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "ibapi_FYtdachWwYX1Bggz8sQPyH"#) -}
+71c4103a007e79f417006f672b9c4456
+  $fExceptionIBException_ww4 :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString# "IBException"#) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fShowIBException :: GHC.Show.Show IB.Client.Exception.IBException
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ IB.Client.Exception.IBException
+                  IB.Client.Exception.$fExceptionIBException_$cshowsPrec
+                  IB.Client.Exception.$fExceptionIBException_$cshow
+                  IB.Client.Exception.$fShowIBException_$cshowList -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fShowIBException1 ::
+    IB.Client.Exception.IBException -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ w :: IB.Client.Exception.IBException
+                   w1 :: GHC.Base.String ->
+                 case w of ww { IB.Client.Exception.IBExc ww1 ww2 ww3 ->
+                 IB.Client.Exception.$w$cshowsPrec 0 ww1 ww2 ww3 w1 }) -}
+5a2b47c6aec643ee7726a746e9ba295d
+  $fShowIBExceptionType ::
+    GHC.Show.Show IB.Client.Exception.IBExceptionType
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ IB.Client.Exception.IBExceptionType
+                  IB.Client.Exception.$fShowIBExceptionType_$cshowsPrec
+                  IB.Client.Exception.$fShowIBExceptionType_$cshow
+                  IB.Client.Exception.$fShowIBExceptionType_$cshowList -}
+5a2b47c6aec643ee7726a746e9ba295d
+  $fShowIBExceptionType_$cshow ::
+    IB.Client.Exception.IBExceptionType -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: IB.Client.Exception.IBExceptionType ->
+                 IB.Client.Exception.$fShowIBExceptionType_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+5a2b47c6aec643ee7726a746e9ba295d
+  $fShowIBExceptionType_$cshowList ::
+    [IB.Client.Exception.IBExceptionType] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ IB.Client.Exception.IBExceptionType
+                   IB.Client.Exception.$w$cshowsPrec1) -}
+5a2b47c6aec643ee7726a746e9ba295d
+  $fShowIBExceptionType_$cshowsPrec ::
+    GHC.Types.Int
+    -> IB.Client.Exception.IBExceptionType -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,A><S,1*U><L,1*U>, Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, True)
+                (\ w :: GHC.Types.Int
+                   w1 :: IB.Client.Exception.IBExceptionType
+                   w2 :: GHC.Base.String ->
+                 IB.Client.Exception.$w$cshowsPrec1 w1 w2) -}
+fda05e95c632a0cbe51a8057782a9e2e
+  $fShowIBException_$cshowList ::
+    [IB.Client.Exception.IBException] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ IB.Client.Exception.IBException
+                   IB.Client.Exception.$fShowIBException1) -}
+bf52ea613f632362d92e268b4c2642c7
+  $w$cshowsPrec ::
+    GHC.Prim.Int#
+    -> GHC.Types.Int
+    -> IB.Client.Exception.IBExceptionType
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+  {- Arity: 5, Strictness: <L,U><L,1*U(U)><L,1*U><L,1*U><L,U>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: GHC.Types.Int
+                   ww2 :: IB.Client.Exception.IBExceptionType
+                   ww3 :: GHC.Base.String
+                   w :: GHC.Base.String ->
+                 let {
+                   p :: GHC.Show.ShowS {- Arity: 1, Strictness: <L,U> -}
+                   = \ x :: GHC.Base.String[OneShot] ->
+                     GHC.Base.++
+                       @ GHC.Types.Char
+                       IB.Client.Exception.$fExceptionIBException1
+                       (case ww1 of ww4 { GHC.Types.I# ww5 ->
+                        case GHC.Show.$wshowSignedInt
+                               11
+                               ww5
+                               (GHC.Types.:
+                                  @ GHC.Types.Char
+                                  GHC.Show.showSpace1
+                                  (IB.Client.Exception.$w$cshowsPrec1
+                                     ww2
+                                     (GHC.Types.:
+                                        @ GHC.Types.Char
+                                        GHC.Show.showSpace1
+                                        (GHC.Types.:
+                                           @ GHC.Types.Char
+                                           GHC.Show.shows6
+                                           (GHC.Show.showLitString
+                                              ww3
+                                              (GHC.Types.:
+                                                 @ GHC.Types.Char
+                                                 GHC.Show.shows6
+                                                 x)))))) of ww6 { (#,#) ww7 ww8 ->
+                        GHC.Types.: @ GHC.Types.Char ww7 ww8 } })
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11) of wild {
+                   GHC.Types.False -> p w
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (p (GHC.Types.: @ GHC.Types.Char GHC.Show.shows8 w)) }) -}
+5a2b47c6aec643ee7726a746e9ba295d
+  $w$cshowsPrec1 ::
+    IB.Client.Exception.IBExceptionType
+    -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 2, Strictness: <S,1*U><L,1*U>, Inline: [0] -}
+102ce091cbe62a82b0c9a09c33590e7b
+  type CodeMsgPair = (GHC.Types.Int, GHC.Base.String)
+fda05e95c632a0cbe51a8057782a9e2e
+  data IBException
+    = IBExc GHC.Types.Int
+            IB.Client.Exception.IBExceptionType
+            GHC.Base.String
+5a2b47c6aec643ee7726a746e9ba295d
+  data IBExceptionType
+    = AlreadyConnected
+    | ConnectFail
+    | UpdateTWS
+    | NotConnected
+    | UnknownID
+    | ZeroByteRead
+    | NullStringRead
+    | NoBytesRead
+    | SocketException
+    | FailCreateSock
+    | FailConnectTWS
+    | FailSendFARequest
+    | FailSendFAReplace
+    | FailSendReqScanner
+    | FailSendCanScanner
+    | FailSendReqScannerParameters
+    | FailSendReqHistData
+    | FailSendCanHistData
+    | FailSendReqRtBars
+    | FailSendCanRTBars
+    | FailSendReqCurrTime
+    | MissingHandler
+    | ParseError
+    | SystemError
+    Promotable
+c8b903c7bbc93bdc876e13998bb6f00a
+  code :: IB.Client.Exception.CodeMsgPair -> GHC.Types.Int
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SL),1*U(1*U,A)>,
+     Unfolding: InlineRule (0, True, True)
+                (Data.Tuple.fst @ GHC.Types.Int @ GHC.Base.String) -}
+0d02883c52d97e0499f7a919b02dcae9
+  excToPair ::
+    IB.Client.Exception.IBExceptionType
+    -> IB.Client.Exception.CodeMsgPair
+  {- Arity: 1, Strictness: <S,1*U>m, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: IB.Client.Exception.IBExceptionType ->
+                 case w of wild {
+                   DEFAULT
+                   -> (IB.Client.Exception.excToPair44,
+                       IB.Client.Exception.excToPair43)
+                   IB.Client.Exception.AlreadyConnected
+                   -> (IB.Client.Exception.excToPair42,
+                       IB.Client.Exception.excToPair41)
+                   IB.Client.Exception.ConnectFail
+                   -> (IB.Client.Exception.excToPair40,
+                       IB.Client.Exception.excToPair39)
+                   IB.Client.Exception.UpdateTWS
+                   -> (IB.Client.Exception.excToPair38,
+                       IB.Client.Exception.excToPair37)
+                   IB.Client.Exception.NotConnected
+                   -> (IB.Client.Exception.excToPair36,
+                       IB.Client.Exception.excToPair35)
+                   IB.Client.Exception.UnknownID
+                   -> (IB.Client.Exception.excToPair34,
+                       IB.Client.Exception.excToPair33)
+                   IB.Client.Exception.ZeroByteRead
+                   -> (IB.Client.Exception.excToPair32,
+                       IB.Client.Exception.excToPair31)
+                   IB.Client.Exception.NullStringRead
+                   -> (IB.Client.Exception.excToPair30,
+                       IB.Client.Exception.excToPair29)
+                   IB.Client.Exception.NoBytesRead
+                   -> (IB.Client.Exception.excToPair28,
+                       IB.Client.Exception.excToPair27)
+                   IB.Client.Exception.SocketException
+                   -> (IB.Client.Exception.excToPair26,
+                       IB.Client.Exception.excToPair25)
+                   IB.Client.Exception.FailCreateSock
+                   -> (IB.Client.Exception.excToPair24,
+                       IB.Client.Exception.excToPair23)
+                   IB.Client.Exception.FailConnectTWS
+                   -> (IB.Client.Exception.excToPair22,
+                       IB.Client.Exception.excToPair21)
+                   IB.Client.Exception.FailSendFARequest
+                   -> (IB.Client.Exception.excToPair20,
+                       IB.Client.Exception.excToPair19)
+                   IB.Client.Exception.FailSendFAReplace
+                   -> (IB.Client.Exception.excToPair18,
+                       IB.Client.Exception.excToPair17)
+                   IB.Client.Exception.FailSendReqScanner
+                   -> (IB.Client.Exception.excToPair16,
+                       IB.Client.Exception.excToPair15)
+                   IB.Client.Exception.FailSendCanScanner
+                   -> (IB.Client.Exception.excToPair14,
+                       IB.Client.Exception.excToPair13)
+                   IB.Client.Exception.FailSendReqScannerParameters
+                   -> (IB.Client.Exception.excToPair12,
+                       IB.Client.Exception.excToPair11)
+                   IB.Client.Exception.FailSendReqHistData
+                   -> (IB.Client.Exception.excToPair10,
+                       IB.Client.Exception.excToPair9)
+                   IB.Client.Exception.FailSendCanHistData
+                   -> (IB.Client.Exception.excToPair8, IB.Client.Exception.excToPair7)
+                   IB.Client.Exception.FailSendReqRtBars
+                   -> (IB.Client.Exception.excToPair6, IB.Client.Exception.excToPair5)
+                   IB.Client.Exception.FailSendCanRTBars
+                   -> (IB.Client.Exception.excToPair4, IB.Client.Exception.excToPair3)
+                   IB.Client.Exception.FailSendReqCurrTime
+                   -> (IB.Client.Exception.excToPair2,
+                       IB.Client.Exception.excToPair1) }) -}
+1769727c6b86e9f850904a0086c07c0d
+  excToPair1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Request Current Time Sending Error - "#) -}
+baa3440cf198f1fd2444b36376d91a46
+  excToPair10 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 527) -}
+470c2938dd9aa018d5231f0d47379ec5
+  excToPair11 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Request Scanner Parameter Sending Error - "#) -}
+17d2d9c233b5512b31554a943ad6445d
+  excToPair12 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 526) -}
+2e474cbf89a8570e57a622e0cbea837c
+  excToPair13 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Cancel Scanner Subscription Sending Error - "#) -}
+98a14c9210b7c375a3200c4a22ecd6c3
+  excToPair14 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 525) -}
+77481ad50546a24234245c07bb733633
+  excToPair15 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Request Scanner Subscription Sending Error - "#) -}
+120b97f1fd258ed32947b5a976dd71e1
+  excToPair16 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 524) -}
+1a4bdc4d49f047b7e1dfd004910f5985
+  excToPair17 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "FA Information Replace Sending Error - "#) -}
+425e881595783c851e1be2f7c893ecb6
+  excToPair18 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 523) -}
+1ff96ceab76d3d34a9eb4a3a65964ed9
+  excToPair19 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "FA Information Request Sending Error - "#) -}
+8cddb17ca03237365de9a4b4ae427be4
+  excToPair2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 531) -}
+1413ab4c4f8d7985750fe2f26c650cfb
+  excToPair20 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 522) -}
+b54d09c04a27dbdefb5fc98256219305
+  excToPair21 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Couldn't connect to TWS."#) -}
+05982aacc893babbaa5da449deccfe10
+  excToPair22 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 521) -}
+573981a72154b1b51f28dad23a94532a
+  excToPair23 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Failed to create socket"#) -}
+b72f659df6d89c2e592d3f3e4d8d0557
+  excToPair24 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 520) -}
+a2707608122d83ccd680dc61c4accec2
+  excToPair25 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Exception caught while reading socket - "#) -}
+4262f4d27f9e6b9b0999ce7fdd9f90eb
+  excToPair26 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 509) -}
+658d3f9ffd109d9744c20d688786509b
+  excToPair27 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Error: no bytes read or no null terminator found"#) -}
+b5a870a649d9f057bcc123452622e7a2
+  excToPair28 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 508) -}
+2886e9b3c2e83b74963b7358aafb1c87
+  excToPair29 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Null string read when expecting integer"#) -}
+3f19c1af2488c6dd3c1ac6f2c1e8bc91
+  excToPair3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Cancel Real-time Bar Data Sending Error - "#) -}
+bedcc4fbc3778ca9480963bcb4bdb0ca
+  excToPair30 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 507) -}
+85b1771081637390935f5b9237587877
+  excToPair31 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Unexplained zero bytes read."#) -}
+0a7aa21db0c2dae3ffe8af7b98424a88
+  excToPair32 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 506) -}
+4811fab3bd0886b583f414dff46839c2
+  excToPair33 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Fatal Error: Unknown message id."#) -}
+3aa4bc7a05a781ec21dce68ae86568d6
+  excToPair34 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 505) -}
+5a94b3ea0aa426b31d287bb04d97d134
+  excToPair35 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Not connected"#) -}
+fb414deada0e792755d4c64f284714d4
+  excToPair36 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 504) -}
+650c93e127ce5b20e3b7f033370188ee
+  excToPair37 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "The TWS is out of date and must be upgraded."#) -}
+172c818119c6e842895db3200819bce6
+  excToPair38 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 503) -}
+fbcbb4d41a8c1d254d1fdd48c12ef121
+  excToPair39 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Couldn't connect to TWS.  Confirm that \"Enable ActiveX and Socket Clients\" is enabled on the TWS \"Configure->API\" menu."#) -}
+8a9a2f378e2a8ef1b4ad61f7c76bb5c1
+  excToPair4 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 530) -}
+0c8e43e9c4f50ac5a9217b9666bba74d
+  excToPair40 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 502) -}
+57b3ca45683833ccf1bb410f73656250
+  excToPair41 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Already connected."#) -}
+bea1d9243941392633e9144143adbba1
+  excToPair42 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 501) -}
+a11a2e2d768ed420838779fdac9c11e9
+  excToPair43 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "All other Error - "#) -}
+29524bc733321f7688e5ff44a1bbc909
+  excToPair44 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 999) -}
+98d4f689f7930f151d05de2d81493e8e
+  excToPair5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Request Real-time Bar Data Sending Error - "#) -}
+879e011707fc6e0e7b7b54d35c2c87b9
+  excToPair6 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 529) -}
+ce3c8490009e7796804bd4ad7146d043
+  excToPair7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Cancel Historical Data Sending Error - "#) -}
+9608e2db90c2d8ccb937596e0f2cd55a
+  excToPair8 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 528) -}
+7f9382f359e9d4d05bb42a286c36d928
+  excToPair9 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "Request Historical Data Sending Error - "#) -}
+0304d694f70aa764b1fb1ec07cbbd282
+  msg :: IB.Client.Exception.CodeMsgPair -> GHC.Base.String
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LS),1*U(A,1*U)>,
+     Unfolding: InlineRule (0, True, True)
+                (Data.Tuple.snd @ GHC.Types.Int @ GHC.Base.String) -}
+instance GHC.Exception.Exception [IB.Client.Exception.IBException]
+  = IB.Client.Exception.$fExceptionIBException
+instance GHC.Show.Show [IB.Client.Exception.IBException]
+  = IB.Client.Exception.$fShowIBException
+instance GHC.Show.Show [IB.Client.Exception.IBExceptionType]
+  = IB.Client.Exception.$fShowIBExceptionType
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

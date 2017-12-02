@@ -1,0 +1,180 @@
+
+==================== FINAL INTERFACE ====================
+2017-12-01 17:56:43.642857 UTC
+
+interface ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Nums 7102
+  interface hash: 3d72f2def71cee828e788393a90a7ba4
+  ABI hash: 58a359e02642eec9b8a336565de0a79c
+  export-list hash: d0908944e2fd0cd158a337b3d47aceb6
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 8fa4450a5f132c7187db8e49ab5aa78d
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  IB.Client.Nums.client_version
+  IB.Client.Nums.min_server_ver_account_summary
+  IB.Client.Nums.min_server_ver_algo_orders
+  IB.Client.Nums.min_server_ver_cancel_calc_implied_volat
+  IB.Client.Nums.min_server_ver_cancel_calc_option_price
+  IB.Client.Nums.min_server_ver_contract_data_chain
+  IB.Client.Nums.min_server_ver_delta_neutral_conid
+  IB.Client.Nums.min_server_ver_delta_neutral_open_close
+  IB.Client.Nums.min_server_ver_execution_data_chain
+  IB.Client.Nums.min_server_ver_fundamental_data
+  IB.Client.Nums.min_server_ver_hedge_orders
+  IB.Client.Nums.min_server_ver_linking
+  IB.Client.Nums.min_server_ver_not_held
+  IB.Client.Nums.min_server_ver_opt_out_smart_routing
+  IB.Client.Nums.min_server_ver_order_combo_legs_price
+  IB.Client.Nums.min_server_ver_place_order_conid
+  IB.Client.Nums.min_server_ver_positions
+  IB.Client.Nums.min_server_ver_pta_orders
+  IB.Client.Nums.min_server_ver_req_calc_implied_volat
+  IB.Client.Nums.min_server_ver_req_calc_option_price
+  IB.Client.Nums.min_server_ver_req_global_cancel
+  IB.Client.Nums.min_server_ver_req_market_data_type
+  IB.Client.Nums.min_server_ver_req_mkt_data_conid
+  IB.Client.Nums.min_server_ver_scale_orders2
+  IB.Client.Nums.min_server_ver_scale_orders3
+  IB.Client.Nums.min_server_ver_scale_table
+  IB.Client.Nums.min_server_ver_sec_id_type
+  IB.Client.Nums.min_server_ver_smart_combo_routing_params
+  IB.Client.Nums.min_server_ver_sshortx
+  IB.Client.Nums.min_server_ver_sshortx_old
+  IB.Client.Nums.min_server_ver_trading_class
+  IB.Client.Nums.min_server_ver_trailing_percent
+  IB.Client.Nums.min_server_ver_under_comp
+  IB.Client.Nums.no_valid_error_code
+  IB.Client.Nums.no_valid_id
+  IB.Client.Nums.server_version
+module dependencies:
+package dependencies: base-4.8.1.0* ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: base-4.8.1.0:GHC.Base base-4.8.1.0:GHC.Float
+family instance modules: base-4.8.1.0:Control.Applicative
+                         base-4.8.1.0:Data.Either base-4.8.1.0:Data.Monoid
+                         base-4.8.1.0:Data.Type.Equality base-4.8.1.0:GHC.Generics
+import  -/  base-4.8.1.0:Prelude 518f762991bc287d78f21a73c974da1f
+9e86818de2c4825a0543c7402614f458
+  client_version :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 63) -}
+4103a7cf4a77af2c80a11868494b22c2
+  min_server_ver_account_summary :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 67) -}
+8690c6fa98e9ef5a3e89c4a781fc6bbd
+  min_server_ver_algo_orders :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 41) -}
+a2faa9e190950f047d76b957133e6f17
+  min_server_ver_cancel_calc_implied_volat :: GHC.Types.Int
+  {- Strictness: m,
+     Unfolding: (IB.Client.Nums.min_server_ver_cancel_calc_option_price) -}
+711b1080902dc899aea7de6f7a00fb51
+  min_server_ver_cancel_calc_option_price :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 50) -}
+59edb14bdc28f3ce583158fac1820c1c
+  min_server_ver_contract_data_chain :: GHC.Types.Int
+  {- Strictness: m,
+     Unfolding: (IB.Client.Nums.min_server_ver_scale_orders2) -}
+1f2f9f99eee4c4d118aa57747e4a666d
+  min_server_ver_delta_neutral_conid :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 58) -}
+dafd3182873d1df6f9f5d6594999d5f2
+  min_server_ver_delta_neutral_open_close :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 66) -}
+b30a76e134a06837404aa2e20e7996b0
+  min_server_ver_execution_data_chain :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 42) -}
+f9d59b86d2f6e6731db3a388eda82027
+  min_server_ver_fundamental_data :: GHC.Types.Int
+  {- Strictness: m,
+     Unfolding: (IB.Client.Nums.min_server_ver_scale_orders2) -}
+e339038e72c8dbf66a9797574ca2cb41
+  min_server_ver_hedge_orders :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 54) -}
+a9b8896fc9ded1947e019646fe72f599
+  min_server_ver_linking :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 70) -}
+c1ef4753ff6889d1a99401c1f8b18953
+  min_server_ver_not_held :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 44) -}
+93d2d54b3962a0a75da39164dc8edfad
+  min_server_ver_opt_out_smart_routing :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 56) -}
+095919ef0646e02010340204624d76cd
+  min_server_ver_order_combo_legs_price :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 61) -}
+4d4d6aaf986ce79130607616ce0e4cc3
+  min_server_ver_place_order_conid :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 46) -}
+c67c18349b5e14557197bf60b9f3f648
+  min_server_ver_positions :: GHC.Types.Int
+  {- Strictness: m,
+     Unfolding: (IB.Client.Nums.min_server_ver_account_summary) -}
+2efc071edc0da31642b73c96ae8dcdf4
+  min_server_ver_pta_orders :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 39) -}
+27cd7bc66a64f238935b05bef71a7a6c
+  min_server_ver_req_calc_implied_volat :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 49) -}
+0ba3eda72e42554bf8530094aeb70850
+  min_server_ver_req_calc_option_price :: GHC.Types.Int
+  {- Strictness: m,
+     Unfolding: (IB.Client.Nums.min_server_ver_cancel_calc_option_price) -}
+9ea6272ae877a1e586b8d180af8cb547
+  min_server_ver_req_global_cancel :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 53) -}
+08f9e564f8cd1a08482c54bbf9bf99a7
+  min_server_ver_req_market_data_type :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 55) -}
+8b8492aad5082c123ba5c5c03df7938a
+  min_server_ver_req_mkt_data_conid :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 47) -}
+d52d2cac70f9bcd4e280b9f3222bd99e
+  min_server_ver_scale_orders2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 40) -}
+ed150570f0a00684868f06b6bce36eca
+  min_server_ver_scale_orders3 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 60) -}
+98224b3e48112ec0f52c4ee6acc9aba5
+  min_server_ver_scale_table :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 69) -}
+5549bf13600d417179edc34610824844
+  min_server_ver_sec_id_type :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 45) -}
+00bc2d4719d998347352fdde207904a8
+  min_server_ver_smart_combo_routing_params :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 57) -}
+0a3ba480ccb41e846f80289c631aebd5
+  min_server_ver_sshortx :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 52) -}
+74dc0b0127a6cc9905f527b947da2de1
+  min_server_ver_sshortx_old :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 51) -}
+d92c9749decb3c95793eb092a8fa025b
+  min_server_ver_trading_class :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 68) -}
+c22e2fdb71a4235b0c4d14cca2a0e7b8
+  min_server_ver_trailing_percent :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 62) -}
+c45a26cd43c73b51d84e5d31d5ef4f3f
+  min_server_ver_under_comp :: GHC.Types.Int
+  {- Strictness: m,
+     Unfolding: (IB.Client.Nums.min_server_ver_scale_orders2) -}
+ec4a00f3eb7227b787db48d917165ce8
+  no_valid_error_code :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0) -}
+e0554a210720e1ba427aa859a5189870
+  no_valid_id :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# (-1)) -}
+8f0268d066d5d5d5d3b149a87c3253fe
+  server_version :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 38) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

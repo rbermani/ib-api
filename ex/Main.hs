@@ -28,6 +28,19 @@ import IB.Client.Exception
 import IB.Client.Parser
 import IB.Client
 
+-- Modificaton by Phage Ky
+import Data.Time.Calendar(toGregorian)
+import Data.Time.Clock(utctDay,UTCTime)
+import Data.Time.Clock.POSIX(posixSecondsToUTCTime)
+import System.Console.ANSI
+
+
+epochToUTC :: Integral a => a -> UTCTime
+epochToUTC = posixSecondsToUTCTime . fromIntegral
+
+epochToGregorian :: Integral a => a -> (Integer,Int,Int)
+epochToGregorian = toGregorian . utctDay . epochToUTC
+
 
 handleMsg :: MIB -> IBMessage -> IO ()
 handleMsg msv (CurrentTime time) =
@@ -37,31 +50,21 @@ handleMsg msv (ManagedAccts acct) =
     do putStrLn $ "Managed Accts: " ++ acct
 handleMsg msv msg = putStrLn $ "Catch-all handler called for " ++ show msg
 
-{--
-nothreadEx = do let cconf = defaultConf { cc_handler = Just handleMsg } 
-                result <- connect cconf False False
-                case result of 
-                 Left err ->
-                 Right msv -> do s <- readMVar msv
-                                 unless (not s_connected s) 
-                                    do checkMsg False 
 
-threadEx = do let cconf = defaultConf { cc_handler = Just handleMsg } 
-                  result <- connect cconf True False
-                  case result of 
-                   Left err ->
-                   Right msv -> do s <- readMVar msv
-
-                  unless (not s_connected s) checkMsg False 
---}
 main :: IO ()
 main = 
-    do result <- connect defaultConf { cc_handler = Just handleMsg } False True
+    do clearScreen >> setCursorPosition 0 0
+       result <- connect defaultConf { cc_handler = Just handleMsg } False True
        case result of 
          Left err -> putStrLn "Unable to Connect"
-         Right msv -> do businessLogic msv
+         Right msv -> do setSGR []
+                         setSGR [SetColor Foreground Vivid Yellow]
+                         putStrLn " *** Connection Sucessful ..."
+                         putStrLn " *** API is now ON - commence trading ... "
+                         checkMsg msv False
+                         businessLogic msv
 
-
+{-- Original Code
 businessLogic :: MIB -> IO ()
 businessLogic msv =
     do s <- readMVar msv
@@ -70,7 +73,28 @@ businessLogic msv =
        when (s_connected s) $
             do checkMsg msv False
                when (((toInteger ptime) `mod` 120) == 0)  $
-                 do putStrLn $ "Inside do block" ++ show (toInteger ptime)
+                 do putStrLn $ "Inside do block: " ++ show (toInteger ptime)
+                    putStrLn "Requesting..."
                     request s CurrentTimeReq
        threadDelay (10^6)
        businessLogic msv
+--}
+
+
+businessLogic :: MIB -> IO ()
+businessLogic msv =
+    do checkMsg msv False
+       s <- readMVar msv
+
+       CTime ptime <- epochTime 
+       when (s_connected s) $
+            do putStrLn $ "Inside do block: " ++ show (toInteger ptime)
+               setSGR [SetColor Foreground Vivid Yellow]
+               putStrLn " *** Sending Request to IB-TWS ..."
+               request s CurrentTimeReq
+               checkMsg msv False
+       hClose (fromJust $ s_sock s)
+       putStrLn "... IB-TWS Connection Close"
+       -- threadDelay (10^8)
+       -- businessLogic msv
+

@@ -1,0 +1,1241 @@
+
+==================== FINAL INTERFACE ====================
+2017-12-01 19:16:27.435822 UTC
+
+interface ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Request 7102
+  interface hash: 1e7125183803a9a8ac42b2cdf0e1b2ea
+  ABI hash: 9c1196de4f998fc855c55147bae014d9
+  export-list hash: 79f249c8c70bf30464006183257f9ffb
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 068cc1f41bfc91d0e50323dbaef0362d
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  IB.Client.Request.<++>
+  IB.Client.Request.appNull
+  IB.Client.Request.debugWrite
+  IB.Client.Request.defReqHeader
+  IB.Client.Request.encodeComboLeg
+  IB.Client.Request.encodeComboLegList
+  IB.Client.Request.encodeContract
+  IB.Client.Request.encodeDbl
+  IB.Client.Request.encodeDblMax
+  IB.Client.Request.encodeExecutionFilter
+  IB.Client.Request.encodeIntMax
+  IB.Client.Request.encodeSubscription
+  IB.Client.Request.encodeTagValue
+  IB.Client.Request.encodeTagValueList
+  IB.Client.Request.encodeUnderComp
+  IB.Client.Request.getHeader
+  IB.Client.Request.getHeaderCon
+  IB.Client.Request.nullch
+  IB.Client.Request.request
+  IB.Client.Request.show'
+  IB.Client.Request.wFlush
+  IB.Client.Request.write
+  IB.Client.Request.writeLst
+  IB.Client.Request.ReqHeader{IB.Client.Request.ReqHeader IB.Client.Request.rqh_errId IB.Client.Request.rqh_errMsg IB.Client.Request.rqh_exAuth IB.Client.Request.rqh_minVer IB.Client.Request.rqh_msgId IB.Client.Request.rqh_proVer}
+module dependencies: IB.Client.Exception IB.Client.Nums
+                     IB.Client.Types
+package dependencies: ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg
+                      array-0.5.1.0@array_E0sTtauuKsGDLZoT7lTbgZ base-4.8.1.0*
+                      bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH*
+                      deepseq-1.4.1.1@deeps_LbCWUlehDDeLxurARKDH5o ghc-prim-0.4.0.0
+                      integer-gmp-1.0.0.0
+orphans: base-4.8.1.0:GHC.Base base-4.8.1.0:GHC.Float
+family instance modules: base-4.8.1.0:Control.Applicative
+                         base-4.8.1.0:Data.Either base-4.8.1.0:Data.Functor.Identity
+                         base-4.8.1.0:Data.Monoid base-4.8.1.0:Data.Type.Equality
+                         base-4.8.1.0:Data.Void base-4.8.1.0:GHC.Generics
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI 124b9a5cc81625b5d35bb66f7f3dc750
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI.Common d0af977ef1b7b8ecdafafa46bce3ef4b
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI.Unix 4d02c95a64fdfe094db04762201cd1bd
+import  -/  base-4.8.1.0:Control.Concurrent.MVar 42b17972c7194d81ab1db982ca1fc21e
+import  -/  base-4.8.1.0:Control.Exception ad90805da5ad455017893997acf84ba2
+import  -/  base-4.8.1.0:Control.Monad dfea142d91349c4861427789d50d5b80
+import  -/  base-4.8.1.0:Data.Foldable 2e5acb797cfda6b3b7fabd7052abe290
+import  -/  base-4.8.1.0:Data.Maybe 1cb58de2b04ee3c0c0a7dc9201184aff
+import  -/  base-4.8.1.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.1.0:GHC.IO c40fa9051eafbe02c69624c2ae0f498f
+import  -/  base-4.8.1.0:GHC.IO.Handle fda05b0a879e69b0b19e31645e2a560c
+import  -/  base-4.8.1.0:GHC.Show b8c65ca3124f92a166c9f05120382442
+import  -/  base-4.8.1.0:Prelude 518f762991bc287d78f21a73c974da1f
+import  -/  base-4.8.1.0:System.IO d541b8bdf18c04de3ab7ea0277c4eba3
+import  -/  base-4.8.1.0:Text.Printf ad7802849661c053618cc511ab4272b4
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString 65bd6f108f33ac736977e12af3a12795
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Char8 727f18c1a10ff91ccff6cf752ee2a230
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Internal bf4b7d23d1b8365e073bc2ac77444155
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+import  -/  IB.Client.Exception ca4f6733651cf163ea580063199c2a5c
+  exports: 7eff26c27b335ad06056128a7d034b9f
+  IBExc fc6a864aff7c140893feb5ed1aada899
+  NotConnected ae0af8f7f72a52990f0309e44b5710b7
+  UpdateTWS 97d4126c9a5734a559a51180b3ef52b9
+import  -/  IB.Client.Nums 58a359e02642eec9b8a336565de0a79c
+  exports: d0908944e2fd0cd158a337b3d47aceb6
+  min_server_ver_account_summary 4103a7cf4a77af2c80a11868494b22c2
+  min_server_ver_cancel_calc_implied_volat a2faa9e190950f047d76b957133e6f17
+  min_server_ver_cancel_calc_option_price 711b1080902dc899aea7de6f7a00fb51
+  min_server_ver_execution_data_chain b30a76e134a06837404aa2e20e7996b0
+  min_server_ver_fundamental_data f9d59b86d2f6e6731db3a388eda82027
+  min_server_ver_linking a9b8896fc9ded1947e019646fe72f599
+  min_server_ver_positions c67c18349b5e14557197bf60b9f3f648
+  min_server_ver_req_global_cancel 9ea6272ae877a1e586b8d180af8cb547
+  min_server_ver_req_mkt_data_conid 8b8492aad5082c123ba5c5c03df7938a
+  min_server_ver_trading_class d92c9749decb3c95793eb092a8fa025b
+  min_server_ver_under_comp c45a26cd43c73b51d84e5d31d5ef4f3f
+  no_valid_id e0554a210720e1ba427aa859a5189870
+import  -/  IB.Client.Types 4c6a6fdfbfd3bbf81422ed04211308a6
+  exports: 85904ef18005241fa853203f455d7870
+  AccountUpdatesReq 17f7b9c2ed9fbce838e9d390d0d17094
+  AllOpenOrdersReq 65c55bbfe4b9ef966e19e3fdf1e7a01f
+  AutoOpenOrdersReq 4d70bedae1201ed3c9e9f4613f3d89cf
+  CancelAccountSummary 1eaed3e20da8922dd08027db854207f8
+  CancelCalcImpliedVolatility 951f24f787f686bae25ea80e73a7bea0
+  CancelCalcOptionPrice e0842206f452124984318e1d8afcb061
+  CancelFundamentalData ada5bf9ff4411e0964a7a8dfbdbf5526
+  CancelHistoricalData 6bee86729e3e92fb6395fc9ce5b9128f
+  CancelMktData b464db51179304e9f623971fb8332bce
+  CancelMktDepth 6af732e4ed8f7d3d7513d9624ef5a306
+  CancelNewsBulletins 4dc43669c4866b2db54ed3cde6f2e924
+  CancelOrder cc6c407b82c63fa23d13a5f01f19dfd8
+  CancelPositions 1c084a5c89403c1186634cfccd158e67
+  CancelRealTimeBars bf8f0ff6e344ad98458feb16316a0608
+  CancelScannerSubscription 4905f3caf62f54e8b94486d54ddcf665
+  ComboLeg 002efe166b6bb952b605830233cda850
+  Contract caa528b01431966dcbe9dd33da29f1b8
+  CurrentTimeReq 989b26fd76cec6a759c582bc52b756d0
+  ExecutionFilter c3b324c073ae953432909e17e7787685
+  ExecutionsReq 6afc2f827e9fe4f339773a60f3fbbd33
+  ExerciseOptionsReq 19ae81b76be438f160e93041b9b7023b
+  FAReplaceReq 0642e55da11314f7b3570bed2a8761f0
+  FAReq 28928108bbcad7bf42d9e12d3e87faee
+  GlobalCancelReq 8e814a3b85b13908fc81845fa2304bb8
+  HistoricalDataReq 799d791a307daa7c1af3da4e7e19a981
+  IBServer 5648ec0728afbb5950c4733509557b1a
+  IdsReq 86a1c4a5868c483ac74f8b59ade1c3b2
+  ManagedAcctsReq 9e793da29be8aeeea28670c41637637d
+  MarketDataTypeReq 1adb613fe8004c8cb010c32ace55d927
+  MktDataReq d9d97591649b862115dc05c812c91508
+  MktDepthReq bca0839f120a643a0210a01c9c149863
+  NewsBulletinsReq ff14e1499e16283061d042e8a332453a
+  OpenOrdersReq 8a296b3c39d86129479fcb43bdb7768b
+  PlaceOrder 0c64485d644044e6f8f0b1fab4b8f3d5
+  PositionsReq 3021730dd41d0b31e8d766bbfbb4a60c
+  QueryDisplayGroups 301baaeb7baa9579a77cd0534dd660de
+  RealTimeBarsReq 3e4652815082576a6c56c95c1787e78b
+  Request fc280c903efa72a25e79a60326413a98
+  ScannerParametersReq d916a67377d1806175855e4bd286f0a9
+  ScannerSubscription 367c05871f196c1198c7c33cc84e551f
+  ScannerSubscriptionReq 4f0ff8ab0839afddc58c67af80da1cf0
+  SetServerLogLevel 41c1dbeda0040d2ac4c549dd481bbf70
+  StartApi 58b2eaa7adb696331e132ec6c1aadb65
+  SubscribeToGroupEvents 4ed8c400af4953e6e91926f4bd8456b6
+  TagValue 1a67fe1f9587ca84c5ec8a5540dcc404
+  UnderComp a21e71e5f5ea67fadee2024d47af45da
+  UnsubscribeFromGroupEvents 0fd21f949328aeec35e1a5ebbbf631a5
+  UpdateDisplayGroup 95f11bbab2bcb06d39a141acf279c624
+  VerifyMessage 6bef794b7af63ad1a16b06c0221dcf1e
+  VerifyReq 4205cfd105249fc158dc6d931cd49296
+  aur_acctCode 6e7443374d073df7ff20d3a76b2b3bee
+  aur_subscribe bb2d0b1d016989ca818d903603f3e6b4
+  cl_action 111b786b70d673ccad0c6f72f5e80503
+  cl_conId 58b089ff91cc5e630a9485515c12f995
+  cl_exchange fded4f0168604c885aeeed45d47a6f76
+  cl_ratio 35499b7c1d07b16bd0fa4a43bd8cbb24
+  ct_comboLegsList e34d9d0d3184baf04a359d5e5e2eae99
+  ct_conId bdf7db4b6e16f4fb43c7ccccaaf0822e
+  ct_currency 77719cea6f41afde8f01eaca1d78141b
+  ct_exchange 3f10b3769d15711239f337e72f21686f
+  ct_expiry 8157d207d0c253fac321d591174ba894
+  ct_includeExpired 678afda3425226329657392d0bf4e343
+  ct_localSymbol 2f1a20738281197b78029ae0cdcf35d8
+  ct_multiplier 1c306b7447c076b9234ace9085878d88
+  ct_primaryExchange 1b2ede38b11bde73d58361090c1523cc
+  ct_right 9c619ea5b4b36cb1d9836533bba32bc1
+  ct_secType 8fb684d1036bc1852054cd26a80bf53b
+  ct_strike b8d85c0904c43efcda913197f134dc54
+  ct_symbol d576a2f8a9d857b426c91e4c74682edd
+  ct_tradingClass e660b2a73c05df1d6eaada282cd67212
+  ct_underComp d58421ef7bf58eb420ae5f92077d98b2
+  dblMaximum 55a8f176ad55535e3cad0db75cb951c5
+  eor_account b44377711ecf2099dbb190173cb60ffa
+  eor_contract 70ae3342d880a8b605c61b492181e3f0
+  eor_exerciseAction cee84580f7822119cd3bf40b097a56dc
+  eor_exerciseQuantity b6c44ec1bb64c5828186229595c6b834
+  eor_override 3025e9b3b15396c4adac6979076d0d16
+  exf_acctCode a1454c5c1f7029757ce8a4caf8a3a823
+  exf_clientId 8a0c9367498faa1069a3f280d1901934
+  exf_exchange bb7e636f0f3b9d27b02f5fafc5eb663a
+  exf_secType 28eebf423872dc3339ed4b1cf45d962b
+  exf_side a23241e01c10f603a1e0c9c62017e557
+  exf_symbol 551aeaeba51b7a37bbda8c125f882916
+  exf_time 1f823c89b486e36722ea5aeb09cf19f3
+  fromBool bf83f00c285c927223f0707f832bdc1c
+  fromEnum' 78b5a87f484f900d2e4bf9f99a928c78
+  hdr_barSizeSetting 903b1c47a211a14cc622f283a78cb7fc
+  hdr_chartOptions 1b3ed178d1c60a1b8468690d7075a773
+  hdr_contract 282af2b3d6761ad37be76a9d33384c50
+  hdr_durationStr 5d5aeef25ec7a68bde39d2a3280c8776
+  hdr_endDataTime 1c1ee16d4c934492d268b05f0a1e3e93
+  hdr_formatDate af1ff1e4d7ceb61af892a41cd194bd7d
+  hdr_useRTH 5a762b8afb9b2217b71845316e2ead30
+  hdr_whatToShow 62f2748edeab8e51b94be0de5d4159cc
+  int32max 87263ed227140ea8fa3a84890f3b0dac
+  mdr_contract 31de3eb68ed660f467037945ca3dab65
+  mdr_genericTicks 241c2a04b78146a2b7692cfcfe235d6f
+  mdr_mktDataOptions 74a8bebeaa9f8f3542504a2863fac468
+  mdr_snapshot f25ddd8edf833334ab1ec50785a7c7da
+  mkr_contract 6432ff038c7eda02f92f605984a47d26
+  mkr_mktDepthOptions cc6e073d0372fa4db23b9545844c6002
+  mkr_numRows e548ed82d69c7d35a66abb3727316d5b
+  reqToId 4c9935967712aa6f2f3f021b151e3559
+  rqp_orderId f9e24fbf31b6c3f45103fceed3ed0b81
+  rqp_tickerId 86a683d062ead3a16775548f2acdb4ac
+  s_clientId 7f80537bec2ae70a2784f21862a601dd
+  s_connected 400f0674035aa7079a619b9cefd8a89d
+  s_debug 57b516f6b74ca3c58ac59cdfe5b7186d
+  s_extraAuth 51110092ea1387c285dc662a86f99826
+  s_sock abaa0706f12748447909ffb0b78e644f
+  s_version 889b3513dbf8128819d06a795147b927
+  ssb_abovePrice 1593f57ed376ec98390ab626a9f107b8
+  ssb_aboveVolume 651a31a6f7dd6175fc2c4db343491c78
+  ssb_averageOptionVolumeAbove e8b9fa254ab1b3d2c0a846986ae835d6
+  ssb_belowPrice 01e47c0e50931b1bc5500e5d1da0d599
+  ssb_couponRateAbove e0b681aad7178fcfeff18760daa61d7c
+  ssb_couponRateBelow ecd5f251505e7c5a8dcae144b4b0ba80
+  ssb_excludeConvertible 24724c2e5a85ef273abfd4a58e5db2ad
+  ssb_instrument 4381f0a4a25354324b06736c95aef264
+  ssb_locationCode d6c28da920810b5280eb12a8a957d4c3
+  ssb_marketCapAbove b7a362e5c753ac915bbe7c708f9a8a49
+  ssb_marketCapBelow 588a6361117a1a616dc268f27efc427a
+  ssb_maturityDateAbove d7a7f0c6bcbab85da41b8ee67242f3fa
+  ssb_maturityDateBelow 00dd77ab3cd3a54b577ffc9020b5702c
+  ssb_moodyRatingAbove f209dc47720e754eb111d40a92557bca
+  ssb_moodyRatingBelow 160a135356ee9f8e7623227938a13c07
+  ssb_numberOfRows 58df36dcf2c7ac3f6bd843dbc13c1230
+  ssb_scanCode 371dffd8e49c61214dce7c6833d90bd1
+  ssb_scannerSettingPairs c4737ccf2dcbc84d02ed1e5900d61d57
+  ssb_spRatingAbove 254764531b86afebcdc687c5e572177a
+  ssb_spRatingBelow 504839026a0d3b9c091b44088b246431
+  ssb_stockTypeFilter eb95e096fb001a569f89e7fc7a8e0a25
+  ssr_subscription db013f8d668093d52c45ce03ee1a2b46
+  ssr_subscriptionOptions 6dca303ce2a0978caf4148a29d8764a9
+  tv_tag 7ed291a4a625a0fbf27654219c21c49f
+  tv_value 9a72792a0ffacbdbb799ec03ae406221
+  uc_conId 8fb494a50f69daf19ea9ab87c2342d4a
+  uc_price d18e9b79134cfcd4bca0292bf8ebdb01
+f1467b07f7e06d49ca866c7ea9e62381
+  $sprintf3 ::
+    GHC.Base.String -> [Text.Printf.UPrintf] -> [GHC.Types.Char]
+  {- Arity: 2, Strictness: <S,1*U><L,1*U>,
+     Unfolding: (\ fmts :: GHC.Base.String
+                   args :: [Text.Printf.UPrintf] ->
+                 GHC.Base.map
+                   @ GHC.Types.Char
+                   @ GHC.Types.Char
+                   Text.Printf.$fIsCharChar_$cfromChar
+                   (Text.Printf.uprintfs
+                      fmts
+                      (GHC.List.reverse1
+                         @ Text.Printf.UPrintf
+                         args
+                         (GHC.Types.[] @ Text.Printf.UPrintf))
+                      (GHC.Types.[] @ GHC.Types.Char))) -}
+c3f6296b1b597b542c15f8c917695129
+  $w<++> ::
+    GHC.Prim.Addr#
+    -> GHC.ForeignPtr.ForeignPtrContents
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Addr#
+    -> GHC.ForeignPtr.ForeignPtrContents
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> Data.ByteString.Internal.ByteString
+  {- Arity: 8,
+     Strictness: <L,U><L,U><L,U><S,1*U><L,U><L,U><L,U><L,U>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Addr#
+                   ww1 :: GHC.ForeignPtr.ForeignPtrContents
+                   ww2 :: GHC.Prim.Int#
+                   ww3 :: GHC.Prim.Int#
+                   ww4 :: GHC.Prim.Addr#
+                   ww5 :: GHC.ForeignPtr.ForeignPtrContents
+                   ww6 :: GHC.Prim.Int#
+                   ww7 :: GHC.Prim.Int# ->
+                 case IB.Client.Request.nullch of ww8 { Data.ByteString.Internal.PS ww9 ww10 ww11 ww12 ->
+                 case ww3 of ds {
+                   DEFAULT
+                   -> case ww12 of ds1 {
+                        DEFAULT
+                        -> case GHC.IO.unsafeDupablePerformIO
+                                  @ Data.ByteString.Internal.ByteString
+                                  (\ eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                                   let {
+                                     a16 :: GHC.Prim.Int# = GHC.Prim.+# ds ds1
+                                   } in
+                                   case GHC.Prim.tagToEnum#
+                                          @ GHC.Types.Bool
+                                          (GHC.Prim.<# a16 0) of wild1 {
+                                     GHC.Types.False
+                                     -> case GHC.Prim.newPinnedByteArray#
+                                               @ GHC.Prim.RealWorld
+                                               a16
+                                               eta of ds2 { (#,#) ipv ipv1 ->
+                                        let {
+                                          a17 :: GHC.Prim.Addr#
+                                          = GHC.Prim.byteArrayContents#
+                                              ipv1
+                                                `cast`
+                                              (UnivCo mkUnsafeCo representational (GHC.Prim.MutableByteArray#
+                                                                                     GHC.Prim.RealWorld) GHC.Prim.ByteArray#)
+                                        } in
+                                        case {__pkg_ccall bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH memcpy GHC.Prim.Addr#
+                                                                                                                  -> GHC.Prim.Addr#
+                                                                                                                  -> GHC.Prim.Word#
+                                                                                                                  -> GHC.Prim.State#
+                                                                                                                       GHC.Prim.RealWorld
+                                                                                                                  -> (# GHC.Prim.State#
+                                                                                                                          GHC.Prim.RealWorld,
+                                                                                                                        GHC.Prim.Addr# #)}
+                                               a17
+                                               (GHC.Prim.plusAddr# ww ww2)
+                                               (GHC.Prim.int2Word# ds)
+                                               ipv of wild { (#,#) ds3 ds4 ->
+                                        case GHC.Prim.touch#
+                                               @ GHC.ForeignPtr.ForeignPtrContents
+                                               ww1
+                                               ds3 of s' { DEFAULT ->
+                                        case {__pkg_ccall bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH memcpy GHC.Prim.Addr#
+                                                                                                                  -> GHC.Prim.Addr#
+                                                                                                                  -> GHC.Prim.Word#
+                                                                                                                  -> GHC.Prim.State#
+                                                                                                                       GHC.Prim.RealWorld
+                                                                                                                  -> (# GHC.Prim.State#
+                                                                                                                          GHC.Prim.RealWorld,
+                                                                                                                        GHC.Prim.Addr# #)}
+                                               (GHC.Prim.plusAddr# a17 ds)
+                                               (GHC.Prim.plusAddr# ww9 ww11)
+                                               (GHC.Prim.int2Word# ds1)
+                                               s' of wild2 { (#,#) ds5 ds6 ->
+                                        case GHC.Prim.touch#
+                                               @ GHC.ForeignPtr.ForeignPtrContents
+                                               ww10
+                                               ds5 of s'1 { DEFAULT ->
+                                        let {
+                                          a18 :: GHC.ForeignPtr.ForeignPtrContents
+                                          = GHC.ForeignPtr.PlainPtr ipv1
+                                        } in
+                                        case GHC.Prim.touch#
+                                               @ GHC.ForeignPtr.ForeignPtrContents
+                                               a18
+                                               s'1 of s'2 { DEFAULT ->
+                                        (# s'2,
+                                           Data.ByteString.Internal.PS a17 a18 0 a16 #) } } } } } }
+                                     GHC.Types.True
+                                     -> case GHC.ForeignPtr.mallocPlainForeignPtrBytes2
+                                        ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                                  Data.ByteString.Internal.ByteString #)
+                                        of {} })
+                                    `cast`
+                                  (Sym (GHC.Types.NTCo:IO[0]
+                                            <Data.ByteString.Internal.ByteString>_R)) of ww13 { Data.ByteString.Internal.PS ww14 ww15 ww16 ww17 ->
+                           Data.ByteString.Internal.$w$cmappend
+                             ww14
+                             ww15
+                             ww16
+                             ww17
+                             ww4
+                             ww5
+                             ww6
+                             ww7 }
+                        0
+                        -> Data.ByteString.Internal.$w$cmappend
+                             ww
+                             ww1
+                             ww2
+                             ds
+                             ww4
+                             ww5
+                             ww6
+                             ww7 }
+                   0
+                   -> Data.ByteString.Internal.$w$cmappend
+                        ww9
+                        ww10
+                        ww11
+                        ww12
+                        ww4
+                        ww5
+                        ww6
+                        ww7 } }) -}
+e633382c579402480543466c7438bdf9
+  $wa ::
+    GHC.Prim.Int#
+    -> IB.Client.Types.Contract
+    -> GHC.Types.Bool
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.ByteString.Internal.ByteString #)
+  {- Arity: 4,
+     Strictness: <L,U><L,U(1*U(U),1*U,1*U,1*U,1*U(U),1*U,1*U,1*U,1*U,1*U,1*U,1*U,A,A,A,A,A,A)><L,1*U><L,U>,
+     Inline: [0] -}
+050ef278d4f4db160c85965cf3e475b5
+  $wa1 ::
+    GHC.Types.Bool
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Base.Maybe GHC.Types.Int
+    -> GHC.Base.Maybe GHC.Types.Bool
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.ByteString.Internal.ByteString #)
+  {- Arity: 10,
+     Strictness: <L,1*U><L,1*U(U)><S,1*U><L,1*U(U)><L,1*U(U)><L,U><L,U><S,1*U><L,1*U><L,U>,
+     Inline: [0] -}
+6b4ec6953571b74f3b14a45b31623ef6
+  $wa2 ::
+    GHC.Types.Int
+    -> GHC.Types.Bool
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Base.Maybe GHC.Types.Int
+    -> IB.Client.Types.Contract
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.ByteString.Internal.ByteString #)
+  {- Arity: 9,
+     Strictness: <L,1*U(U)><S,1*U><L,1*U(U)><L,1*U(U)><L,U><L,U><S,1*U><L,U(1*U(U),A,A,A,A,A,A,A,A,A,A,1*U,A,A,A,A,A,A)><L,U>,
+     Inline: [0] -}
+75f42bc39e571f263515aa3a75427424
+  $wa3 ::
+    GHC.Types.Int
+    -> GHC.Types.Bool
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+    -> GHC.Types.Bool
+    -> GHC.Base.Maybe GHC.IO.Handle.Types.Handle
+    -> IB.Client.Types.Request
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 8,
+     Strictness: <L,1*U(U)><L,1*U><L,U(U)><S,1*U><L,U><L,U><S,1*U><L,U>,
+     Inline: [0] -}
+87fee3cd642ae9c27dafabf87cdfb3de
+  $wa4 ::
+    GHC.Types.Bool
+    -> GHC.Base.Maybe GHC.IO.Handle.Types.Handle
+    -> [Data.ByteString.Internal.ByteString]
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 4, Strictness: <S,1*U><L,1*U><L,1*U><L,U>, Inline: [0],
+     Unfolding: (\ ww :: GHC.Types.Bool
+                   ww1 :: GHC.Base.Maybe GHC.IO.Handle.Types.Handle
+                   w :: [Data.ByteString.Internal.ByteString]
+                   w1 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 let {
+                   outbs :: Data.ByteString.Internal.ByteString
+                   = case w of wild {
+                       []
+                       -> case IB.Client.Request.writeLst2 of ww2 { Data.ByteString.Internal.PS ww3 ww4 ww5 ww6 ->
+                          case IB.Client.Request.nullch of ww7 { Data.ByteString.Internal.PS ww8 ww9 ww10 ww11 ->
+                          Data.ByteString.Internal.$w$cmappend
+                            ww3
+                            ww4
+                            ww5
+                            ww6
+                            ww8
+                            ww9
+                            ww10
+                            ww11 } }
+                       : x1 xs
+                       -> case Data.ByteString.Internal.$fMonoidByteString_$cmconcat
+                                 (GHC.Types.:
+                                    @ Data.ByteString.Internal.ByteString
+                                    x1
+                                    (Data.OldList.prependToAll
+                                       @ Data.ByteString.Internal.ByteString
+                                       IB.Client.Request.nullch
+                                       xs)) of ww2 { Data.ByteString.Internal.PS ww3 ww4 ww5 ww6 ->
+                          case IB.Client.Request.nullch of ww7 { Data.ByteString.Internal.PS ww8 ww9 ww10 ww11 ->
+                          Data.ByteString.Internal.$w$cmappend
+                            ww3
+                            ww4
+                            ww5
+                            ww6
+                            ww8
+                            ww9
+                            ww10
+                            ww11 } } }
+                 } in
+                 case ww of wild {
+                   GHC.Types.False
+                   -> case outbs of ww2 { Data.ByteString.Internal.PS ww3 ww4 ww5 ww6 ->
+                      case ww6 of ds {
+                        DEFAULT
+                        -> case GHC.IO.Handle.Text.$wa5
+                                  @ GHC.Prim.Any
+                                  (case ww1 of wild1 {
+                                     GHC.Base.Nothing
+                                     -> Data.Maybe.fromJust1 @ GHC.IO.Handle.Types.Handle
+                                     GHC.Base.Just x -> x })
+                                  (GHC.Ptr.Ptr @ GHC.Prim.Any (GHC.Prim.plusAddr# ww3 ww5))
+                                  ds
+                                  GHC.Types.True
+                                  w1 of ds1 { (#,#) ipv ipv1 ->
+                           case GHC.Prim.touch#
+                                  @ GHC.ForeignPtr.ForeignPtrContents
+                                  ww4
+                                  ipv of s' { DEFAULT ->
+                           (# s', GHC.Tuple.() #) } }
+                        0 -> (# w1, GHC.Tuple.() #) } }
+                   GHC.Types.True
+                   -> case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             (GHC.CString.unpackAppendCString#
+                                "<< "#
+                                (case outbs of ww2 { Data.ByteString.Internal.PS ww3 ww4 ww5 ww6 ->
+                                 Data.ByteString.Internal.$wunpackAppendCharsLazy
+                                   ww3
+                                   ww4
+                                   ww5
+                                   ww6
+                                   (GHC.Types.[] @ GHC.Types.Char) }))
+                             GHC.Types.True
+                             w1 of ds1 { (#,#) ipv ipv1 ->
+                      case outbs of ww2 { Data.ByteString.Internal.PS ww3 ww4 ww5 ww6 ->
+                      case ww6 of ds {
+                        DEFAULT
+                        -> case GHC.IO.Handle.Text.$wa5
+                                  @ GHC.Prim.Any
+                                  (case ww1 of wild1 {
+                                     GHC.Base.Nothing
+                                     -> Data.Maybe.fromJust1 @ GHC.IO.Handle.Types.Handle
+                                     GHC.Base.Just x -> x })
+                                  (GHC.Ptr.Ptr @ GHC.Prim.Any (GHC.Prim.plusAddr# ww3 ww5))
+                                  ds
+                                  GHC.Types.True
+                                  ipv of ds2 { (#,#) ipv2 ipv3 ->
+                           case GHC.Prim.touch#
+                                  @ GHC.ForeignPtr.ForeignPtrContents
+                                  ww4
+                                  ipv2 of s' { DEFAULT ->
+                           (# s', GHC.Tuple.() #) } }
+                        0 -> (# ipv, GHC.Tuple.() #) } } } }) -}
+bc71ec1183d2fe48c0cdfa2ca69e7531
+  $wencodeIntMax ::
+    GHC.Prim.Int# -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <S,1*U>, Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int# ->
+                 case ww of wild {
+                   DEFAULT
+                   -> let {
+                        cs3 :: [GHC.Types.Char]
+                        = case GHC.Show.$wshowSignedInt
+                                 0
+                                 wild
+                                 (GHC.Types.[] @ GHC.Types.Char) of ww4 { (#,#) ww5 ww6 ->
+                          GHC.Types.: @ GHC.Types.Char ww5 ww6 }
+                      } in
+                      Data.ByteString.Internal.unsafePackLenChars
+                        (case GHC.List.$wlenAcc @ GHC.Types.Char cs3 0 of ww2 { DEFAULT ->
+                         GHC.Types.I# ww2 })
+                        cs3
+                   2147483647 -> IB.Client.Request.encodeDblMax1 }) -}
+e1ee297f63543841eb8b3891b1c263af
+  $wencodeSubscription ::
+    GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Prim.Double#
+    -> GHC.Prim.Double#
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Double#
+    -> GHC.Prim.Double#
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Prim.Double#
+    -> GHC.Prim.Double#
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> Data.ByteString.Internal.ByteString
+  {- Arity: 21,
+     Strictness: <S,1*U><L,U><L,U><L,U><S,U><S,U><S,1*U><S,U><S,U><L,U><L,U><L,U><L,U><L,U><L,U><S,U><S,U><S,1*U><S,1*U><L,U><L,U>,
+     Inline: [0] -}
+cf8cb0cbb0acf9fb74062f0df691dbe9
+  (<++>) ::
+    Data.ByteString.Internal.ByteString
+    -> Data.ByteString.Internal.ByteString
+    -> Data.ByteString.Internal.ByteString
+  {- Arity: 2, Strictness: <S(LLLS),1*U(U,U,U,1*U)><S,1*U(U,U,U,U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: Data.ByteString.Internal.ByteString
+                   w1 :: Data.ByteString.Internal.ByteString ->
+                 case w of ww { Data.ByteString.Internal.PS ww1 ww2 ww3 ww4 ->
+                 case w1 of ww5 { Data.ByteString.Internal.PS ww6 ww7 ww8 ww9 ->
+                 IB.Client.Request.$w<++> ww1 ww2 ww3 ww4 ww6 ww7 ww8 ww9 } }) -}
+76809e74667ff6451d35ca51f7afe1ff
+  data ReqHeader
+    = ReqHeader {rqh_msgId :: GHC.Types.Int,
+                 rqh_proVer :: GHC.Types.Int,
+                 rqh_errId :: GHC.Types.Int,
+                 rqh_errMsg :: GHC.Base.String,
+                 rqh_minVer :: GHC.Base.Maybe GHC.Types.Int,
+                 rqh_exAuth :: GHC.Base.Maybe GHC.Types.Bool}
+205acfe9d3d3232ea6a99ce2cfec57ae
+  appNull ::
+    Data.ByteString.Internal.ByteString
+    -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <S(LLLS),1*U(U,U,U,U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ bin :: Data.ByteString.Internal.ByteString ->
+                 Data.ByteString.Internal.$fMonoidByteString_$cmappend
+                   bin
+                   IB.Client.Request.nullch) -}
+58eac69b8484bec23358f9a67618a69e
+  debugWrite ::
+    IB.Client.Types.IBServer -> GHC.Base.String -> GHC.Types.IO ()
+  {- Arity: 3,
+     Strictness: <S(LLLLLLLSLLLL),1*U(A,A,A,A,A,A,A,1*U,A,A,A,A)><L,1*U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.debugWrite1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <GHC.Base.String>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+69b5705d0aa5b8b3383f1d4cb4f27c24
+  debugWrite1 ::
+    IB.Client.Types.IBServer
+    -> GHC.Base.String
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3,
+     Strictness: <S(LLLLLLLSLLLL),1*U(A,A,A,A,A,A,A,1*U,A,A,A,A)><L,1*U><L,U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ s :: IB.Client.Types.IBServer
+                   msg :: GHC.Base.String
+                   eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case s of wild { IB.Client.Types.IBServer ds1 ds2 ds3 ds4 ds5 ds6 ds7 ds8 ds9 ds10 ds11 ds12 ->
+                 case ds8 of wild1 {
+                   GHC.Types.False -> (# eta, GHC.Tuple.() #)
+                   GHC.Types.True
+                   -> GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        msg
+                        GHC.Types.True
+                        eta } }) -}
+8403c6ab2ac267c31ad039e3c0f3cd26
+  defReqHeader :: IB.Client.Request.ReqHeader
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (IB.Client.Request.ReqHeader
+                   IB.Client.Request.defReqHeader1
+                   IB.Client.Request.defReqHeader1
+                   IB.Client.Nums.no_valid_id
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   (GHC.Base.Nothing @ GHC.Types.Int)
+                   (GHC.Base.Nothing @ GHC.Types.Bool)) -}
+5dcfaffa3ad6bf1be60b126752c1d330
+  defReqHeader1 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 1) -}
+b7d96c78c707062c708da468204220e2
+  encodeComboLeg ::
+    IB.Client.Types.ComboLeg -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <L,U(1*U(U),1*U(U),1*U,1*U,A,A,A,A)> -}
+9ac2c98d738d09393e4a0b1096262fd3
+  encodeComboLegList ::
+    [IB.Client.Types.ComboLeg] -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <S,U> -}
+bf9f18cbba7ae00b265a74a87f9e69ff
+  encodeContract ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Types.Contract
+    -> GHC.Types.Bool
+    -> GHC.Types.IO Data.ByteString.Internal.ByteString
+  {- Arity: 4,
+     Strictness: <S(LLLLSLLLLLLL),1*U(A,A,A,A,1*U(U),A,A,A,A,A,A,A)><L,U(1*U(U),1*U,1*U,1*U,1*U(U),1*U,1*U,1*U,1*U,1*U,1*U,1*U,A,A,A,A,A,A)><L,1*U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.encodeContract1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <IB.Client.Types.Contract>_R
+                 ->_R <GHC.Types.Bool>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0]
+                               <Data.ByteString.Internal.ByteString>_R)) -}
+204712b9ef03fe8e379674f64d7ea0ab
+  encodeContract1 ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Types.Contract
+    -> GHC.Types.Bool
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.ByteString.Internal.ByteString #)
+  {- Arity: 4,
+     Strictness: <S(LLLLSLLLLLLL),1*U(A,A,A,A,1*U(U),A,A,A,A,A,A,A)><L,U(1*U(U),1*U,1*U,1*U,1*U(U),1*U,1*U,1*U,1*U,1*U,1*U,1*U,A,A,A,A,A,A)><L,1*U><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (4, True, False)
+                (\ w :: IB.Client.Types.IBServer
+                   w1 :: IB.Client.Types.Contract
+                   w2 :: GHC.Types.Bool
+                   w3 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case w of ww { IB.Client.Types.IBServer ww1 ww2 ww3 ww4 ww5 ww6 ww7 ww8 ww9 ww10 ww11 ww12 ->
+                 case ww5 of ww13 { GHC.Types.I# ww14 ->
+                 IB.Client.Request.$wa ww14 w1 w2 w3 } }) -}
+8cd89ac35935965252646cd9b1e30786
+  encodeDbl ::
+    GHC.Types.Double -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <L,U(U)>,
+     Unfolding: (\ val :: GHC.Types.Double ->
+                 let {
+                   cs3 :: [GHC.Types.Char]
+                   = IB.Client.Request.$sprintf3
+                       IB.Client.Request.encodeDbl1
+                       (GHC.Types.:
+                          @ Text.Printf.UPrintf
+                          (Text.Printf.$fPrintfArgDouble_$cparseFormat val,
+                           Text.Printf.$fPrintfArgDouble_$sformatRealFloat val)
+                          (GHC.Types.[] @ Text.Printf.UPrintf))
+                 } in
+                 Data.ByteString.Internal.unsafePackLenChars
+                   (case GHC.List.$wlenAcc @ GHC.Types.Char cs3 0 of ww2 { DEFAULT ->
+                    GHC.Types.I# ww2 })
+                   cs3) -}
+82876f082ff378b25c270ac279461b44
+  encodeDbl1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "%.2f"#) -}
+7b0a8805619d5c511336c0f41cc20aaf
+  encodeDblMax ::
+    GHC.Types.Double -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <S(S),1*U(U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ val :: GHC.Types.Double ->
+                 case val of wild { GHC.Types.D# x ->
+                 case x of wild1 {
+                   DEFAULT -> IB.Client.Request.encodeDbl wild
+                   Infinity -> IB.Client.Request.encodeDblMax1 } }) -}
+07fe7b39b27460706f1d55ce71d6a9e9
+  encodeDblMax1 :: Data.ByteString.Internal.ByteString
+  {- Unfolding: (Data.ByteString.Internal.unsafePackLenChars
+                   IB.Client.Request.encodeDblMax2
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+4f43896b508f1567065c2734ee2eaa46
+  encodeDblMax2 :: GHC.Types.Int
+  {- Unfolding: (case GHC.List.$wlenAcc
+                        @ GHC.Types.Char
+                        (GHC.Types.[] @ GHC.Types.Char)
+                        0 of ww2 { DEFAULT ->
+                 GHC.Types.I# ww2 }) -}
+59a43ad7e6b55dc8369628a0d0f6188e
+  encodeExecutionFilter ::
+    IB.Client.Types.ExecutionFilter
+    -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <L,U(1*U(U),1*U,1*U,1*U,1*U,1*U,1*U)> -}
+ac2bb59915b804d3eb5a7173c25008f5
+  encodeIntMax ::
+    GHC.Types.Int -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <S(S),1*U(1*U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: GHC.Types.Int ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 IB.Client.Request.$wencodeIntMax ww1 }) -}
+08dbbc682b5ae372bf13e3884224901b
+  encodeSubscription ::
+    IB.Client.Types.ScannerSubscription
+    -> Data.ByteString.Internal.ByteString
+  {- Arity: 1,
+     Strictness: <S(S(S)LLLS(S)S(S)S(S)S(S)S(S)LLLLLLS(S)S(S)S(S)S(S)LL),1*U(1*U(1*U),U,U,U,1*U(U),1*U(U),1*U(1*U),1*U(U),1*U(U),U,U,U,U,U,U,1*U(U),1*U(U),1*U(1*U),1*U(1*U),U,U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: IB.Client.Types.ScannerSubscription ->
+                 case w of ww { IB.Client.Types.ScannerSubscription ww1 ww2 ww3 ww4 ww5 ww6 ww7 ww8 ww9 ww10 ww11 ww12 ww13 ww14 ww15 ww16 ww17 ww18 ww19 ww20 ww21 ->
+                 case ww1 of ww22 { GHC.Types.I# ww23 ->
+                 case ww5 of ww24 { GHC.Types.D# ww25 ->
+                 case ww6 of ww26 { GHC.Types.D# ww27 ->
+                 case ww7 of ww28 { GHC.Types.I# ww29 ->
+                 case ww8 of ww30 { GHC.Types.D# ww31 ->
+                 case ww9 of ww32 { GHC.Types.D# ww33 ->
+                 case ww16 of ww34 { GHC.Types.D# ww35 ->
+                 case ww17 of ww36 { GHC.Types.D# ww37 ->
+                 case ww18 of ww38 { GHC.Types.I# ww39 ->
+                 case ww19 of ww40 { GHC.Types.I# ww41 ->
+                 IB.Client.Request.$wencodeSubscription
+                   ww23
+                   ww2
+                   ww3
+                   ww4
+                   ww25
+                   ww27
+                   ww29
+                   ww31
+                   ww33
+                   ww10
+                   ww11
+                   ww12
+                   ww13
+                   ww14
+                   ww15
+                   ww35
+                   ww37
+                   ww39
+                   ww41
+                   ww20
+                   ww21 } } } } } } } } } } }) -}
+edc18d3d11e9562942100c2ccfad2337
+  encodeTagValue ::
+    IB.Client.Types.TagValue -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <L,1*U(1*U,1*U)>,
+     Unfolding: (\ tv :: IB.Client.Types.TagValue ->
+                 let {
+                   cs3 :: [GHC.Types.Char]
+                   = case tv of wild { IB.Client.Types.TagValue ds1 ds2 ->
+                     GHC.Base.++
+                       @ GHC.Types.Char
+                       ds1
+                       (GHC.CString.unpackAppendCString#
+                          "="#
+                          (GHC.Base.++
+                             @ GHC.Types.Char
+                             ds2
+                             IB.Client.Request.encodeTagValue1)) }
+                 } in
+                 Data.ByteString.Internal.unsafePackLenChars
+                   (case GHC.List.$wlenAcc @ GHC.Types.Char cs3 0 of ww2 { DEFAULT ->
+                    GHC.Types.I# ww2 })
+                   cs3) -}
+6a46c982cb70927a9b207211bfb4e40a
+  encodeTagValue1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# ";"#) -}
+1ac74eaf0f3e0510f31242a725fd7964
+  encodeTagValueList ::
+    [IB.Client.Types.TagValue] -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ tvl :: [IB.Client.Types.TagValue] ->
+                 Data.ByteString.Internal.$fMonoidByteString_$cmconcat
+                   (GHC.Base.build
+                      @ Data.ByteString.Internal.ByteString
+                      (\ @ b1
+                         c :: Data.ByteString.Internal.ByteString -> b1 -> b1[OneShot]
+                         n :: b1[OneShot] ->
+                       GHC.Base.foldr
+                         @ IB.Client.Types.TagValue
+                         @ b1
+                         (GHC.Base.mapFB
+                            @ Data.ByteString.Internal.ByteString
+                            @ b1
+                            @ IB.Client.Types.TagValue
+                            c
+                            IB.Client.Request.encodeTagValue)
+                         n
+                         tvl))) -}
+360bd245663aa7de803709e760d21a0f
+  encodeUnderComp ::
+    IB.Client.Types.UnderComp -> Data.ByteString.Internal.ByteString
+  {- Arity: 1, Strictness: <L,U(1*U(U),A,1*U(U))> -}
+8d1cdd6745dbc43055fe2d970846f267
+  getHeader ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Request.ReqHeader
+    -> GHC.Types.IO Data.ByteString.Internal.ByteString
+  {- Arity: 3,
+     Strictness: <S(LLLLLSLLLLLL),1*U(A,A,A,1*U,1*U(U),1*U,A,A,A,A,A,A)><S(LLLLSL),1*U(1*U(U),1*U(U),U,U,1*U,1*U)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.getHeader1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <IB.Client.Request.ReqHeader>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0]
+                               <Data.ByteString.Internal.ByteString>_R)) -}
+1b9b5e3c8c6a55a97995e09c5597f817
+  getHeader1 ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Request.ReqHeader
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.ByteString.Internal.ByteString #)
+  {- Arity: 3,
+     Strictness: <S(LLLLLSLLLLLL),1*U(A,A,A,1*U,1*U(U),1*U,A,A,A,A,A,A)><S(LLLLSL),1*U(1*U(U),1*U(U),U,U,1*U,1*U)><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: IB.Client.Types.IBServer
+                   w1 :: IB.Client.Request.ReqHeader
+                   w2 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case w of ww { IB.Client.Types.IBServer ww1 ww2 ww3 ww4 ww5 ww6 ww7 ww8 ww9 ww10 ww11 ww12 ->
+                 case w1 of ww13 { IB.Client.Request.ReqHeader ww14 ww15 ww16 ww17 ww18 ww19 ->
+                 IB.Client.Request.$wa1
+                   ww4
+                   ww5
+                   ww6
+                   ww14
+                   ww15
+                   ww16
+                   ww17
+                   ww18
+                   ww19
+                   w2 } }) -}
+26360ba9ff86fc4095857f2ee44aec91
+  getHeaderCon ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Request.ReqHeader
+    -> IB.Client.Types.Contract
+    -> GHC.Types.IO Data.ByteString.Internal.ByteString
+  {- Arity: 4,
+     Strictness: <S(LLLLLSLLLLLL),1*U(A,A,A,A,1*U(U),1*U,A,A,A,A,A,A)><S(LLLLSL),1*U(1*U(U),1*U(U),U,U,1*U,A)><L,U(1*U(U),A,A,A,A,A,A,A,A,A,A,1*U,A,A,A,A,A,A)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.getHeaderCon1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <IB.Client.Request.ReqHeader>_R
+                 ->_R <IB.Client.Types.Contract>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0]
+                               <Data.ByteString.Internal.ByteString>_R)) -}
+e048840ee049a3b463fc35ecd9ec6467
+  getHeaderCon1 ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Request.ReqHeader
+    -> IB.Client.Types.Contract
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.ByteString.Internal.ByteString #)
+  {- Arity: 4,
+     Strictness: <S(LLLLLSLLLLLL),1*U(A,A,A,A,1*U(U),1*U,A,A,A,A,A,A)><S(LLLLSL),1*U(1*U(U),1*U(U),U,U,1*U,A)><L,U(1*U(U),A,A,A,A,A,A,A,A,A,A,1*U,A,A,A,A,A,A)><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (4, True, False)
+                (\ w :: IB.Client.Types.IBServer
+                   w1 :: IB.Client.Request.ReqHeader
+                   w2 :: IB.Client.Types.Contract
+                   w3 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case w of ww { IB.Client.Types.IBServer ww1 ww2 ww3 ww4 ww5 ww6 ww7 ww8 ww9 ww10 ww11 ww12 ->
+                 case w1 of ww13 { IB.Client.Request.ReqHeader ww14 ww15 ww16 ww17 ww18 ww19 ->
+                 IB.Client.Request.$wa2
+                   ww5
+                   ww6
+                   ww14
+                   ww15
+                   ww16
+                   ww17
+                   ww18
+                   w2
+                   w3 } }) -}
+93a447905f99ac3cd507ea10bf18086d
+  nullch :: Data.ByteString.Internal.ByteString
+  {- Unfolding: (Data.ByteString.Internal.unsafePackLenChars
+                   IB.Client.Request.nullch1
+                   IB.Client.Request.nullch_cs) -}
+cbf79348dc6ef125dd7b65e56400ae36
+  nullch1 :: GHC.Types.Int
+  {- Unfolding: (case GHC.List.$wlenAcc
+                        @ GHC.Types.Char
+                        IB.Client.Request.nullch_cs
+                        0 of ww2 { DEFAULT ->
+                 GHC.Types.I# ww2 }) -}
+3cd0f863c608e974aab7290586348600
+  nullch_cs :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCStringUtf8# "\\192\\128"#) -}
+e2f052a391d2e32104c740a933766848
+  request ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Types.Request -> GHC.Types.IO ()
+  {- Arity: 3,
+     Strictness: <S(LLLLLSLLLLLL),U(A,A,1*U(U),1*U,U(U),1*U,A,U,U,A,A,A)><S,1*U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.request1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <IB.Client.Types.Request>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+8f249dfaf3e132bc53eeb391c5901b81
+  request1 ::
+    IB.Client.Types.IBServer
+    -> IB.Client.Types.Request
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3,
+     Strictness: <S(LLLLLSLLLLLL),U(A,A,1*U(U),1*U,U(U),1*U,A,U,U,A,A,A)><S,1*U><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: IB.Client.Types.IBServer
+                   w1 :: IB.Client.Types.Request
+                   w2 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case w of ww { IB.Client.Types.IBServer ww1 ww2 ww3 ww4 ww5 ww6 ww7 ww8 ww9 ww10 ww11 ww12 ->
+                 IB.Client.Request.$wa3 ww3 ww4 ww5 ww6 ww8 ww9 w1 w2 }) -}
+ebadfc7d538a7505569328e6329b0bfb
+  rqh_errId :: IB.Client.Request.ReqHeader -> GHC.Types.Int
+  RecSel IB.Client.Request.ReqHeader
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLSLLL),1*U(A,A,1*U(U),A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.Request.ReqHeader ->
+                 case ds of wild { IB.Client.Request.ReqHeader ds1 ds2 ds3 ds4 ds5 ds6 ->
+                 ds3 }) -}
+06e04bae7b7fb337b3271334b85eb88a
+  rqh_errMsg :: IB.Client.Request.ReqHeader -> GHC.Base.String
+  RecSel IB.Client.Request.ReqHeader
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLSLL),1*U(A,A,A,1*U,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.Request.ReqHeader ->
+                 case ds of wild { IB.Client.Request.ReqHeader ds1 ds2 ds3 ds4 ds5 ds6 ->
+                 ds4 }) -}
+261c9780916b18cdc682176eee287195
+  rqh_exAuth ::
+    IB.Client.Request.ReqHeader -> GHC.Base.Maybe GHC.Types.Bool
+  RecSel IB.Client.Request.ReqHeader
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLLS),1*U(A,A,A,A,A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.Request.ReqHeader ->
+                 case ds of wild { IB.Client.Request.ReqHeader ds1 ds2 ds3 ds4 ds5 ds6 ->
+                 ds6 }) -}
+ea1116ca7d715e8d3c9c5cd0dbce377b
+  rqh_minVer ::
+    IB.Client.Request.ReqHeader -> GHC.Base.Maybe GHC.Types.Int
+  RecSel IB.Client.Request.ReqHeader
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLSL),1*U(A,A,A,A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.Request.ReqHeader ->
+                 case ds of wild { IB.Client.Request.ReqHeader ds1 ds2 ds3 ds4 ds5 ds6 ->
+                 ds5 }) -}
+b16bec1fc5b24dd275330db41debc5ef
+  rqh_msgId :: IB.Client.Request.ReqHeader -> GHC.Types.Int
+  RecSel IB.Client.Request.ReqHeader
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SLLLLL),1*U(1*U(U),A,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.Request.ReqHeader ->
+                 case ds of wild { IB.Client.Request.ReqHeader ds1 ds2 ds3 ds4 ds5 ds6 ->
+                 ds1 }) -}
+509e4f5a9259e412e02185d485ba528d
+  rqh_proVer :: IB.Client.Request.ReqHeader -> GHC.Types.Int
+  RecSel IB.Client.Request.ReqHeader
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LSLLLL),1*U(A,1*U(U),A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.Request.ReqHeader ->
+                 case ds of wild { IB.Client.Request.ReqHeader ds1 ds2 ds3 ds4 ds5 ds6 ->
+                 ds2 }) -}
+6a54a10f0831203914613c577fd2beb1
+  show' ::
+    GHC.Show.Show a => a -> Data.ByteString.Internal.ByteString
+  {- Arity: 2, Strictness: <L,1*U(A,1*C1(U),A)><L,U>,
+     Unfolding: (\ @ a6 $dShow :: GHC.Show.Show a6 eta :: a6 ->
+                 let {
+                   cs3 :: [GHC.Types.Char] = GHC.Show.show @ a6 $dShow eta
+                 } in
+                 Data.ByteString.Internal.unsafePackLenChars
+                   (case GHC.List.$wlenAcc @ GHC.Types.Char cs3 0 of ww2 { DEFAULT ->
+                    GHC.Types.I# ww2 })
+                   cs3) -}
+a87b3397fa8f24beecdaf895c2d26ca3
+  show'1 :: [GHC.Types.Char]
+  {- HasNoCafRefs,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   GHC.Show.shows6
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+8a15c34ee06df0f187dd2d31c23e3e4f
+  wFlush :: IB.Client.Types.IBServer -> GHC.Types.IO ()
+  {- Arity: 2,
+     Strictness: <S(LLLLLLLLSLLL),1*U(A,A,A,A,A,A,A,A,1*U,A,A,A)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.wFlush1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+258a8f223605ea162c4eb79401955bcc
+  wFlush1 ::
+    IB.Client.Types.IBServer
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2,
+     Strictness: <S(LLLLLLLLSLLL),1*U(A,A,A,A,A,A,A,A,1*U,A,A,A)><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ s :: IB.Client.Types.IBServer
+                   eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case s of wild { IB.Client.Types.IBServer ds1 ds2 ds3 ds4 ds5 ds6 ds7 ds8 ds9 ds10 ds11 ds12 ->
+                 case ds9 of wild1 {
+                   GHC.Base.Nothing
+                   -> case Data.Maybe.fromJust1
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+                      of {}
+                   GHC.Base.Just x
+                   -> GHC.IO.Handle.Internals.wantWritableHandle1
+                        @ ()
+                        GHC.IO.Handle.hFlush2
+                        x
+                        GHC.IO.Handle.Internals.flushWriteBuffer1
+                          `cast`
+                        (<GHC.IO.Handle.Types.Handle__>_R
+                         ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R))
+                        eta } }) -}
+ed1377dc39d7af152aae786078016bd1
+  write ::
+    IB.Client.Types.IBServer
+    -> Data.ByteString.Internal.ByteString -> GHC.Types.IO ()
+  {- Arity: 3,
+     Strictness: <L,1*U(A,A,A,A,A,A,A,1*U,1*U,A,A,A)><L,U(U,U,U,U)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.write1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <Data.ByteString.Internal.ByteString>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+61dec71bb136b5155cf9ce1b5e97be60
+  write1 ::
+    IB.Client.Types.IBServer
+    -> Data.ByteString.Internal.ByteString
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3,
+     Strictness: <L,1*U(A,A,A,A,A,A,A,1*U,1*U,A,A,A)><L,U(U,U,U,U)><L,U>,
+     Unfolding: (\ s :: IB.Client.Types.IBServer
+                   msg :: Data.ByteString.Internal.ByteString
+                   eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        IB.Client.Request.write3
+                        GHC.Types.False
+                        eta of ds1 { (#,#) ipv ipv1 ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        IB.Client.Request.write2
+                        GHC.Types.True
+                        ipv of ds2 { (#,#) ipv2 ipv3 ->
+                 case s of wild { IB.Client.Types.IBServer ds3 ds4 ds5 ds6 ds7 ds8 ds9 ds10 ds11 ds12 ds13 ds14 ->
+                 case ds10 of wild1 {
+                   GHC.Types.False
+                   -> case msg of ww { Data.ByteString.Internal.PS ww1 ww2 ww3 ww4 ->
+                      case ww4 of ds {
+                        DEFAULT
+                        -> case GHC.IO.Handle.Text.$wa5
+                                  @ GHC.Prim.Any
+                                  (case ds11 of wild2 {
+                                     GHC.Base.Nothing
+                                     -> Data.Maybe.fromJust1 @ GHC.IO.Handle.Types.Handle
+                                     GHC.Base.Just x -> x })
+                                  (GHC.Ptr.Ptr @ GHC.Prim.Any (GHC.Prim.plusAddr# ww1 ww3))
+                                  ds
+                                  GHC.Types.True
+                                  ipv2 of ds15 { (#,#) ipv4 ipv5 ->
+                           case GHC.Prim.touch#
+                                  @ GHC.ForeignPtr.ForeignPtrContents
+                                  ww2
+                                  ipv4 of s' { DEFAULT ->
+                           (# s', GHC.Tuple.() #) } }
+                        0 -> (# ipv2, GHC.Tuple.() #) } }
+                   GHC.Types.True
+                   -> case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             (GHC.CString.unpackAppendCString#
+                                " IB-server << "#
+                                (case msg of ww { Data.ByteString.Internal.PS ww1 ww2 ww3 ww4 ->
+                                 Data.ByteString.Internal.$wunpackAppendCharsLazy
+                                   ww1
+                                   ww2
+                                   ww3
+                                   ww4
+                                   (GHC.Types.[] @ GHC.Types.Char) }))
+                             GHC.Types.True
+                             ipv2 of ds15 { (#,#) ipv4 ipv5 ->
+                      case msg of ww { Data.ByteString.Internal.PS ww1 ww2 ww3 ww4 ->
+                      case ww4 of ds {
+                        DEFAULT
+                        -> case GHC.IO.Handle.Text.$wa5
+                                  @ GHC.Prim.Any
+                                  (case ds11 of wild2 {
+                                     GHC.Base.Nothing
+                                     -> Data.Maybe.fromJust1 @ GHC.IO.Handle.Types.Handle
+                                     GHC.Base.Just x -> x })
+                                  (GHC.Ptr.Ptr @ GHC.Prim.Any (GHC.Prim.plusAddr# ww1 ww3))
+                                  ds
+                                  GHC.Types.True
+                                  ipv4 of ds16 { (#,#) ipv6 ipv7 ->
+                           case GHC.Prim.touch#
+                                  @ GHC.ForeignPtr.ForeignPtrContents
+                                  ww2
+                                  ipv6 of s' { DEFAULT ->
+                           (# s', GHC.Tuple.() #) } }
+                        0 -> (# ipv4, GHC.Tuple.() #) } } } } } } }) -}
+914ab16bb361c81928962d59d9f49df0
+  write2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   " *** Writing Msg to IB Server ..."#) -}
+e89e6a85cdcd9cb6f82472a26c1a7ff1
+  write3 :: GHC.Base.String
+  {- Unfolding: (System.Console.ANSI.Unix.csi
+                   IB.Client.Request.write4
+                   System.Console.ANSI.Unix.setSGRCode1) -}
+8bf184be03585b684b406aaf29c9d8f7
+  write4 :: [GHC.Types.Int]
+  {- Unfolding: (GHC.Types.:
+                   @ GHC.Types.Int
+                   IB.Client.Request.write5
+                   (GHC.Types.[] @ GHC.Types.Int)) -}
+ed6b5b185798355a76b36da685c009a0
+  write5 :: GHC.Types.Int
+  {- Unfolding: (case System.Console.ANSI.Unix.$wsgrToCode
+                        IB.Client.Request.write6 of ww { DEFAULT ->
+                 GHC.Types.I# ww }) -}
+a717a666cd87715e1f456ce2e20a12a4
+  write6 :: System.Console.ANSI.Common.SGR
+  {- HasNoCafRefs,
+     Unfolding: (System.Console.ANSI.Common.SetColor
+                   System.Console.ANSI.Common.Foreground
+                   System.Console.ANSI.Common.Dull
+                   System.Console.ANSI.Common.Cyan) -}
+c793786da271dcd4e17a17d11a6296ff
+  writeLst ::
+    IB.Client.Types.IBServer
+    -> [Data.ByteString.Internal.ByteString] -> GHC.Types.IO ()
+  {- Arity: 3,
+     Strictness: <S(LLLLLLLSLLLL),1*U(A,A,A,A,A,A,A,1*U,1*U,A,A,A)><L,1*U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.Request.writeLst1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R <[Data.ByteString.Internal.ByteString]>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+59acb57db3fcbb660c980589442e5351
+  writeLst1 ::
+    IB.Client.Types.IBServer
+    -> [Data.ByteString.Internal.ByteString]
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3,
+     Strictness: <S(LLLLLLLSLLLL),1*U(A,A,A,A,A,A,A,1*U,1*U,A,A,A)><L,1*U><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: IB.Client.Types.IBServer
+                   w1 :: [Data.ByteString.Internal.ByteString]
+                   w2 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case w of ww { IB.Client.Types.IBServer ww1 ww2 ww3 ww4 ww5 ww6 ww7 ww8 ww9 ww10 ww11 ww12 ->
+                 IB.Client.Request.$wa4 ww8 ww9 w1 w2 }) -}
+71d6e83ee1fb992989e4337c9b47bb9d
+  writeLst2 :: Data.ByteString.Internal.ByteString
+  {- Unfolding: (Data.ByteString.Internal.$fMonoidByteString_$cmconcat
+                   (GHC.Types.[] @ Data.ByteString.Internal.ByteString)) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

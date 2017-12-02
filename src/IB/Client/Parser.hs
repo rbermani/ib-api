@@ -1,16 +1,7 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
 
-module IB.Client.Parser 
-  (
-    -- * Types
-    IBMessage(..)
-  , RecvMsg(..) 
-
-    -- * Functions
-  , pRecvMsg
-  , pServerVersion
-  ) where
+module IB.Client.Parser where
 
 --import Data.ByteString hiding (elem, map, empty)
 import Prelude hiding (takeWhile, take)
@@ -22,6 +13,8 @@ import Data.Attoparsec.ByteString.Char8
 
 import IB.Client.Types
 import IB.Client.Nums
+
+import System.Console.ANSI
 
 pServerVersion :: Parser Preamble
 pServerVersion = 

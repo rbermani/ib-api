@@ -60,7 +60,7 @@ msg :: CodeMsgPair -> String
 msg = snd
 
 excToPair :: IBExceptionType -> CodeMsgPair
-excToPair AlreadyConnected = (501,	"Already connected.") 
+excToPair AlreadyConnected = (501, "Already connected.") 
 excToPair ConnectFail = (502, "Couldn't connect to TWS.  Confirm that \"Enable ActiveX and Socket Clients\" is enabled on the TWS \"Configure->API\" menu.") 
 excToPair UpdateTWS = (503, "The TWS is out of date and must be upgraded.")
 excToPair NotConnected = (504, "Not connected")
@@ -81,4 +81,6 @@ excToPair FailSendCanHistData= (528, "Cancel Historical Data Sending Error - ")
 excToPair FailSendReqRtBars = (529, "Request Real-time Bar Data Sending Error - ")
 excToPair FailSendCanRTBars =(530, "Cancel Real-time Bar Data Sending Error - ")
 excToPair FailSendReqCurrTime = (531, "Request Current Time Sending Error - ")
+excToPair _ = (999, "All other Error - ")
+
 

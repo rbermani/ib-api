@@ -1,18 +1,6 @@
 {-# LANGUAGE NamedFieldPuns #-}
 
-module IB.Client.Request 
-  (
-    -- * Types
-    Request(..)
-  
-    -- * Functions
-  , request 
-  , wFlush
-  , write
-  , appNull
-  , show'
-  , debugWrite
-  ) where
+module IB.Client.Request where
 
 import Control.Concurrent.MVar
 import Control.Exception
@@ -25,6 +13,8 @@ import Data.Maybe
 import IB.Client.Exception
 import IB.Client.Nums
 import IB.Client.Types
+
+import System.Console.ANSI
 
 data ReqHeader = 
     ReqHeader 
@@ -47,7 +37,9 @@ debugWrite s msg =
 
 write :: IBServer -> B.ByteString -> IO ()
 write s msg = do
-    debugWrite s $ "<< " ++ B.unpack msg 
+    setSGR [SetColor Foreground Dull Cyan]
+    putStrLn " *** Writing Msg to IB Server ..."
+    debugWrite s $ " IB-server << " ++ B.unpack msg 
     B.hPutStr h msg 
     where h = fromJust $ s_sock s
 

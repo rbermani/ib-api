@@ -1,0 +1,359 @@
+
+==================== FINAL INTERFACE ====================
+2017-12-01 19:17:00.436477 UTC
+
+interface main@main:Main 7102
+  interface hash: d105e2f753dc88391243d08ec99237c1
+  ABI hash: 33b6f60c05872caf53d7bb3e60b055b4
+  export-list hash: 428533a313ed495541017c08f021cb85
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 14a7c03a3b628dea6eac6225ba3bbda9
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.businessLogic
+  Main.epochToGregorian
+  Main.epochToUTC
+  Main.handleMsg
+  Main.main
+module dependencies:
+package dependencies: ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg
+                      array-0.5.1.0@array_E0sTtauuKsGDLZoT7lTbgZ
+                      attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E base-4.8.1.0
+                      binary-0.7.5.0@binar_IvYoLp9H6Xy3zEH13MmZwd
+                      bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH
+                      containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN
+                      deepseq-1.4.1.1@deeps_LbCWUlehDDeLxurARKDH5o ghc-prim-0.4.0.0
+                      hashable-1.2.3.3@hasha_Fu46I2eA9YPGrMUpXqnAaw
+                      ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH integer-gmp-1.0.0.0
+                      network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE
+                      primitive-0.6.1.0@primi_5Jnw7oEuYtM9dmKXelGXVb
+                      scientific-0.3.4.4@scien_3wyQhsIn3IzCO2Fl73SRM1
+                      text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG
+                      time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH
+                      transformers-0.4.2.0@trans_3eG64VdP2vzGjP6wJiCp5X
+                      unix-2.7.1.0@unix_A3WgcI5QiHK4PDo4jSYdwQ
+                      vector-0.10.12.3@vecto_JrQt7SYKOQF2foH4Ugm8MQ
+orphans: attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.ByteString.Char8
+         base-4.8.1.0:GHC.Base base-4.8.1.0:GHC.Float
+         binary-0.7.5.0@binar_IvYoLp9H6Xy3zEH13MmZwd:Data.Binary.Generic
+         bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Builder
+         hashable-1.2.3.3@hasha_Fu46I2eA9YPGrMUpXqnAaw:Data.Hashable.Generic
+         network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket
+         network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket.Types
+         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text
+         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text.Lazy
+         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text.Show
+         time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH:Data.Time.Calendar.Gregorian
+         transformers-0.4.2.0@trans_3eG64VdP2vzGjP6wJiCp5X:Control.Monad.Trans.Error
+         vector-0.10.12.3@vecto_JrQt7SYKOQF2foH4Ugm8MQ:Data.Vector.Fusion.Stream
+family instance modules: attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.Internal.Types
+                         base-4.8.1.0:Control.Applicative base-4.8.1.0:Data.Either
+                         base-4.8.1.0:Data.Functor.Identity base-4.8.1.0:Data.Monoid
+                         base-4.8.1.0:Data.Type.Equality base-4.8.1.0:Data.Void
+                         base-4.8.1.0:GHC.Exts base-4.8.1.0:GHC.Generics
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.IntMap.Base
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.IntSet.Base
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.Map.Base
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.Sequence
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.Set.Base
+                         primitive-0.6.1.0@primi_5Jnw7oEuYtM9dmKXelGXVb:Control.Monad.Primitive
+                         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text
+                         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text.Lazy
+                         vector-0.10.12.3@vecto_JrQt7SYKOQF2foH4Ugm8MQ:Data.Vector
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI 124b9a5cc81625b5d35bb66f7f3dc750
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI.Common d0af977ef1b7b8ecdafafa46bce3ef4b
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI.Unix 4d02c95a64fdfe094db04762201cd1bd
+import  -/  attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.ByteString.Char8 61a1573badf17d184bbf042565e2e1c3
+import  -/  base-4.8.1.0:Control.Concurrent eedef4ce4eb0a2874a44a6b90863cce8
+import  -/  base-4.8.1.0:Control.Concurrent.MVar 42b17972c7194d81ab1db982ca1fc21e
+import  -/  base-4.8.1.0:Control.Exception ad90805da5ad455017893997acf84ba2
+import  -/  base-4.8.1.0:Control.Monad dfea142d91349c4861427789d50d5b80
+import  -/  base-4.8.1.0:Data.Bits 5341167fdd5958c2b3f0dac8924f1efd
+import  -/  base-4.8.1.0:Data.Either bc9482e78cc431fce439b593377aa2e6
+import  -/  base-4.8.1.0:Data.IORef d11b1514c62648b5630f6a04aaafce97
+import  -/  base-4.8.1.0:Data.List 2a4f5f92892d432e7113f64cd9dcca53
+import  -/  base-4.8.1.0:Data.Maybe 1cb58de2b04ee3c0c0a7dc9201184aff
+import  -/  base-4.8.1.0:Foreign.C.Types e5754634c3e77afa375b6d3d49ab7ce2
+import  -/  base-4.8.1.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.1.0:GHC.IO.Handle fda05b0a879e69b0b19e31645e2a560c
+import  -/  base-4.8.1.0:GHC.MVar b4b3c5aff0a4a363f48f0cc3b89c1927
+import  -/  base-4.8.1.0:GHC.Real 4c3b525ecbd4d62bb287aec36d4c2f0d
+import  -/  base-4.8.1.0:GHC.Show b8c65ca3124f92a166c9f05120382442
+import  -/  base-4.8.1.0:Prelude 518f762991bc287d78f21a73c974da1f
+import  -/  base-4.8.1.0:System.IO d541b8bdf18c04de3ab7ea0277c4eba3
+import  -/  base-4.8.1.0:System.Posix.Types 7fa4b2df4aab8c4a440322796ffac3f4
+import  -/  base-4.8.1.0:System.Timeout b7d5cb27986c83c67c1a707cd2549d6b
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Char8 727f18c1a10ff91ccff6cf752ee2a230
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client c1ecfb89d34f5beedf4830ac13d87092
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Exception ca4f6733651cf163ea580063199c2a5c
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Nums 58a359e02642eec9b8a336565de0a79c
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Parser ce140e1281202caa50d0b47619571213
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Request 9c1196de4f998fc855c55147bae014d9
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Types 4c6a6fdfbfd3bbf81422ed04211308a6
+import  -/  integer-gmp-1.0.0.0:GHC.Integer.Type bf9b4d13b1dbe96a83786d2e47d2e8ca
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.BSD 777eb058269e74aca488bd21903a0b54
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket e3a0d0de7e1edfdda157779d1bac350c
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket.ByteString 2bb891968c72e4c02b3f200d387bf040
+import  -/  time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH:Data.Time.Calendar dfab27466d273da6cdc74f4a2b7a3434
+import  -/  time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH:Data.Time.Calendar.Gregorian 9b052c2950e8d33efbab5e40c761f8d5
+import  -/  time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH:Data.Time.Clock fbad5c654231b61a0d6aaad7d18d82fc
+import  -/  time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH:Data.Time.Clock.POSIX 9f57e101ec0df25a95b3f2db68fba480
+import  -/  time-1.5.0.1@time_AXTdBF9VRQoBOqJT6qtmVH:Data.Time.Clock.UTC 3183d9aefea2b6dd8c714b30c22b4b3f
+import  -/  unix-2.7.1.0@unix_A3WgcI5QiHK4PDo4jSYdwQ:System.Posix.Time 0a74524c5207f069cbaef1aabb289f94
+0be0d917255b260d332641ed409127fd
+  $wepochToGregorian ::
+    GHC.Real.Integral a =>
+    a -> (# GHC.Integer.Type.Integer, GHC.Types.Int, GHC.Types.Int #)
+  {- Arity: 2, Strictness: <L,1*U(A,A,A,A,A,A,A,A,1*C1(U))><L,U>,
+     Inline: [0],
+     Unfolding: (\ @ a w :: GHC.Real.Integral a w1 :: a ->
+                 Data.Time.Calendar.Gregorian.$wtoGregorian
+                   (case Data.Time.Clock.POSIX.$wposixSecondsToUTCTime
+                           (GHC.Integer.Type.timesInteger
+                              (GHC.Real.toInteger @ a w w1)
+                              Data.Fixed.$fHasResolutionE5)
+                             `cast`
+                           (Trans
+                                (Sym (Data.Fixed.NTCo:Fixed[0] <Data.Fixed.E12>_P))
+                                (Sym (Data.Time.Clock.UTC.NTCo:NominalDiffTime[0]))) of ww { (#,#) ww1 ww2 ->
+                    ww1 })) -}
+36aeac2ff4edad0d2f794a00e3f2bb70
+  businessLogic :: IB.Client.Types.MIB -> GHC.Types.IO ()
+  {- Arity: 2, Strictness: <L,U(U)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.businessLogic1
+                  `cast`
+                (<IB.Client.Types.MIB>_R ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+b3f2044842f3342e3f0ddb8ca49eb9e2
+  businessLogic1 ::
+    IB.Client.Types.MIB
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, Strictness: <L,U(U)><L,U> -}
+951d84b976a84d9a98dac98d6e2a2139
+  epochToGregorian ::
+    GHC.Real.Integral a =>
+    a -> (GHC.Integer.Type.Integer, GHC.Types.Int, GHC.Types.Int)
+  {- Arity: 2, Strictness: <L,1*U(A,A,A,A,A,A,A,A,1*C1(U))><L,U>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a w :: GHC.Real.Integral a w1 :: a ->
+                 case Main.$wepochToGregorian @ a w w1 of ww { (#,,#) ww1 ww2 ww3 ->
+                 (ww1, ww2, ww3) }) -}
+46daef3e439d523b643b4e5cd6021ff4
+  epochToUTC ::
+    GHC.Real.Integral a => a -> Data.Time.Clock.UTC.UTCTime
+  {- Arity: 2, Strictness: <L,1*U(A,A,A,A,A,A,A,A,1*C1(U))><L,U>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a w :: GHC.Real.Integral a w1 :: a ->
+                 case Data.Time.Clock.POSIX.$wposixSecondsToUTCTime
+                        (GHC.Integer.Type.timesInteger
+                           (GHC.Real.toInteger @ a w w1)
+                           Data.Fixed.$fHasResolutionE5)
+                          `cast`
+                        (Trans
+                             (Sym (Data.Fixed.NTCo:Fixed[0] <Data.Fixed.E12>_P))
+                             (Sym (Data.Time.Clock.UTC.NTCo:NominalDiffTime[0]))) of ww { (#,#) ww1 ww2 ->
+                 Data.Time.Clock.UTC.UTCTime ww1 ww2 }) -}
+345f0998e22c79f2414155f4b0408064
+  handleMsg ::
+    IB.Client.Types.MIB -> IB.Client.Types.IBMessage -> GHC.Types.IO ()
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.handleMsg1
+                  `cast`
+                (<IB.Client.Types.MIB>_R
+                 ->_R <IB.Client.Types.IBMessage>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+dc8d1d5e3d93c5cdb82ef9993700f5a0
+  handleMsg1 ::
+    IB.Client.Types.MIB
+    -> IB.Client.Types.IBMessage
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U>,
+     Unfolding: (\ msv :: IB.Client.Types.MIB
+                   ds :: IB.Client.Types.IBMessage
+                   eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case ds of wild {
+                   DEFAULT
+                   -> GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        (GHC.CString.unpackAppendCString#
+                           "Catch-all handler called for "#
+                           (IB.Client.Types.$fShowIBMessage_$cshowsPrec
+                              GHC.Show.shows18
+                              wild
+                              (GHC.Types.[] @ GHC.Types.Char)))
+                        GHC.Types.True
+                        eta
+                   IB.Client.Types.ManagedAccts acct
+                   -> GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        (GHC.CString.unpackAppendCString# "Managed Accts: "# acct)
+                        GHC.Types.True
+                        eta
+                   IB.Client.Types.CurrentTime time
+                   -> case msv of wild1 { GHC.MVar.MVar mvar# ->
+                      case GHC.Prim.readMVar#
+                             @ GHC.Prim.RealWorld
+                             @ IB.Client.Types.IBServer
+                             mvar#
+                             eta of ds1 { (#,#) ipv ipv1 ->
+                      GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        (GHC.CString.unpackAppendCString#
+                           "Current Time Response Received "#
+                           (case time of ww2 { GHC.Types.I# ww3 ->
+                            case GHC.Show.$wshowSignedInt
+                                   0
+                                   ww3
+                                   (GHC.Types.[] @ GHC.Types.Char) of ww4 { (#,#) ww5 ww6 ->
+                            GHC.Types.: @ GHC.Types.Char ww5 ww6 } }))
+                        GHC.Types.True
+                        ipv } } }) -}
+83ef2fad1568a19d00bb5462976b0212
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+8ce8c6abb50ed69f6e59d05f5d2ac1cb
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ s :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        System.Console.ANSI.Unix.clearScreenCode
+                        GHC.Types.False
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        Main.main11
+                        GHC.Types.False
+                        ipv of ds2 { (#,#) ipv2 ipv3 ->
+                 case IB.Client.connect1
+                        Main.main9
+                        GHC.Types.False
+                        GHC.Types.True
+                        ipv2 of ds3 { (#,#) ipv4 ipv5 ->
+                 case ipv5 of wild {
+                   Data.Either.Left err
+                   -> GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        Main.main8
+                        GHC.Types.True
+                        ipv4
+                   Data.Either.Right msv
+                   -> case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             Main.main7
+                             GHC.Types.False
+                             ipv4 of ds4 { (#,#) ipv6 ipv7 ->
+                      case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             Main.main3
+                             GHC.Types.False
+                             ipv6 of ds5 { (#,#) ipv8 ipv9 ->
+                      case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             Main.main2
+                             GHC.Types.True
+                             ipv8 of ds6 { (#,#) ipv10 ipv11 ->
+                      case IB.Client.checkMsg1
+                             msv
+                             GHC.Types.False
+                             ipv10 of ds7 { (#,#) ipv12 ipv13 ->
+                      Main.businessLogic1 msv ipv12 } } } } } } } }) -}
+eb09b46644a8736a8c0c9e4759e5bbe1
+  main10 :: GHC.Base.Maybe IB.Client.Types.HandlerFunc
+  {- Unfolding: (GHC.Base.Just
+                   @ IB.Client.Types.HandlerFunc
+                   Main.handleMsg1
+                     `cast`
+                   (<IB.Client.Types.MIB>_R
+                    ->_R <IB.Client.Types.IBMessage>_R
+                    ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+06ca3a51e680727fc25969b229d592b0
+  main11 :: GHC.Base.String
+  {- Unfolding: (System.Console.ANSI.Unix.csi
+                   Main.main12
+                   System.Console.ANSI.Unix.setCursorPositionCode1) -}
+22d200a469ed8b4d102084270bdd3c7b
+  main12 :: [GHC.Types.Int]
+  {- HasNoCafRefs,
+     Unfolding: (GHC.Types.: @ GHC.Types.Int Main.main14 Main.main13) -}
+6e255296d9d78c67d41a36f8333bc556
+  main13 :: [GHC.Types.Int]
+  {- HasNoCafRefs,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Int
+                   Main.main14
+                   (GHC.Types.[] @ GHC.Types.Int)) -}
+e3a70301c8a9e4626e6583d825d2f00e
+  main14 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 1) -}
+8321d9903bfaa1e46dc0b32efcca427f
+  main15 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+035117cb3fae60932651f4d578a58754
+  main2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   " *** Connection Sucessfull ..."#) -}
+cb2b15e7dfc72f50c3c8e654ea11c372
+  main3 :: GHC.Base.String
+  {- Unfolding: (System.Console.ANSI.Unix.csi
+                   Main.main4
+                   System.Console.ANSI.Unix.setSGRCode1) -}
+ae92e6244c0fa1abedb0f9731ed6eb9d
+  main4 :: [GHC.Types.Int]
+  {- Unfolding: (GHC.Types.:
+                   @ GHC.Types.Int
+                   Main.main5
+                   (GHC.Types.[] @ GHC.Types.Int)) -}
+064cdb1cd2b64388fc5c7587ec0d5302
+  main5 :: GHC.Types.Int
+  {- Unfolding: (case System.Console.ANSI.Unix.$wsgrToCode
+                        Main.main6 of ww { DEFAULT ->
+                 GHC.Types.I# ww }) -}
+b2e64a4b9a442cf1914f9ffa5bf5d14b
+  main6 :: System.Console.ANSI.Common.SGR
+  {- HasNoCafRefs,
+     Unfolding: (System.Console.ANSI.Common.SetColor
+                   System.Console.ANSI.Common.Foreground
+                   System.Console.ANSI.Common.Vivid
+                   System.Console.ANSI.Common.Yellow) -}
+cd999f24aec69ec5eb653b3b9e663338
+  main7 :: GHC.Base.String
+  {- Unfolding: (System.Console.ANSI.Unix.csi
+                   (GHC.Types.[] @ GHC.Types.Int)
+                   System.Console.ANSI.Unix.setSGRCode1) -}
+ef991f42cadf0bca8d049ae79bb415dc
+  main8 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Unable to Connect"#) -}
+584510b4a450dbda3672b8b39175e9eb
+  main9 :: IB.Client.ClientConfig
+  {- Unfolding: (IB.Client.ClientConfig
+                   IB.Client.defaultConf4
+                   IB.Client.defaultConf3
+                   IB.Client.defaultConf2
+                   GHC.Types.False
+                   Main.main10) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

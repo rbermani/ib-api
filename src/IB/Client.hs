@@ -30,6 +30,9 @@ import IB.Client.Request
 import IB.Client.Exception
 import IB.Client.Parser
 
+-- Modification by Phage Ky
+import System.Console.ANSI
+
 data ClientConfig = ClientConfig
     { cc_addr :: String
     , cc_port :: Int 
@@ -85,7 +88,9 @@ greetServer server =
 
 checkMsg :: MIB -> Bool -> IO ()
 checkMsg mvs loop =
-    do s <- readMVar mvs
+    do setSGR [SetColor Foreground Dull Green]
+       putStrLn " *** Checking Msg from IB Server ..."
+       s <- readMVar mvs
        let h = fromJust $ s_sock s
            handleMsg = s_handler s
            ver = s_version s
@@ -98,15 +103,17 @@ checkMsg mvs loop =
                         hClose h
         Just False -> do msg <- B.hGetNonBlocking h 1024
                          server <- takeMVar mvs
-                         debugWrite server $ ">> " ++ B.unpack msg
+
+                         debugWrite server $ " * IB-msg received (raw) >> " ++ B.unpack msg
                          putMVar mvs server
-                         pResult <- parseWith (B.hGetNonBlocking h 1024) (pRecvMsg ver) msg 
+                         pResult <- parseWith (B.hGetNonBlocking h 1024) (pRecvMsg ver) msg
 
                          case eitherResult pResult of 
                              Left errMsg -> throwIO $ IBExc no_valid_id ParseError errMsg
-                             Right res -> handleMsg mvs $ rc_msgBody res 
-                         
+                             Right res -> handleMsg mvs $ rc_msgBody res
+
                          when loop $ checkMsg mvs loop
+       setSGR [Reset]
 
 -- |Connects to a server
 connect :: ClientConfig     -- ^ Configuration
@@ -115,8 +122,9 @@ connect :: ClientConfig     -- ^ Configuration
            -> IO (Either IOError MIB) -- ^ IB instance
  
 connect cconf threaded debug = try $ do
+    setSGR [SetColor Foreground Vivid Yellow]
     when debug $
-        putStrLn $ "Connecting to " ++ cc_addr cconf ++ " on port " ++ show (cc_port cconf)
+        putStrLn $ " *** Connecting to " ++ cc_addr cconf ++ " on port " ++ show (cc_port cconf)
 
 --    if (isConnected $ cc_socket cconf)
 --             then throwIO IBExc no_valid_id AlreadyConnected ""

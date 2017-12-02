@@ -1,0 +1,465 @@
+
+==================== FINAL INTERFACE ====================
+2017-12-01 19:16:59.282882 UTC
+
+interface ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client 7102
+  interface hash: a9db9458c49160418acc9f65f4c3edd2
+  ABI hash: c1ecfb89d34f5beedf4830ac13d87092
+  export-list hash: 85e5219bd2ab0def49d9cbcf3fe9fc77
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: c1f2280760789c8f5087c2d5fdf65b37
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  IB.Client.ascCodes
+  IB.Client.checkMsg
+  IB.Client.connect
+  IB.Client.defHandler
+  IB.Client.defaultConf
+  IB.Client.disconnect
+  IB.Client.greetServer
+  IB.Client.toServer
+  IB.Client.ClientConfig{IB.Client.ClientConfig IB.Client.cc_addr IB.Client.cc_clientId IB.Client.cc_extraAuth IB.Client.cc_handler IB.Client.cc_port}
+module dependencies: IB.Client.Exception IB.Client.Nums
+                     IB.Client.Parser IB.Client.Request IB.Client.Types
+package dependencies: ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg
+                      array-0.5.1.0@array_E0sTtauuKsGDLZoT7lTbgZ
+                      attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E base-4.8.1.0
+                      binary-0.7.5.0@binar_IvYoLp9H6Xy3zEH13MmZwd
+                      bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH
+                      containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN
+                      deepseq-1.4.1.1@deeps_LbCWUlehDDeLxurARKDH5o ghc-prim-0.4.0.0
+                      hashable-1.2.3.3@hasha_Fu46I2eA9YPGrMUpXqnAaw integer-gmp-1.0.0.0
+                      network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE
+                      primitive-0.6.1.0@primi_5Jnw7oEuYtM9dmKXelGXVb
+                      scientific-0.3.4.4@scien_3wyQhsIn3IzCO2Fl73SRM1
+                      text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG
+                      transformers-0.4.2.0@trans_3eG64VdP2vzGjP6wJiCp5X
+                      vector-0.10.12.3@vecto_JrQt7SYKOQF2foH4Ugm8MQ
+orphans: attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.ByteString.Char8
+         base-4.8.1.0:GHC.Base base-4.8.1.0:GHC.Float
+         binary-0.7.5.0@binar_IvYoLp9H6Xy3zEH13MmZwd:Data.Binary.Generic
+         bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Builder
+         hashable-1.2.3.3@hasha_Fu46I2eA9YPGrMUpXqnAaw:Data.Hashable.Generic
+         network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket
+         network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket.Types
+         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text
+         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text.Lazy
+         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text.Show
+         transformers-0.4.2.0@trans_3eG64VdP2vzGjP6wJiCp5X:Control.Monad.Trans.Error
+         vector-0.10.12.3@vecto_JrQt7SYKOQF2foH4Ugm8MQ:Data.Vector.Fusion.Stream
+family instance modules: attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.Internal.Types
+                         base-4.8.1.0:Control.Applicative base-4.8.1.0:Data.Either
+                         base-4.8.1.0:Data.Functor.Identity base-4.8.1.0:Data.Monoid
+                         base-4.8.1.0:Data.Type.Equality base-4.8.1.0:Data.Void
+                         base-4.8.1.0:GHC.Exts base-4.8.1.0:GHC.Generics
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.IntMap.Base
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.IntSet.Base
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.Map.Base
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.Sequence
+                         containers-0.5.6.2@conta_LKCPrTJwOTOLk4OU37YmeN:Data.Set.Base
+                         primitive-0.6.1.0@primi_5Jnw7oEuYtM9dmKXelGXVb:Control.Monad.Primitive
+                         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text
+                         text-1.2.2.0@text_BKzOMwCPkuv5n8xwLM3CQG:Data.Text.Lazy
+                         vector-0.10.12.3@vecto_JrQt7SYKOQF2foH4Ugm8MQ:Data.Vector
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI 124b9a5cc81625b5d35bb66f7f3dc750
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI.Common d0af977ef1b7b8ecdafafa46bce3ef4b
+import  -/  ansi-terminal-0.6.2.3@ansit_KW0LUY2zB7JCYzE4ZYrwBg:System.Console.ANSI.Unix 4d02c95a64fdfe094db04762201cd1bd
+import  -/  attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.ByteString f724660c6020e0714329a6ddef52c41a
+import  -/  attoparsec-0.12.1.6@attop_8slB1TUPc0y9Z1f4ky3i2E:Data.Attoparsec.ByteString.Char8 61a1573badf17d184bbf042565e2e1c3
+import  -/  base-4.8.1.0:Control.Concurrent eedef4ce4eb0a2874a44a6b90863cce8
+import  -/  base-4.8.1.0:Control.Concurrent.MVar 42b17972c7194d81ab1db982ca1fc21e
+import  -/  base-4.8.1.0:Control.Exception ad90805da5ad455017893997acf84ba2
+import  -/  base-4.8.1.0:Control.Exception.Base da2438b8a9b2933da5a60a968b3e3fac
+import  -/  base-4.8.1.0:Control.Monad dfea142d91349c4861427789d50d5b80
+import  -/  base-4.8.1.0:Data.Bits 5341167fdd5958c2b3f0dac8924f1efd
+import  -/  base-4.8.1.0:Data.Char ba93ec4ca3776f6d9a8c8a6223b2fb26
+import  -/  base-4.8.1.0:Data.Either bc9482e78cc431fce439b593377aa2e6
+import  -/  base-4.8.1.0:Data.Foldable 2e5acb797cfda6b3b7fabd7052abe290
+import  -/  base-4.8.1.0:Data.List 2a4f5f92892d432e7113f64cd9dcca53
+import  -/  base-4.8.1.0:Data.Maybe 1cb58de2b04ee3c0c0a7dc9201184aff
+import  -/  base-4.8.1.0:Data.OldList 21f46c368c20a00483b41333e53a55cb
+import  -/  base-4.8.1.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.1.0:GHC.Conc.Sync 9e3836b2f1d1d028a49b374ef552faad
+import  -/  base-4.8.1.0:GHC.IO c40fa9051eafbe02c69624c2ae0f498f
+import  -/  base-4.8.1.0:GHC.IO.Exception d3ead07ed0a008300b39abe0b3be2e2c
+import  -/  base-4.8.1.0:GHC.IO.Handle fda05b0a879e69b0b19e31645e2a560c
+import  -/  base-4.8.1.0:GHC.IO.Handle.Types 10e039aec061d8ce17bd51dbcefbc854
+import  -/  base-4.8.1.0:GHC.IO.IOMode 322ecfdfea0791ba55fa98d605d1fcc8
+import  -/  base-4.8.1.0:GHC.List f31ed8784b3e05f1397195751f7d74ea
+import  -/  base-4.8.1.0:GHC.MVar b4b3c5aff0a4a363f48f0cc3b89c1927
+import  -/  base-4.8.1.0:GHC.Show b8c65ca3124f92a166c9f05120382442
+import  -/  base-4.8.1.0:Prelude 518f762991bc287d78f21a73c974da1f
+import  -/  base-4.8.1.0:System.IO d541b8bdf18c04de3ab7ea0277c4eba3
+import  -/  base-4.8.1.0:System.Timeout b7d5cb27986c83c67c1a707cd2549d6b
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString 65bd6f108f33ac736977e12af3a12795
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Char8 727f18c1a10ff91ccff6cf752ee2a230
+import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Internal bf4b7d23d1b8365e073bc2ac77444155
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+import  -/  IB.Client.Exception ca4f6733651cf163ea580063199c2a5c
+  exports: 7eff26c27b335ad06056128a7d034b9f
+  IBExc fc6a864aff7c140893feb5ed1aada899
+  ParseError e57673181ddd912029f3823a3de9cc03
+  UpdateTWS 97d4126c9a5734a559a51180b3ef52b9
+import  -/  IB.Client.Nums 58a359e02642eec9b8a336565de0a79c
+  exports: d0908944e2fd0cd158a337b3d47aceb6
+  client_version 9e86818de2c4825a0543c7402614f458
+  min_server_ver_linking a9b8896fc9ded1947e019646fe72f599
+  no_valid_id e0554a210720e1ba427aa859a5189870
+  server_version 8f0268d066d5d5d5d3b149a87c3253fe
+import  -/  IB.Client.Parser ce140e1281202caa50d0b47619571213
+  exports: f815f5a1f9cb711f97630a390ff43fa3
+  pRecvMsg a5f06c33bf74cae1ea47880aaf98a126
+  pServerVersion 27e558102ff10d63a3fa7e3ff1d0e9ba
+import  -/  IB.Client.Request 9c1196de4f998fc855c55147bae014d9
+  exports: 79f249c8c70bf30464006183257f9ffb
+  appNull 205acfe9d3d3232ea6a99ce2cfec57ae
+  debugWrite 58eac69b8484bec23358f9a67618a69e
+  request e2f052a391d2e32104c740a933766848
+  show' 6a54a10f0831203914613c577fd2beb1
+  wFlush 8a15c34ee06df0f187dd2d31c23e3e4f
+  write ed1377dc39d7af152aae786078016bd1
+import  -/  IB.Client.Types 4c6a6fdfbfd3bbf81422ed04211308a6
+  exports: 85904ef18005241fa853203f455d7870
+  HandlerFunc 5648ec0728afbb5950c4733509557b1a
+  IBMessage c3159178f505ab80d8d762e3ddc31b28
+  IBServer b1d2487a662dc4a3b06deaf01dca6a82
+  IBServer 5648ec0728afbb5950c4733509557b1a
+  MIB 5648ec0728afbb5950c4733509557b1a
+  StartApi 58b2eaa7adb696331e132ec6c1aadb65
+  pre_serverVersion da9d1f448ab523f60f701c8407192265
+  pre_twsTime f17c2544905300c012df12301e74a3fa
+  rc_msgBody da689cac084fd6a14575a8a7b980a59f
+  s_addr 05390dbe7f73acce274ba74146d2ab45
+  s_clientId 7f80537bec2ae70a2784f21862a601dd
+  s_connected 400f0674035aa7079a619b9cefd8a89d
+  s_debug 57b516f6b74ca3c58ac59cdfe5b7186d
+  s_extraAuth 51110092ea1387c285dc662a86f99826
+  s_handler 54ebb9fc651318cd874317148b523d10
+  s_msgThread 160ec8866725a573754fcca8c5451cae
+  s_port e5c070d3224c3b2d0989c1e312d08532
+  s_sock abaa0706f12748447909ffb0b78e644f
+  s_timeoutInterval 9ff9847fafb3c3c0c64bf3b422320f2f
+  s_twsTime c7ff0cc1629859c7be4f10e0aa7c526a
+  s_version 889b3513dbf8128819d06a795147b927
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.BSD 777eb058269e74aca488bd21903a0b54
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket e3a0d0de7e1edfdda157779d1bac350c
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket.ByteString 2bb891968c72e4c02b3f200d387bf040
+import  -/  network-2.6.2.1@netwo_F6mK9sCIw3M5SbZMt2lUQE:Network.Socket.Types 915e90abe5539c8f80b791ac6b9a0e59
+bd849b98054d6407832e4983aada0104
+  $wa ::
+    GHC.Prim.MVar# GHC.Prim.RealWorld IB.Client.Types.IBServer
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, Strictness: <L,U><L,U>, Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.MVar#
+                           GHC.Prim.RealWorld IB.Client.Types.IBServer
+                   w :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case GHC.Prim.readMVar#
+                        @ GHC.Prim.RealWorld
+                        @ IB.Client.Types.IBServer
+                        ww
+                        w of ds1 { (#,#) ipv ipv1 ->
+                 case ipv1 of wild { IB.Client.Types.IBServer ds2 ds3 ds4 ds5 ds6 ds7 ds8 ds9 ds10 ds11 ds12 ds13 ->
+                 case ds10 of wild1 {
+                   GHC.Base.Nothing
+                   -> case Data.Maybe.fromJust1
+                      ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+                      of {}
+                   GHC.Base.Just x
+                   -> case GHC.IO.Handle.hClose1 x ipv of ds14 { (#,#) ipv2 ipv3 ->
+                      case GHC.Prim.putMVar#
+                             @ GHC.Prim.RealWorld
+                             @ IB.Client.Types.IBServer
+                             ww
+                             (IB.Client.Types.IBServer
+                                ds2
+                                ds3
+                                IB.Client.disconnect2
+                                GHC.Types.False
+                                IB.Client.defaultConf2
+                                GHC.Types.False
+                                ds8
+                                ds9
+                                wild1
+                                ds11
+                                ds12
+                                ds13)
+                             ipv2 of s2# { DEFAULT ->
+                      (# s2#, GHC.Tuple.() #) } } } } }) -}
+c2b7b2759b16c794f6b4e14439f44b30
+  $wascCodes ::
+    GHC.Prim.Addr#
+    -> GHC.ForeignPtr.ForeignPtrContents
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+  {- Arity: 4, HasNoCafRefs, Strictness: <L,U><L,U><L,U><L,U>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Addr#
+                   ww1 :: GHC.ForeignPtr.ForeignPtrContents
+                   ww2 :: GHC.Prim.Int#
+                   ww3 :: GHC.Prim.Int# ->
+                 case IB.Client.ascCodes_go
+                        (Data.ByteString.Internal.$wunpackAppendCharsLazy
+                           ww
+                           ww1
+                           ww2
+                           ww3
+                           (GHC.Types.[] @ GHC.Types.Char)) of wild {
+                   [] -> GHC.Types.[] @ GHC.Types.Char : ds1 xs -> xs }) -}
+84edfe19278259bd81778da1d93658fd
+  data ClientConfig
+    = ClientConfig {cc_addr :: GHC.Base.String,
+                    cc_port :: GHC.Types.Int,
+                    cc_clientId :: GHC.Types.Int,
+                    cc_extraAuth :: GHC.Types.Bool,
+                    cc_handler :: GHC.Base.Maybe IB.Client.Types.HandlerFunc}
+759c58992f9a9a1144a2614be14a9ec1
+  ascCodes :: Data.ByteString.Internal.ByteString -> GHC.Base.String
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U(U,U,U,U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: Data.ByteString.Internal.ByteString ->
+                 case w of ww { Data.ByteString.Internal.PS ww1 ww2 ww3 ww4 ->
+                 IB.Client.$wascCodes ww1 ww2 ww3 ww4 }) -}
+5e6dd1076f5b4b7743c7f2ca5852ad48
+  ascCodes_go :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+9dcf4890c8fc2b6562df218f335fe5c5
+  cc_addr :: IB.Client.ClientConfig -> GHC.Base.String
+  RecSel IB.Client.ClientConfig
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(SLLLL),1*U(1*U,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.ClientConfig ->
+                 case ds of wild { IB.Client.ClientConfig ds1 ds2 ds3 ds4 ds5 ->
+                 ds1 }) -}
+307d96d2b70a11ec36b55bebbc658687
+  cc_clientId :: IB.Client.ClientConfig -> GHC.Types.Int
+  RecSel IB.Client.ClientConfig
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLSLL),1*U(A,A,1*U(U),A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.ClientConfig ->
+                 case ds of wild { IB.Client.ClientConfig ds1 ds2 ds3 ds4 ds5 ->
+                 ds3 }) -}
+f490558d397ec506f7cac8fa2678980e
+  cc_extraAuth :: IB.Client.ClientConfig -> GHC.Types.Bool
+  RecSel IB.Client.ClientConfig
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLLSL),1*U(A,A,A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.ClientConfig ->
+                 case ds of wild { IB.Client.ClientConfig ds1 ds2 ds3 ds4 ds5 ->
+                 ds4 }) -}
+507b99515720ef225bbb28376a21e932
+  cc_handler ::
+    IB.Client.ClientConfig
+    -> GHC.Base.Maybe IB.Client.Types.HandlerFunc
+  RecSel IB.Client.ClientConfig
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLLLS),1*U(A,A,A,A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.ClientConfig ->
+                 case ds of wild { IB.Client.ClientConfig ds1 ds2 ds3 ds4 ds5 ->
+                 ds5 }) -}
+17e700d45a6b609acbf1b8ab35c54b26
+  cc_port :: IB.Client.ClientConfig -> GHC.Types.Int
+  RecSel IB.Client.ClientConfig
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LSLLL),1*U(A,1*U(U),A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: IB.Client.ClientConfig ->
+                 case ds of wild { IB.Client.ClientConfig ds1 ds2 ds3 ds4 ds5 ->
+                 ds2 }) -}
+cb2a66971ec6b8d30b5e1626d28fbbf6
+  checkMsg ::
+    IB.Client.Types.MIB -> GHC.Types.Bool -> GHC.Types.IO ()
+  {- Arity: 3, Strictness: <L,1*U(U)><L,1*U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.checkMsg1
+                  `cast`
+                (<IB.Client.Types.MIB>_R
+                 ->_R <GHC.Types.Bool>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+be2d8831023ea83828764c946efbab19
+  checkMsg1 ::
+    IB.Client.Types.MIB
+    -> GHC.Types.Bool
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3, Strictness: <L,1*U(U)><L,1*U><L,U> -}
+d9258322a3d2116804942d7df98045ff
+  connect ::
+    IB.Client.ClientConfig
+    -> GHC.Types.Bool
+    -> GHC.Types.Bool
+    -> GHC.Types.IO
+         (Data.Either.Either GHC.IO.Exception.IOError IB.Client.Types.MIB)
+  {- Arity: 4, Strictness: <L,U(U,U(U),U(U),U,1*U)><L,1*U><L,U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.connect1
+                  `cast`
+                (<IB.Client.ClientConfig>_R
+                 ->_R <GHC.Types.Bool>_R
+                 ->_R <GHC.Types.Bool>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0]
+                               <Data.Either.Either
+                                  GHC.IO.Exception.IOError
+                                  (GHC.MVar.MVar IB.Client.Types.IBServer)>_R)) -}
+d712b6a38885bc85da83f19514213833
+  connect1 ::
+    IB.Client.ClientConfig
+    -> GHC.Types.Bool
+    -> GHC.Types.Bool
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.Either.Either
+            GHC.IO.Exception.IOError
+            (GHC.MVar.MVar IB.Client.Types.IBServer) #)
+  {- Arity: 4,
+     Strictness: <L,U(U,U(U),U(U),U,1*U)><L,1*U><L,U><L,U> -}
+c765189ee7117f4e3e899d19c8987352
+  defHandler ::
+    IB.Client.Types.MIB -> IB.Client.Types.IBMessage -> GHC.Types.IO ()
+  {- Arity: 3, Strictness: <L,A><L,A>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.defHandler1
+                  `cast`
+                (<IB.Client.Types.MIB>_R
+                 ->_R <IB.Client.Types.IBMessage>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+b6a547f552a91708109a875ad7fca14f
+  defHandler1 ::
+    IB.Client.Types.MIB
+    -> IB.Client.Types.IBMessage
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3, Strictness: <L,A><L,A>,
+     Unfolding: InlineRule (2, True, True)
+                (\ ds :: IB.Client.Types.MIB
+                   ds1 :: IB.Client.Types.IBMessage
+                   eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 IB.Client.defHandler2 eta) -}
+85f3454d9cb591488c38b765fac9ae7c
+  defHandler2 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 GHC.IO.Handle.Text.hPutStr2
+                   GHC.IO.Handle.FD.stdout
+                   IB.Client.defHandler3
+                   GHC.Types.True
+                   eta) -}
+7126494b94c7d48a79067e34c900725f
+  defHandler3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "No Message Handler is defined"#) -}
+67433afb47cf29b5eadcadc9c0895736
+  defaultConf :: IB.Client.ClientConfig
+  {- Strictness: m,
+     Unfolding: (IB.Client.ClientConfig
+                   IB.Client.defaultConf4
+                   IB.Client.defaultConf3
+                   IB.Client.defaultConf2
+                   GHC.Types.False
+                   IB.Client.defaultConf1) -}
+28187358f87a38b819285c446d05050c
+  defaultConf1 :: GHC.Base.Maybe IB.Client.Types.HandlerFunc
+  {- Strictness: m2,
+     Unfolding: (GHC.Base.Just
+                   @ IB.Client.Types.HandlerFunc
+                   IB.Client.defHandler1
+                     `cast`
+                   (<IB.Client.Types.MIB>_R
+                    ->_R <IB.Client.Types.IBMessage>_R
+                    ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
+e344ae5b74bb9df85d8e38e2d2108c82
+  defaultConf2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0) -}
+ad08bb2e4a927c6776b51e4094bf65e7
+  defaultConf3 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 7496) -}
+7ebc4bbe623236053970860d5970076b
+  defaultConf4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "127.0.0.1"#) -}
+8fb96ddf8c1ae086ff127309c5f0c461
+  disconnect :: IB.Client.Types.MIB -> GHC.Types.IO ()
+  {- Arity: 2, Strictness: <S,1*U(U)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.disconnect1
+                  `cast`
+                (<IB.Client.Types.MIB>_R ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
+23970f51e07bb55be41ef06cd0561506
+  disconnect1 ::
+    IB.Client.Types.MIB
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, Strictness: <S,1*U(U)><L,U>, Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: IB.Client.Types.MIB
+                   w1 :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case w of ww { GHC.MVar.MVar ww1 -> IB.Client.$wa ww1 w1 }) -}
+b8db7629f7b5ca5d55d8d85fe5f54474
+  disconnect2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# (-1)) -}
+cd1270f3197de7c8fbc9e35f4da6b2e6
+  greetServer ::
+    IB.Client.Types.IBServer -> GHC.Types.IO IB.Client.Types.IBServer
+  {- Arity: 2, Strictness: <L,U(U,U,U(U),U,A,A,A,U,U,U,U,U)><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                IB.Client.greetServer1
+                  `cast`
+                (<IB.Client.Types.IBServer>_R
+                 ->_R Sym (GHC.Types.NTCo:IO[0] <IB.Client.Types.IBServer>_R)) -}
+587281840d60566f4b2fdb61d67b3ecb
+  greetServer1 ::
+    IB.Client.Types.IBServer
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          IB.Client.Types.IBServer #)
+  {- Arity: 2, Strictness: <L,U(U,U,U(U),U,A,A,A,U,U,U,U,U)><L,U> -}
+37ca2cbc875e992861a0eee82597e841
+  toServer ::
+    IB.Client.ClientConfig
+    -> GHC.IO.Handle.Types.Handle
+    -> GHC.Types.Bool
+    -> IB.Client.Types.IBServer
+  {- Arity: 3, Strictness: <L,U(1*U,1*U,1*U,1*U,1*U)><L,U><L,U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ cc :: IB.Client.ClientConfig
+                   h :: GHC.IO.Handle.Types.Handle
+                   debug :: GHC.Types.Bool ->
+                 IB.Client.Types.IBServer
+                   (case cc of wild { IB.Client.ClientConfig ds ds1 ds2 ds3 ds4 ->
+                    ds })
+                   (case cc of wild { IB.Client.ClientConfig ds ds1 ds2 ds3 ds4 ->
+                    ds1 })
+                   (case cc of wild { IB.Client.ClientConfig ds ds1 ds2 ds3 ds4 ->
+                    ds2 })
+                   (case cc of wild { IB.Client.ClientConfig ds ds1 ds2 ds3 ds4 ->
+                    ds3 })
+                   IB.Client.defaultConf2
+                   GHC.Types.False
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   debug
+                   (GHC.Base.Just @ GHC.IO.Handle.Types.Handle h)
+                   (GHC.Base.Nothing @ GHC.Conc.Sync.ThreadId)
+                   IB.Client.toServer1
+                   (case cc of wild { IB.Client.ClientConfig ds ds1 ds2 ds3 ds4 ->
+                    case ds4 of wild1 {
+                      GHC.Base.Nothing
+                      -> Data.Maybe.fromJust1 @ IB.Client.Types.HandlerFunc
+                      GHC.Base.Just x -> x } })) -}
+02d70c2af381baeb214f822fa84fe38a
+  toServer1 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 100000) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+
