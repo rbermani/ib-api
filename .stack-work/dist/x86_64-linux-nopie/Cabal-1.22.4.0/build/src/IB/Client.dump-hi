@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-12-01 19:16:59.282882 UTC
+2017-12-30 19:34:01.783744 UTC
 
 interface ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client 7102
-  interface hash: a9db9458c49160418acc9f65f4c3edd2
-  ABI hash: c1ecfb89d34f5beedf4830ac13d87092
+  interface hash: 70233dad6bc62149d4b0dc4f7e444402
+  ABI hash: 5116e859e350d5804e0727a5cf1428fb
   export-list hash: 85e5219bd2ab0def49d9cbcf3fe9fc77
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: c1f2280760789c8f5087c2d5fdf65b37
@@ -356,7 +356,7 @@ b6a547f552a91708109a875ad7fca14f
   defHandler3 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString#
                    "No Message Handler is defined"#) -}
-67433afb47cf29b5eadcadc9c0895736
+bc5e315b21d9ea91b6e73a9ab7f3517c
   defaultConf :: IB.Client.ClientConfig
   {- Strictness: m,
      Unfolding: (IB.Client.ClientConfig
@@ -378,9 +378,9 @@ b6a547f552a91708109a875ad7fca14f
 e344ae5b74bb9df85d8e38e2d2108c82
   defaultConf2 :: GHC.Types.Int
   {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0) -}
-ad08bb2e4a927c6776b51e4094bf65e7
+1f239e39e6e8f9df6035d539d899e7f1
   defaultConf3 :: GHC.Types.Int
-  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 7496) -}
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 7497) -}
 7ebc4bbe623236053970860d5970076b
   defaultConf4 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "127.0.0.1"#) -}

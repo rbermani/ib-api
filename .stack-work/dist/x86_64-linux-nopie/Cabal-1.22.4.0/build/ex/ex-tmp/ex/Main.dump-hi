@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-12-01 19:17:00.436477 UTC
+2017-12-30 19:34:02.811187 UTC
 
 interface main@main:Main 7102
-  interface hash: d105e2f753dc88391243d08ec99237c1
-  ABI hash: 33b6f60c05872caf53d7bb3e60b055b4
+  interface hash: 58492e45e3739c0a0a20892e23982d50
+  ABI hash: 9eefe68c22ac2085348bcf46da49a5c1
   export-list hash: 428533a313ed495541017c08f021cb85
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 14a7c03a3b628dea6eac6225ba3bbda9
@@ -87,7 +87,7 @@ import  -/  base-4.8.1.0:System.Posix.Types 7fa4b2df4aab8c4a440322796ffac3f4
 import  -/  base-4.8.1.0:System.Timeout b7d5cb27986c83c67c1a707cd2549d6b
 import  -/  bytestring-0.10.6.0@bytes_6elQVSg5cWdFrvRnfxTUrH:Data.ByteString.Char8 727f18c1a10ff91ccff6cf752ee2a230
 import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
-import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client c1ecfb89d34f5beedf4830ac13d87092
+import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client 5116e859e350d5804e0727a5cf1428fb
 import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Exception ca4f6733651cf163ea580063199c2a5c
 import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Nums 58a359e02642eec9b8a336565de0a79c
 import  -/  ib-api-0.1.0.0@ibapi_FYtdachWwYX1Bggz8sQPyH:IB.Client.Parser ce140e1281202caa50d0b47619571213
@@ -216,12 +216,12 @@ dc8d1d5e3d93c5cdb82ef9993700f5a0
                             GHC.Types.: @ GHC.Types.Char ww5 ww6 } }))
                         GHC.Types.True
                         ipv } } }) -}
-83ef2fad1568a19d00bb5462976b0212
+56c865b9961944edf003cb19599702d5
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <L,U>,
      Unfolding: InlineRule (0, True, True)
                 Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R)) -}
-8ce8c6abb50ed69f6e59d05f5d2ac1cb
+034932baf34127b6e7f63904db673cc8
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -234,11 +234,11 @@ dc8d1d5e3d93c5cdb82ef9993700f5a0
                         s of ds1 { (#,#) ipv ipv1 ->
                  case GHC.IO.Handle.Text.hPutStr2
                         GHC.IO.Handle.FD.stdout
-                        Main.main11
+                        Main.main12
                         GHC.Types.False
                         ipv of ds2 { (#,#) ipv2 ipv3 ->
                  case IB.Client.connect1
-                        Main.main9
+                        Main.main10
                         GHC.Types.False
                         GHC.Types.True
                         ipv2 of ds3 { (#,#) ipv4 ipv5 ->
@@ -246,32 +246,45 @@ dc8d1d5e3d93c5cdb82ef9993700f5a0
                    Data.Either.Left err
                    -> GHC.IO.Handle.Text.hPutStr2
                         GHC.IO.Handle.FD.stdout
-                        Main.main8
+                        Main.main9
                         GHC.Types.True
                         ipv4
                    Data.Either.Right msv
                    -> case GHC.IO.Handle.Text.hPutStr2
                              GHC.IO.Handle.FD.stdout
-                             Main.main7
+                             Main.main8
                              GHC.Types.False
                              ipv4 of ds4 { (#,#) ipv6 ipv7 ->
                       case GHC.IO.Handle.Text.hPutStr2
                              GHC.IO.Handle.FD.stdout
-                             Main.main3
+                             Main.main4
                              GHC.Types.False
                              ipv6 of ds5 { (#,#) ipv8 ipv9 ->
                       case GHC.IO.Handle.Text.hPutStr2
                              GHC.IO.Handle.FD.stdout
-                             Main.main2
+                             Main.main3
                              GHC.Types.True
                              ipv8 of ds6 { (#,#) ipv10 ipv11 ->
+                      case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             Main.main2
+                             GHC.Types.True
+                             ipv10 of ds7 { (#,#) ipv12 ipv13 ->
                       case IB.Client.checkMsg1
                              msv
                              GHC.Types.False
-                             ipv10 of ds7 { (#,#) ipv12 ipv13 ->
-                      Main.businessLogic1 msv ipv12 } } } } } } } }) -}
-eb09b46644a8736a8c0c9e4759e5bbe1
-  main10 :: GHC.Base.Maybe IB.Client.Types.HandlerFunc
+                             ipv12 of ds8 { (#,#) ipv14 ipv15 ->
+                      Main.businessLogic1 msv ipv14 } } } } } } } } }) -}
+b9c301a41b898ab6406bd1b0747ea9fe
+  main10 :: IB.Client.ClientConfig
+  {- Unfolding: (IB.Client.ClientConfig
+                   IB.Client.defaultConf4
+                   IB.Client.defaultConf3
+                   IB.Client.defaultConf2
+                   GHC.Types.False
+                   Main.main11) -}
+46d3d32c286e05f43b88949ff82a5b2e
+  main11 :: GHC.Base.Maybe IB.Client.Types.HandlerFunc
   {- Unfolding: (GHC.Base.Just
                    @ IB.Client.Types.HandlerFunc
                    Main.handleMsg1
@@ -279,76 +292,72 @@ eb09b46644a8736a8c0c9e4759e5bbe1
                    (<IB.Client.Types.MIB>_R
                     ->_R <IB.Client.Types.IBMessage>_R
                     ->_R Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
-06ca3a51e680727fc25969b229d592b0
-  main11 :: GHC.Base.String
+f7f77063aa4fa8f38e84cffd9b0ce82c
+  main12 :: GHC.Base.String
   {- Unfolding: (System.Console.ANSI.Unix.csi
-                   Main.main12
+                   Main.main13
                    System.Console.ANSI.Unix.setCursorPositionCode1) -}
-22d200a469ed8b4d102084270bdd3c7b
-  main12 :: [GHC.Types.Int]
-  {- HasNoCafRefs,
-     Unfolding: (GHC.Types.: @ GHC.Types.Int Main.main14 Main.main13) -}
-6e255296d9d78c67d41a36f8333bc556
+6155d2046f9f7ae65ac0d0022c14b2be
   main13 :: [GHC.Types.Int]
+  {- HasNoCafRefs,
+     Unfolding: (GHC.Types.: @ GHC.Types.Int Main.main15 Main.main14) -}
+8b75644929e17341130462e5ff94a08a
+  main14 :: [GHC.Types.Int]
   {- HasNoCafRefs,
      Unfolding: (GHC.Types.:
                    @ GHC.Types.Int
-                   Main.main14
+                   Main.main15
                    (GHC.Types.[] @ GHC.Types.Int)) -}
-e3a70301c8a9e4626e6583d825d2f00e
-  main14 :: GHC.Types.Int
+a87d3556a543419bf1270d181524894c
+  main15 :: GHC.Types.Int
   {- HasNoCafRefs, Unfolding: (GHC.Types.I# 1) -}
-8321d9903bfaa1e46dc0b32efcca427f
-  main15 ::
+c70a57c7ac1bff387706e7f38b02d383
+  main16 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,
      Unfolding: (GHC.TopHandler.runMainIO1
                    @ ()
                    Main.main1 `cast` (Sym (GHC.Types.NTCo:IO[0] <()>_R))) -}
-035117cb3fae60932651f4d578a58754
+c1f3e890e91227c060ae71deca92a25e
   main2 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString#
-                   " *** Connection Sucessfull ..."#) -}
-cb2b15e7dfc72f50c3c8e654ea11c372
-  main3 :: GHC.Base.String
+                   " *** API is now ON - commence trading ... "#) -}
+f703070ce967d5f645a56d451593c67c
+  main3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   " *** Connection Sucessful ..."#) -}
+b52ee7cfd46b94814f5e570d0adcd8a6
+  main4 :: GHC.Base.String
   {- Unfolding: (System.Console.ANSI.Unix.csi
-                   Main.main4
+                   Main.main5
                    System.Console.ANSI.Unix.setSGRCode1) -}
-ae92e6244c0fa1abedb0f9731ed6eb9d
-  main4 :: [GHC.Types.Int]
+7e3da2365e1d22e4c2f51aa237bd361f
+  main5 :: [GHC.Types.Int]
   {- Unfolding: (GHC.Types.:
                    @ GHC.Types.Int
-                   Main.main5
+                   Main.main6
                    (GHC.Types.[] @ GHC.Types.Int)) -}
-064cdb1cd2b64388fc5c7587ec0d5302
-  main5 :: GHC.Types.Int
+f61cdeb89c101ca7c393d9b382f69907
+  main6 :: GHC.Types.Int
   {- Unfolding: (case System.Console.ANSI.Unix.$wsgrToCode
-                        Main.main6 of ww { DEFAULT ->
+                        Main.main7 of ww { DEFAULT ->
                  GHC.Types.I# ww }) -}
-b2e64a4b9a442cf1914f9ffa5bf5d14b
-  main6 :: System.Console.ANSI.Common.SGR
+7fa5a36d58e5e343b214dd4614a049f7
+  main7 :: System.Console.ANSI.Common.SGR
   {- HasNoCafRefs,
      Unfolding: (System.Console.ANSI.Common.SetColor
                    System.Console.ANSI.Common.Foreground
                    System.Console.ANSI.Common.Vivid
                    System.Console.ANSI.Common.Yellow) -}
-cd999f24aec69ec5eb653b3b9e663338
-  main7 :: GHC.Base.String
+652b1955002414229d93a2116c08c5bd
+  main8 :: GHC.Base.String
   {- Unfolding: (System.Console.ANSI.Unix.csi
                    (GHC.Types.[] @ GHC.Types.Int)
                    System.Console.ANSI.Unix.setSGRCode1) -}
-ef991f42cadf0bca8d049ae79bb415dc
-  main8 :: [GHC.Types.Char]
+2932ec8a3f3639fac1cb25314ae9a804
+  main9 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "Unable to Connect"#) -}
-584510b4a450dbda3672b8b39175e9eb
-  main9 :: IB.Client.ClientConfig
-  {- Unfolding: (IB.Client.ClientConfig
-                   IB.Client.defaultConf4
-                   IB.Client.defaultConf3
-                   IB.Client.defaultConf2
-                   GHC.Types.False
-                   Main.main10) -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:

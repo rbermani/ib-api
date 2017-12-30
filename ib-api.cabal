@@ -51,7 +51,7 @@ cabal-version:       >=1.10
 
 library
   -- Modules exported by the library.
-  exposed-modules:     IB.Client, IB.Client.Parser, IB.Client.Exception, IB.Client.Types, IB.Client.Request, IB.Client.Nums
+  exposed-modules:     IB.Client, IB.Client.Parser, IB.Client.Exception, IB.Client.Types, IB.Client.Request, IB.Client.Nums, IB.Client.Rqx
   
   -- Modules included in this library but not exported.
   -- other-modules:       
